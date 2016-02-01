@@ -36,8 +36,7 @@
 					<div class="form-group">
 						<label class="col-md-4 control-label">รหัสพนักงาน</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control"
-								ng-model="vm.employees.empCode" />
+							<input type="text" class="form-control" ng-model="vm.emp.empCode" />
 						</div>
 					</div>
 				</div>
@@ -45,8 +44,7 @@
 					<div class="form-group">
 						<label class="col-md-4 control-label">ชื่อพนักงาน</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control"
-								ng-model="vm.employees.empName">
+							<input type="text" class="form-control" ng-model="vm.emp.empName">
 						</div>
 					</div>
 				</div>
@@ -59,7 +57,7 @@
 							</button>
 						</div>
 						<div class="col-md-3">
-							<button class="btn btn-default" ng-click="vm.resetForm()"
+							<button class="btn btn-default" ng-click="vm.resetPage()"
 								type="reset">
 								<fa name="remove" size="1" title="Reset"></fa>
 								ยกเลิก
@@ -70,11 +68,10 @@
 			</div>
 		</form>
 		</uib-tab> <!-- New employee --> <uib-tab active="vm.tabs[1].selected"
-			heading="{{vm.tabs[1].title}}"
-			ng-click="vm.resetTable() ; vm.resetForm()">
+			heading="{{vm.tabs[1].title}}" ng-click="vm.resetPage()">
 		<div flash-message="3500" class="text-center"></div>
 		<form class="form-horizontal form-margin" novalidate="novalidate"
-			ng-submit="vm.formControl()" name="vm.saveForm">
+			ng-submit="vm.formControl(vm.emp)" name="vm.empForm">
 			<div class="col-md-12">
 				<div class="col-md-12">
 					<div class="form-group">
@@ -82,21 +79,21 @@
 							<label class="col-md-4 control-label">รหัสพนักงาน</label>
 							<div class="col-md-8">
 								<input type="text" class="form-control"
-									ng-model="vm.employees.empCode" required>
+									ng-model="vm.emp.empCode" required>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<label class="col-md-4 control-label">ชื่อพนักงาน</label>
 							<div class="col-md-8">
 								<input type="text" class="form-control"
-									ng-model="vm.employees.empName" required>
+									ng-model="vm.emp.empName" required>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<label class="col-md-4 control-label">ตำแหน่ง</label>
 							<div class="col-md-8">
 								<input type="text" class="form-control"
-									ng-model="vm.employees.empPosition">
+									ng-model="vm.emp.empPosition">
 							</div>
 						</div>
 					</div>
@@ -107,14 +104,14 @@
 							<label class="col-md-4 control-label">เบอร์โทร</label>
 							<div class="col-md-8">
 								<input type="tel" class="form-control"
-									ng-model="vm.employees.empMobile">
+									ng-model="vm.emp.empPhone">
 							</div>
 						</div>
 						<div class="col-md-4">
 							<label class="col-md-4 control-label">อีเมล์</label>
 							<div class="col-md-8">
 								<input type="text" class="form-control"
-									ng-model="vm.employees.empEmail">
+									ng-model="vm.emp.empEmail">
 							</div>
 						</div>
 						<div class="col-md-4">
@@ -123,10 +120,10 @@
 								<div class="input-group">
 									<input type="text" class="form-control" readonly
 										uib-datepicker-popup="dd-MM-yyyy" is-open="status.opened"
-										ng-model="vm.employees.dateAttended" close-text="Close"><span
+										ng-model="vm.emp.empDateAttended" close-text="Close"><span
 										class="input-group-btn">
 										<button type="button" class="btn btn-default"
-											ng-click="open($event)">
+											ng-click="vm.calDate($event)">
 											<i class="glyphicon glyphicon-calendar"></i>
 										</button>
 									</span>
@@ -140,7 +137,7 @@
 						<div class="col-md-4">
 							<label class="col-md-4 control-label">รายละเอียด</label>
 							<div class="col-md-8">
-								<textarea class="form-control" ng-model="vm.employees.empDesc"></textarea>
+								<textarea class="form-control" ng-model="vm.emp.empDesc"></textarea>
 							</div>
 						</div>
 					</div>
@@ -156,7 +153,7 @@
 						</div>
 						<div class="col-md-1 text-center">
 							<button class="btn btn-default"
-								ng-click="vm.employees.empId == null ? vm.resetForm() : vm.resetDefault()"
+								ng-click="vm.emp.empId == null ? vm.resetForm() : vm.resetDefault()"
 								type="button" ng-disabled="vm.saveForm.$pristine">
 								<fa name="remove" size="1" title="Reset"></fa>
 								ยกเลิก
@@ -189,7 +186,7 @@
 						<th class="text-center" st-sort="empMobile">เบอร์โทร</th>
 						<th class="text-center" st-sort="empEmail">อีเมล์</th>
 						<th class="text-center" st-sort="empDesc">รายละเอียด</th>
-						<th class="text-center" st-sort="dateAttended">วันที่เข้าทำงาน</th>
+						<th class="text-center" st-sort="empDateAttended">วันที่เข้าทำงาน</th>
 						<th class="text-center" st-sort="status">สถานะ</th>
 						<th></th>
 					</tr>
@@ -203,15 +200,15 @@
 						<td class="text-center">{{emp.empEmail}}</td>
 						<td class="text-center"><textarea readonly
 								class="form-control">{{emp.empDesc}}</textarea></td>
-						<td class="text-center">{{emp.dateAttended |
+						<td class="text-center">{{emp.empDateAttended |
 							date:'dd/MM/yyyy'}}</td>
 						<td class="text-right">{{emp.empStatus}}</td>
 						<td class="text-center"><button class="btn btn-info"
-								ng-click="vm.preUpdateEmp(emp)">
+								ng-click="vm.update(emp)">
 								<fa name="edit"></fa>
 							</button>
 
-							<button class="btn btn-danger" ng-click="vm.remove(emp)">
+							<button class="btn btn-danger" ng-click="vm.remove(emp.id)">
 								<fa name="trash-o"></fa>
 							</button></td>
 					</tr>

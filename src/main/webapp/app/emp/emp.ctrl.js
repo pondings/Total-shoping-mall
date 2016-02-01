@@ -16,6 +16,14 @@ function EmpCtrl($scope, SweetAlert, Flash, $ngBootbox, EmpService) {
 		selected : false
 	} ];
 
+	/** calendar * */
+	vm.calendar = {
+		opened : false
+	}
+	vm.calDate = function($event) {
+		vm.calendar.opened = true;
+	}
+
 	/** pagination * */
 	vm.numPerPage = 5;
 	vm.numPerPages = [ {
@@ -33,26 +41,100 @@ function EmpCtrl($scope, SweetAlert, Flash, $ngBootbox, EmpService) {
 	} ];
 	vm.selectedNumPerPage = vm.numPerPages[0];
 
-	/** Declare Func * */
-	vm.resetPage = resetPage;
-	vm.search = search;
-
 	/** smart-table * */
 	$scope.displayedEmp = [].concat(vm.empList);
 	$scope.displayedPages = 5;
 
+	/** Declare Func * */
+	vm.resetPage = resetPage;
+	vm.search = search;
+	vm.formControl = formControl;
+	vm.create = create;
+	vm.update = update;
+	vm.remove = remove;
+	vm.resetForm = resetForm;
+
 	/** Function * */
 
-	function search() {
-		EmpService.findAll().then(function(data) {
-			vm.empList = data;
+	function remove(id) {
+		EmpService.remove(id).then(function(data) {
+			Flash.create('success', 'Deleted', 'custom-class');
+			for (var i = 0; i < vm.empList.length; i++) {
+				if (vm.empList[i].id == id) {
+					vm.empList.splice(i, 1);
+					break;
+				}
+			}
 		}, function(errRs) {
-			alert(errRs.errMessage);
+			Flash.create('danger', errRs.errMessage, 'custom-class');
 		})
+	}
+
+	function formControl() {
+		if (vm.emp.id != null) {
+			EmpService.update(vm.emp).then(
+					function(data) {
+						for (var i = 0; i < vm.empList.length; i++) {
+							if (vm.empList[i].id == data.id) {
+								$scope.displayedEmp[i] = data;
+								break;
+							}
+						}
+						Flash.create('success', 'Updated', 'custom-class')
+						vm.resetForm();
+					},
+					function(errRs) {
+						Flash.create('danger', 'Please contact maintenance',
+								'custom-class');
+					})
+		} else {
+			vm.create();
+		}
+	}
+
+	function create() {
+		EmpService.create(vm.emp).then(function(data) {
+			vm.empList.push(data);
+			Flash.create('success', 'Created', 'custom-class');
+			vm.resetForm();
+		}, function(errRs) {
+			Flash.create('danger', errRs.errMessage, 'custom-class');
+		})
+	}
+
+	function update(emp) {
+		vm.emp = angular.copy(emp);
+		vm.tabs[1].selected = true;
+	}
+
+	function search() {
+		EmpService.search(vm.emp).then(
+				function(data) {
+					vm.empList = data;
+					Flash
+							.create('success', "Found " + data.length
+									+ " reccord", 'custom-class');
+				}, function(errRs) {
+					Flash.create('danger', errRs.errMessage, 'custom-class');
+				})
 	}
 
 	function resetPage() {
 		vm.empList = [];
+		vm.emp = {
+			id : null,
+			empCode : null,
+			empName : null
+		};
+		vm.empForm.$setPristine();
 	}
 
+	function resetForm() {
+		vm.emp = {
+			id : null,
+			empCode : null,
+			empName : null
+		};
+		vm.empForm.$setPristine();
+	}
 };

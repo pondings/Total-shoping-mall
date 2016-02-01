@@ -19,26 +19,32 @@ public class EmpServiceImpl implements EmpService{
 
 	@Override
 	public EmpInfo create(EmpInfo empInfo) {
-		// TODO Auto-generated method stub
 		return employeeRepository.save(empInfo);
 	}
 
 	@Override
 	public EmpInfo update(EmpInfo empInfo) {
-		// TODO Auto-generated method stub
 		return employeeRepository.save(empInfo);
 	}
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
 		employeeRepository.delete(id);
 	}
 
 	@Override
-	public Iterable<EmpInfo> findAll() {
-		// TODO Auto-generated method stub
-		return employeeRepository.findAll();
+	public List<EmpInfo> search(EmpInfo empInfo) {
+		return employeeRepository.search(empInfo);
+	}
+
+	@Override
+	public EmpInfo findOne(int id) {
+		return employeeRepository.findOne(id);
+	}
+
+	@Override
+	public List<EmpInfo> duplicate(EmpInfo empInfo) {
+		return employeeRepository.duplicateEmp(empInfo);
 	}
 	
 }

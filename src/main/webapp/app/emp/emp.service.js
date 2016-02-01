@@ -10,29 +10,14 @@ function EmpService($http, $q) {
 		create : create,
 		update : update,
 		remove : remove,
-		search : search,
-		findAll : findAll
+		search : search
 	};
 
 	return service;
 
-	function findAll() {
-		var deferred = $q.defer();
-		$http.get(urlBase + '/emp/findAll/').success(function(dataArr) {
-			deferred.resolve(dataArr);
-		}).error(function(errMs, errCode) {
-			var err = {
-				errMessage : errMs,
-				errCode : errCode
-			}
-			deferred.reject(err);
-		});
-		return deferred.promise;
-	}
-
 	function create(emp) {
 		var deferred = $q.defer();
-		$http.post(urlBase + '/emp/create/', emp).success(function(dataArr) {
+		$http.post(urlBase + '/emp/create', emp).success(function(dataArr) {
 			deferred.resolve(dataArr);
 		}).error(function(errMs, errCode) {
 			var err = {
@@ -46,7 +31,7 @@ function EmpService($http, $q) {
 
 	function update(emp) {
 		var deferred = $q.defer();
-		$http.put(urlBase + '/emp/update/', emp).success(function(dataArr) {
+		$http.put(urlBase + '/emp/update', emp).success(function(dataArr) {
 			deferred.resolve(dataArr);
 		}).error(function(errMs, errCode) {
 			var err = {
