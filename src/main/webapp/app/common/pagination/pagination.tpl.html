@@ -1,0 +1,22 @@
+<nav ng-if="pages.length >= 2">
+	<ul class="pagination">
+		<li ng-class="{disabled: 1 === currentPage || ngDisabled}"><a
+			href="#" ng-click="selectPage(1)">First</a></li>
+		<li ng-class="{disabled: 1 === currentPage || ngDisabled}"><a
+			href="#" ng-click="selectPage(currentPage - 1)"
+			uib-tooltip="Previous" tooltip-placement="bottom">&lt;</a></li>
+		<li ng-if="currentPage > 3 && numPages > 4"><a href="#"
+			ng-click="selectPage(currentPage - 3)">...</a></li>
+		<li ng-repeat="page in pages" ng-class="{active: page == currentPage}">
+			<a href="#" ng-click="selectPage(page)">{{page}}</a>
+		</li>
+		<li ng-if="currentPage < (numPages - 2) && numPages > 4"><a
+			href="#" ng-click="selectPage(currentPage + 3)">...</a></li>
+		<li ng-class="{disabled: numPages === currentPage || ngDisabled}">
+			<a href="#" ng-click="selectPage(currentPage + 1)" uib-tooltip="Next"
+			tooltip-placement="bottom">&gt;</a>
+		</li>
+		<li ng-class="{disabled: numPages === currentPage || ngDisabled}"><a
+			href="#" ng-click="selectPage(numPages)">Last</a></li>
+	</ul>
+</nav>
