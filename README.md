@@ -1,0 +1,1 @@
+**Spring security & session :** https://github.com/spring-projects/spring-data-examples/tree/master/rest/security
