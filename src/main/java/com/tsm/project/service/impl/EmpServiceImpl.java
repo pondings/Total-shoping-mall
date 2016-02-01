@@ -19,6 +19,7 @@ public class EmpServiceImpl implements EmpService{
 
 	@Override
 	public EmpInfo create(EmpInfo empInfo) {
+		empInfo.setEmpStatus(1);
 		return employeeRepository.save(empInfo);
 	}
 

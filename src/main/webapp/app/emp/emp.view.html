@@ -119,7 +119,7 @@
 							<div class="col-md-8">
 								<div class="input-group">
 									<input type="text" class="form-control" readonly
-										uib-datepicker-popup="dd-MM-yyyy" is-open="status.opened"
+										uib-datepicker-popup="dd-MM-yyyy" is-open="vm.calendar.opened"
 										ng-model="vm.emp.empDateAttended" close-text="Close"><span
 										class="input-group-btn">
 										<button type="button" class="btn btn-default"
@@ -146,15 +146,15 @@
 					<div class="form-group">
 						<div class="col-md-1 col-md-offset-5 text-center">
 							<button class="btn btn-default" type="submit"
-								ng-disabled="vm.saveForm.$invalid">
+								ng-disabled="vm.empForm.$invalid">
 								<fa name="floppy-o" size="1" tital="Save"></fa>
 								บันทึก
 							</button>
 						</div>
 						<div class="col-md-1 text-center">
 							<button class="btn btn-default"
-								ng-click="vm.emp.empId == null ? vm.resetForm() : vm.resetDefault()"
-								type="button" ng-disabled="vm.saveForm.$pristine">
+								ng-click="vm.emp.id == null ? vm.resetForm() : vm.resetDefault()"
+								type="button" ng-disabled="vm.empForm.$pristine">
 								<fa name="remove" size="1" title="Reset"></fa>
 								ยกเลิก
 							</button>
@@ -224,6 +224,7 @@
 				</tfoot>
 			</table>
 		</div>
+		{{vm.emp.id}}
 	</div>
 
 	<!-- APPLICATION -->

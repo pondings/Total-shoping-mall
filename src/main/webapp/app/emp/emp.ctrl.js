@@ -6,6 +6,7 @@ function EmpCtrl($scope, SweetAlert, Flash, $ngBootbox, EmpService) {
 	var vm = this;
 
 	/** tab * */
+
 	vm.tabs = [ {
 		title : 'ค้นหาข้อมูลพนักงาน',
 		tabIdx : 0,
@@ -17,6 +18,7 @@ function EmpCtrl($scope, SweetAlert, Flash, $ngBootbox, EmpService) {
 	} ];
 
 	/** calendar * */
+
 	vm.calendar = {
 		opened : false
 	}
@@ -25,6 +27,7 @@ function EmpCtrl($scope, SweetAlert, Flash, $ngBootbox, EmpService) {
 	}
 
 	/** pagination * */
+
 	vm.numPerPage = 5;
 	vm.numPerPages = [ {
 		number : 5
@@ -42,20 +45,27 @@ function EmpCtrl($scope, SweetAlert, Flash, $ngBootbox, EmpService) {
 	vm.selectedNumPerPage = vm.numPerPages[0];
 
 	/** smart-table * */
+
 	$scope.displayedEmp = [].concat(vm.empList);
 	$scope.displayedPages = 5;
 
 	/** Declare Func * */
+
 	vm.resetPage = resetPage;
 	vm.search = search;
 	vm.formControl = formControl;
 	vm.create = create;
 	vm.update = update;
 	vm.remove = remove;
+	vm.resetDefault = resetDefault ;
 	vm.resetForm = resetForm;
 
 	/** Function * */
 
+	function resetDefault() {
+		vm.emp = angular.copy(vm.substitute) ;
+	}
+	
 	function remove(id) {
 		EmpService.remove(id).then(function(data) {
 			Flash.create('success', 'Deleted', 'custom-class');
@@ -104,6 +114,7 @@ function EmpCtrl($scope, SweetAlert, Flash, $ngBootbox, EmpService) {
 
 	function update(emp) {
 		vm.emp = angular.copy(emp);
+		vm.substitute = angular.copy(emp);
 		vm.tabs[1].selected = true;
 	}
 
