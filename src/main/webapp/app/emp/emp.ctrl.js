@@ -57,15 +57,16 @@ function EmpCtrl($scope, SweetAlert, Flash, $ngBootbox, EmpService) {
 	vm.create = create;
 	vm.update = update;
 	vm.remove = remove;
-	vm.resetDefault = resetDefault ;
+	vm.resetDefault = resetDefault;
 	vm.resetForm = resetForm;
 
 	/** Function * */
 
 	function resetDefault() {
-		vm.emp = angular.copy(vm.substitute) ;
+		vm.emp = angular.copy(vm.substitute);
+		vm.emp.empDateAttended = new Date(vm.substitute.empDateAttended);
 	}
-	
+
 	function remove(id) {
 		EmpService.remove(id).then(function(data) {
 			Flash.create('success', 'Deleted', 'custom-class');
@@ -115,6 +116,7 @@ function EmpCtrl($scope, SweetAlert, Flash, $ngBootbox, EmpService) {
 	function update(emp) {
 		vm.emp = angular.copy(emp);
 		vm.substitute = angular.copy(emp);
+		vm.emp.empDateAttended = new Date(emp.empDateAttended);
 		vm.tabs[1].selected = true;
 	}
 
@@ -135,7 +137,8 @@ function EmpCtrl($scope, SweetAlert, Flash, $ngBootbox, EmpService) {
 		vm.emp = {
 			id : null,
 			empCode : null,
-			empName : null
+			empName : null,
+			empDateAttended : undefined
 		};
 		vm.empForm.$setPristine();
 	}
@@ -144,7 +147,8 @@ function EmpCtrl($scope, SweetAlert, Flash, $ngBootbox, EmpService) {
 		vm.emp = {
 			id : null,
 			empCode : null,
-			empName : null
+			empName : null,
+			empDateAttended : undefined
 		};
 		vm.empForm.$setPristine();
 	}
