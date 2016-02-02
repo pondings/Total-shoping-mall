@@ -1,6 +1,11 @@
 package com.tsm.project.config;
 
-//@Configuration
-//@ImportResource(value = "classpath:spring/security-config.xml")
-public class SecurityConfig {}
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+	
+}
 
