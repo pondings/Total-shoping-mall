@@ -1,5 +1,5 @@
 package com.tsm.project.model;
-// Generated Feb 5, 2016 12:20:41 AM by Hibernate Tools 4.0.0
+// Generated Feb 5, 2016 2:32:06 AM by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,7 +45,7 @@ public class UserRole implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "username")
 	public User getUser() {
 		return this.user;
 	}
@@ -54,7 +54,7 @@ public class UserRole implements java.io.Serializable {
 		this.user = user;
 	}
 
-	@Column(name = "role", length = 20)
+	@Column(name = "role", length = 12)
 	public String getRole() {
 		return this.role;
 	}

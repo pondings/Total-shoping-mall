@@ -1,16 +1,12 @@
 package com.tsm.project.model;
-// Generated Feb 5, 2016 12:20:41 AM by Hibernate Tools 4.0.0
+// Generated Feb 5, 2016 2:32:06 AM by Hibernate Tools 4.0.0
 
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,8 +17,6 @@ import javax.persistence.Table;
 @Table(name = "user", schema = "main")
 public class User implements java.io.Serializable {
 
-	private int id;
-	private EmpInfo empInfo;
 	private String username;
 	private String password;
 	private Boolean enabled;
@@ -31,19 +25,12 @@ public class User implements java.io.Serializable {
 	public User() {
 	}
 
-	public User(int id) {
-		this.id = id;
-	}
-
-	public User(String username, String password, boolean enabled) {
+	public User(String username, String password) {
 		this.username = username;
 		this.password = password;
-		this.enabled = enabled;
 	}
 
-	public User(int id, EmpInfo empInfo, String username, String password, Boolean enabled, Set<UserRole> userRoles) {
-		this.id = id;
-		this.empInfo = empInfo;
+	public User(String username, String password, Boolean enabled, Set<UserRole> userRoles) {
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
@@ -51,27 +38,8 @@ public class User implements java.io.Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
-	public int getId() {
-		return this.id;
-	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "emp_id")
-	public EmpInfo getEmpInfo() {
-		return this.empInfo;
-	}
-
-	public void setEmpInfo(EmpInfo empInfo) {
-		this.empInfo = empInfo;
-	}
-
-	@Column(name = "username", length = 20)
+	@Column(name = "username", unique = true, nullable = false, length = 45)
 	public String getUsername() {
 		return this.username;
 	}
@@ -80,7 +48,7 @@ public class User implements java.io.Serializable {
 		this.username = username;
 	}
 
-	@Column(name = "password", length = 20)
+	@Column(name = "password", nullable = false, length = 8)
 	public String getPassword() {
 		return this.password;
 	}

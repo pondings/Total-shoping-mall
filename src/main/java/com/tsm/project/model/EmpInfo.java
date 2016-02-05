@@ -1,14 +1,10 @@
 package com.tsm.project.model;
-// Generated Feb 5, 2016 12:20:41 AM by Hibernate Tools 4.0.0
+// Generated Feb 5, 2016 2:32:06 AM by Hibernate Tools 4.0.0
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -36,7 +32,6 @@ public class EmpInfo implements java.io.Serializable {
 	private Date updateDate;
 	private Date empDateAttended;
 	private String empPosition;
-	private Set<User> users = new HashSet<User>(0);
 
 	public EmpInfo() {
 	}
@@ -47,7 +42,7 @@ public class EmpInfo implements java.io.Serializable {
 
 	public EmpInfo(int id, String empCode, String empTitle, String empName, String empAddress, String empEmail,
 			String empPhone, String empFax, String empDesc, Integer empStatus, String createBy, Date createDate,
-			String updateBy, Date updateDate, Date empDateAttended, String empPosition, Set<User> users) {
+			String updateBy, Date updateDate, Date empDateAttended, String empPosition) {
 		this.id = id;
 		this.empCode = empCode;
 		this.empTitle = empTitle;
@@ -64,7 +59,6 @@ public class EmpInfo implements java.io.Serializable {
 		this.updateDate = updateDate;
 		this.empDateAttended = empDateAttended;
 		this.empPosition = empPosition;
-		this.users = users;
 	}
 
 	@Id
@@ -214,15 +208,6 @@ public class EmpInfo implements java.io.Serializable {
 
 	public void setEmpPosition(String empPosition) {
 		this.empPosition = empPosition;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "empInfo")
-	public Set<User> getUsers() {
-		return this.users;
-	}
-
-	public void setUsers(Set<User> users) {
-		this.users = users;
 	}
 
 }
