@@ -1,5 +1,5 @@
 package com.tsm.project.model;
-// Generated Feb 5, 2016 2:32:06 AM by Hibernate Tools 4.0.0
+// Generated Feb 5, 2016 10:56:28 PM by Hibernate Tools 4.0.0
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,22 +18,21 @@ import javax.persistence.Table;
 public class User implements java.io.Serializable {
 
 	private String username;
-	private String password;
 	private Boolean enabled;
+	private String password;
 	private Set<UserRole> userRoles = new HashSet<UserRole>(0);
 
 	public User() {
 	}
 
-	public User(String username, String password) {
+	public User(String username) {
 		this.username = username;
-		this.password = password;
 	}
 
-	public User(String username, String password, Boolean enabled, Set<UserRole> userRoles) {
+	public User(String username, Boolean enabled, String password, Set<UserRole> userRoles) {
 		this.username = username;
-		this.password = password;
 		this.enabled = enabled;
+		this.password = password;
 		this.userRoles = userRoles;
 	}
 
@@ -48,15 +47,6 @@ public class User implements java.io.Serializable {
 		this.username = username;
 	}
 
-	@Column(name = "password", nullable = false, length = 8)
-	public String getPassword() {
-		return this.password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	@Column(name = "enabled")
 	public Boolean getEnabled() {
 		return this.enabled;
@@ -64,6 +54,15 @@ public class User implements java.io.Serializable {
 
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	@Column(name = "password", length = 8)
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")

@@ -23,13 +23,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-		auth.inMemoryAuthentication().withUser("pondingss").password("papapapond").roles("ADMIN");
 	}
 
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers("/emp**").access("hasRole('ROLE_ADMIN##')").and().formLogin()
-				.usernameParameter("username").passwordParameter("password").and().csrf().disable();
+		http.authorizeRequests().antMatchers("/employee", "/product", "/customer").access("hasRole('ROLE_ADMIN##')")
+				.and().formLogin().usernameParameter("username").passwordParameter("password").and().csrf().disable();
 	}
 
 	@Bean

@@ -1,5 +1,5 @@
 package com.tsm.project.model;
-// Generated Feb 5, 2016 2:32:06 AM by Hibernate Tools 4.0.0
+// Generated Feb 5, 2016 10:56:28 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import javax.persistence.Column;

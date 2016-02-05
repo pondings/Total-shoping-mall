@@ -5,11 +5,17 @@ angular.module('app', [
 /* common modules */
 'app.core', 'app.widgets',
 /* Feature modules */
-'app.store' ]);
+'app.emp', 'app.prod' ]);
 /* validate */
 
-/* Store */
+/* Employee */
 angular.module('app.emp', [ 'app.core', 'app.widgets', 'jcs-autoValidate' ])
+		.run([ 'validator', function(validator) {
+			validator.setValidElementStyling(false);
+		} ]);
+
+/* Product */
+angular.module('app.prod', [ 'app.core', 'app.widgets', 'jcs-autoValidate' ])
 		.run([ 'validator', function(validator) {
 			validator.setValidElementStyling(false);
 		} ]);
