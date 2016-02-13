@@ -1,5 +1,5 @@
 package com.tsm.project.model;
-// Generated Feb 5, 2016 10:56:28 PM by Hibernate Tools 4.0.0
+// Generated Feb 13, 2016 12:49:40 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -21,20 +21,20 @@ public class Product implements java.io.Serializable {
 
 	private int id;
 	private ProductType productType;
-	private String prodCode;
-	private String prodName;
-	private String prodDesc;
-	private Integer prodQuantity;
-	private Long prodPrice;
-	private String prodBrand;
-	private String prodColor;
-	private String prodModel;
-	private Integer prodStatus;
 	private String createBy;
 	private Date createDate;
+	private String prodBrand;
+	private String prodCode;
+	private String prodColor;
+	private String prodDesc;
+	private String prodImg;
+	private String prodModel;
+	private String prodName;
+	private Long prodPrice;
+	private Integer prodQuantity;
+	private Integer prodStatus;
 	private String updateBy;
 	private Date updateDate;
-	private String prodImg;
 
 	public Product() {
 	}
@@ -43,25 +43,25 @@ public class Product implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Product(int id, ProductType productType, String prodCode, String prodName, String prodDesc,
-			Integer prodQuantity, Long prodPrice, String prodBrand, String prodColor, String prodModel,
-			Integer prodStatus, String createBy, Date createDate, String updateBy, Date updateDate, String prodImg) {
+	public Product(int id, ProductType productType, String createBy, Date createDate, String prodBrand, String prodCode,
+			String prodColor, String prodDesc, String prodImg, String prodModel, String prodName, Long prodPrice,
+			Integer prodQuantity, Integer prodStatus, String updateBy, Date updateDate) {
 		this.id = id;
 		this.productType = productType;
-		this.prodCode = prodCode;
-		this.prodName = prodName;
-		this.prodDesc = prodDesc;
-		this.prodQuantity = prodQuantity;
-		this.prodPrice = prodPrice;
-		this.prodBrand = prodBrand;
-		this.prodColor = prodColor;
-		this.prodModel = prodModel;
-		this.prodStatus = prodStatus;
 		this.createBy = createBy;
 		this.createDate = createDate;
+		this.prodBrand = prodBrand;
+		this.prodCode = prodCode;
+		this.prodColor = prodColor;
+		this.prodDesc = prodDesc;
+		this.prodImg = prodImg;
+		this.prodModel = prodModel;
+		this.prodName = prodName;
+		this.prodPrice = prodPrice;
+		this.prodQuantity = prodQuantity;
+		this.prodStatus = prodStatus;
 		this.updateBy = updateBy;
 		this.updateDate = updateDate;
-		this.prodImg = prodImg;
 	}
 
 	@Id
@@ -85,87 +85,6 @@ public class Product implements java.io.Serializable {
 		this.productType = productType;
 	}
 
-	@Column(name = "prod_code", length = 45)
-	public String getProdCode() {
-		return this.prodCode;
-	}
-
-	public void setProdCode(String prodCode) {
-		this.prodCode = prodCode;
-	}
-
-	@Column(name = "prod_name", length = 45)
-	public String getProdName() {
-		return this.prodName;
-	}
-
-	public void setProdName(String prodName) {
-		this.prodName = prodName;
-	}
-
-	@Column(name = "prod_desc", length = 100)
-	public String getProdDesc() {
-		return this.prodDesc;
-	}
-
-	public void setProdDesc(String prodDesc) {
-		this.prodDesc = prodDesc;
-	}
-
-	@Column(name = "prod_quantity")
-	public Integer getProdQuantity() {
-		return this.prodQuantity;
-	}
-
-	public void setProdQuantity(Integer prodQuantity) {
-		this.prodQuantity = prodQuantity;
-	}
-
-	@Column(name = "prod_price")
-	public Long getProdPrice() {
-		return this.prodPrice;
-	}
-
-	public void setProdPrice(Long prodPrice) {
-		this.prodPrice = prodPrice;
-	}
-
-	@Column(name = "prod_brand", length = 45)
-	public String getProdBrand() {
-		return this.prodBrand;
-	}
-
-	public void setProdBrand(String prodBrand) {
-		this.prodBrand = prodBrand;
-	}
-
-	@Column(name = "prod_color", length = 45)
-	public String getProdColor() {
-		return this.prodColor;
-	}
-
-	public void setProdColor(String prodColor) {
-		this.prodColor = prodColor;
-	}
-
-	@Column(name = "prod_model", length = 45)
-	public String getProdModel() {
-		return this.prodModel;
-	}
-
-	public void setProdModel(String prodModel) {
-		this.prodModel = prodModel;
-	}
-
-	@Column(name = "prod_status")
-	public Integer getProdStatus() {
-		return this.prodStatus;
-	}
-
-	public void setProdStatus(Integer prodStatus) {
-		this.prodStatus = prodStatus;
-	}
-
 	@Column(name = "create_by", length = 45)
 	public String getCreateBy() {
 		return this.createBy;
@@ -185,6 +104,96 @@ public class Product implements java.io.Serializable {
 		this.createDate = createDate;
 	}
 
+	@Column(name = "prod_brand", length = 45)
+	public String getProdBrand() {
+		return this.prodBrand;
+	}
+
+	public void setProdBrand(String prodBrand) {
+		this.prodBrand = prodBrand;
+	}
+
+	@Column(name = "prod_code", length = 45)
+	public String getProdCode() {
+		return this.prodCode;
+	}
+
+	public void setProdCode(String prodCode) {
+		this.prodCode = prodCode;
+	}
+
+	@Column(name = "prod_color", length = 45)
+	public String getProdColor() {
+		return this.prodColor;
+	}
+
+	public void setProdColor(String prodColor) {
+		this.prodColor = prodColor;
+	}
+
+	@Column(name = "prod_desc", length = 100)
+	public String getProdDesc() {
+		return this.prodDesc;
+	}
+
+	public void setProdDesc(String prodDesc) {
+		this.prodDesc = prodDesc;
+	}
+
+	@Column(name = "prod_img", length = 250)
+	public String getProdImg() {
+		return this.prodImg;
+	}
+
+	public void setProdImg(String prodImg) {
+		this.prodImg = prodImg;
+	}
+
+	@Column(name = "prod_model", length = 45)
+	public String getProdModel() {
+		return this.prodModel;
+	}
+
+	public void setProdModel(String prodModel) {
+		this.prodModel = prodModel;
+	}
+
+	@Column(name = "prod_name", length = 45)
+	public String getProdName() {
+		return this.prodName;
+	}
+
+	public void setProdName(String prodName) {
+		this.prodName = prodName;
+	}
+
+	@Column(name = "prod_price")
+	public Long getProdPrice() {
+		return this.prodPrice;
+	}
+
+	public void setProdPrice(Long prodPrice) {
+		this.prodPrice = prodPrice;
+	}
+
+	@Column(name = "prod_quantity")
+	public Integer getProdQuantity() {
+		return this.prodQuantity;
+	}
+
+	public void setProdQuantity(Integer prodQuantity) {
+		this.prodQuantity = prodQuantity;
+	}
+
+	@Column(name = "prod_status")
+	public Integer getProdStatus() {
+		return this.prodStatus;
+	}
+
+	public void setProdStatus(Integer prodStatus) {
+		this.prodStatus = prodStatus;
+	}
+
 	@Column(name = "update_by", length = 45)
 	public String getUpdateBy() {
 		return this.updateBy;
@@ -202,15 +211,6 @@ public class Product implements java.io.Serializable {
 
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
-	}
-
-	@Column(name = "prod_img", length = 250)
-	public String getProdImg() {
-		return this.prodImg;
-	}
-
-	public void setProdImg(String prodImg) {
-		this.prodImg = prodImg;
 	}
 
 }

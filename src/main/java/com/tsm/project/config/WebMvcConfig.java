@@ -34,6 +34,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		registry.addViewController("/product").setViewName("app/prod/prod.view");
 		registry.addViewController("/login").setViewName("/login");
 		registry.addViewController("/403").setViewName("/403");
+		registry.addViewController("/customer").setViewName("app/customer/customer.view");
 	}
 
 	@Bean

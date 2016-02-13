@@ -1,5 +1,5 @@
 package com.tsm.project.model;
-// Generated Feb 5, 2016 10:56:28 PM by Hibernate Tools 4.0.0
+// Generated Feb 13, 2016 12:49:40 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;

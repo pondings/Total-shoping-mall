@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html ng-app="app.customer">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Customer Management</title>
+<!-- MAIN STYLE -->
+<link rel="stylesheet" href="./assets/css/main.css" />
+<!-- BOOTSTRAP -->
+<link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
+<!-- FONT AWESOME -->
+<link rel="stylesheet" href="./assets/css/font-awesome.min.css" />
+<!-- SWEET ALERT -->
+<link rel="stylesheet" href="./assets/css/sweetalert.css" />
+<!-- ANGULAR RESPONSIVE TABLES -->
+<link rel="stylesheet"
+	href="./assets/css/angular-responsive-tables.min.css" />
+<!-- ANGULAR JS -->
+<script src="./assets/js/angular.min.js"></script>
+</head>
+<body ng-cloak>
+	<div class="container-fluid container-margin"
+		ng-controller="CustomerCtrl as vm">
+		<!-- Tabset -->
+		<uib-tabset> <!-- Search Customer --> <uib-tab heading="ค้นหาข้อมูลลูกค้า"
+			active="vm.tabs[0].selected" select="vm.resetPage()" ng-click="vm.resetTable()">
+		<div flash-message="3500" class="text-center"></div>
+		<form class="form-horizontal form-margin" novalidate="novalidate"
+			ng-submit="vm.search()">
+			<div class="col-md-12">
+				<div class="col-md-4">
+					<div class="form-group">
+						<label class="col-md-4 control-label">รหัสลูกค้า</label>
+						<div class="col-md-8">
+							<input type="text" class="form-control"
+								ng-model="vm.customer.cuscode" />
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label class="col-md-4 contorl-label">ชื่อลูกค้า</label>
+						<div class="col-md-8">
+							<input type="text" class="form-control"
+								ng-model="vm.customer.cusname" />
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<div class="col-md-3">
+							<button class="btn btn-default">
+								<fa name="search" size="1" title="search"></fa>
+								ค้นหา
+							</button>
+						</div>
+						<div class="col-md-3">
+							<button class="btn btn-default">
+								<fa name="remove" size="1" title="reset"> </fa>
+								ยกเลิก
+							</button>
+						</div>
+					</div>
+				</div>
+				</div>
+		</form>
+		</uib-tab><!-- Add/Update Customer -->
+		<uib-tab heading="เพิ่ม/แก้ไข ข้อมูลลูกค้า" active="vm.tabs[1].selected" ng-click="vm.resetPage()" >
+		<div flash-message="3500" class="text-center"></div>
+		
+		</uib-tab>
+		 </uib-tabset>
+	</div>
+
+
+	<!-- APPLICATION -->
+	<script src="./app/app.js"></script>
+	<script src="./app/customer/customer.ctrl.js"></script>
+	<script src="./app/customer/customer.service.js"></script>
+	<!-- BOOTSTRAP -->
+	<script src="./assets/js/jquery.min.js"></script>
+	<script src="./assets/js/bootstrap.min.js"></script>
+	<!-- ANGULAR UI BOOTSTRAP -->
+	<script src="./assets/js/ui-bootstrap-tpls.min.js"></script>
+	<!-- ANGULAR FONT AWESOME -->
+	<script src="./assets/js/angular-fontawesome.min.js"></script>
+	<!-- ANGULAR BOOTBOX -->
+	<script src="./assets/js/bootbox.js"></script>
+	<script src="./assets/js/ngBootbox.min.js"></script>
+	<!-- ANGULAR SWEET ALERT -->
+	<script src="./assets/js/ngSweetAlert.min.js"></script>
+	<script src="./assets/js/sweetalert.min.js"></script>
+	<!-- ANGULAR FLASH -->
+	<script src="./assets/js/angular-flash.min.js"></script>
+	<!-- ANGULAR AUTO VALIDATE -->
+	<script src="./assets/js/jcs-auto-validate.min.js"></script>
+	<!-- AngularUI Router -->
+	<script src="./assets/js/angular-ui-router.min.js"></script>
+	<!-- ANGULAR RESPONSIVE TABLES -->
+	<script src="./assets/js/angular-responsive-tables.min.js"></script>
+	<!-- ANGULAR SMART TABLE -->
+	<script src="./assets/js/smart-table.min.js"></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 package com.tsm.project.model;
-// Generated Feb 5, 2016 10:56:28 PM by Hibernate Tools 4.0.0
+// Generated Feb 13, 2016 12:49:40 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -21,12 +21,12 @@ import javax.persistence.TemporalType;
 public class ProductType implements java.io.Serializable {
 
 	private int id;
-	private String prodName;
+	private String createBy;
+	private Date createDate;
 	private String prodCode;
 	private String prodDesc;
-	private String createBy;
+	private String prodName;
 	private String updateBy;
-	private Date createDate;
 	private Date updateDate;
 	private Set<Product> products = new HashSet<Product>(0);
 
@@ -37,15 +37,15 @@ public class ProductType implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public ProductType(int id, String prodName, String prodCode, String prodDesc, String createBy, String updateBy,
-			Date createDate, Date updateDate, Set<Product> products) {
+	public ProductType(int id, String createBy, Date createDate, String prodCode, String prodDesc, String prodName,
+			String updateBy, Date updateDate, Set<Product> products) {
 		this.id = id;
-		this.prodName = prodName;
+		this.createBy = createBy;
+		this.createDate = createDate;
 		this.prodCode = prodCode;
 		this.prodDesc = prodDesc;
-		this.createBy = createBy;
+		this.prodName = prodName;
 		this.updateBy = updateBy;
-		this.createDate = createDate;
 		this.updateDate = updateDate;
 		this.products = products;
 	}
@@ -61,13 +61,23 @@ public class ProductType implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "prod_name", length = 45)
-	public String getProdName() {
-		return this.prodName;
+	@Column(name = "create_by", length = 45)
+	public String getCreateBy() {
+		return this.createBy;
 	}
 
-	public void setProdName(String prodName) {
-		this.prodName = prodName;
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "create_date", length = 13)
+	public Date getCreateDate() {
+		return this.createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 
 	@Column(name = "prod_code", length = 45)
@@ -88,13 +98,13 @@ public class ProductType implements java.io.Serializable {
 		this.prodDesc = prodDesc;
 	}
 
-	@Column(name = "create_by", length = 45)
-	public String getCreateBy() {
-		return this.createBy;
+	@Column(name = "prod_name", length = 45)
+	public String getProdName() {
+		return this.prodName;
 	}
 
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
+	public void setProdName(String prodName) {
+		this.prodName = prodName;
 	}
 
 	@Column(name = "update_by", length = 45)
@@ -104,16 +114,6 @@ public class ProductType implements java.io.Serializable {
 
 	public void setUpdateBy(String updateBy) {
 		this.updateBy = updateBy;
-	}
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "create_date", length = 13)
-	public Date getCreateDate() {
-		return this.createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
 	}
 
 	@Temporal(TemporalType.DATE)

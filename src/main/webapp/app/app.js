@@ -5,8 +5,14 @@ angular.module('app', [
 /* common modules */
 'app.core', 'app.widgets',
 /* Feature modules */
-'app.emp', 'app.prod' ]);
+'app.emp', 'app.prod','app.customer' ]);
 /* validate */
+
+/* Customer */
+angular.module('app.customer', [ 'app.core', 'app.widgets', 'jcs-autoValidate' ])
+		.run([ 'validator', function(validator) {
+			validator.setValidElementStyling(false);
+		} ]);
 
 /* Employee */
 angular.module('app.emp', [ 'app.core', 'app.widgets', 'jcs-autoValidate' ])
