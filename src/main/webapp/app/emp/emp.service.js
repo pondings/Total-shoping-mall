@@ -1,6 +1,6 @@
 'use strict';
 
-var urlBase = 'http://localhost:8080/final-project';
+var urlBase = 'http://localhost:8080/project';
 
 angular.module('app.emp').service('EmpService', EmpService);
 EmpService.$inject = [ '$http', '$q' ];
