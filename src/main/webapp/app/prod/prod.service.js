@@ -1,6 +1,6 @@
 'use strict';
 
-var urlBase = 'http://localhost:8080/project';
+var urlBase = 'http://localhost:8080/final-project';
 
 angular.module('app.prod').service('ProdService', ProdService);
 ProdService.$inject = [ '$http', '$q' ];

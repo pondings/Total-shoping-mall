@@ -1,5 +1,5 @@
 'use strict';
-angular.module('app.emp').controller('ProdCtrl', ProdCtrl);
+angular.module('app.prod').controller('ProdCtrl', ProdCtrl);
 ProdCtrl.$inject = [ '$scope', 'SweetAlert', 'Flash', '$ngBootbox',
 		'ProdService' ];
 
@@ -7,13 +7,12 @@ function ProdCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdService) {
 	var vm = this;
 
 	/** tab * */
-
 	vm.tabs = [ {
-		title : 'ค้นหาข้อมูลพนักงาน',
+		title : 'ค้นหาข้อมูลสินค้า',
 		tabIdx : 0,
 		selected : true
 	}, {
-		title : 'เพิ่มแก้ไข ข้อมูลพนักงาน',
+		title : 'เพิ่มแก้ไข ข้อมูลสินค้า',
 		tabIdx : 0,
 		selected : false
 	} ];
