@@ -1,6 +1,4 @@
 ##----------------------------------------------------------------------------------------------------
-## JPA beans suffix
-#set ( $env.entityClassNameSuffix = "Entity" )
 ##--------------------------------------------------------------------------------------------------------
 ## Data fields = fields not in Primary Key and not in selected Links    
 #set( $dataFields = $entity.getAttributesByCriteria( $const.NOT_KEY, $const.NOT_IN_SELECTED_LINKS ) )
@@ -52,10 +50,7 @@ import $import;
  */
 
 $jpa.entityAnnotations(0, $entity)
-// Define named queries here
-@NamedQueries ( {
-  @NamedQuery ( name="${entity.name}.countAll", query="SELECT COUNT(x) FROM ${entity.name} x" )
-} )
+
 public class ${entity.name} implements Serializable {
 
     private static final long serialVersionUID = 1L;

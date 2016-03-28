@@ -20,6 +20,12 @@ angular.module('app.prod', [ 'app.core', 'app.widgets', 'jcs-autoValidate' ])
 			validator.setValidElementStyling(false);
 		} ]);
 
+/* Product Type */
+angular.module('app.prodType', [ 'app.core', 'app.widgets', 'jcs-autoValidate' ])
+.run([ 'validator', function(validator) {
+	validator.setValidElementStyling(false);
+} ]);
+
 /* require module */
 angular.module('app.core', [
 /* Angular modules... */

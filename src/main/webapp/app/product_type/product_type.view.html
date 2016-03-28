@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="app.prod">
+<html ng-app="app.prodType">
 <head>
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -22,58 +22,27 @@
 </head>
 <body ng-cloak>
 	<div class="container-fluid container-margin"
-		ng-controller="ProdCtrl as vm">
+		ng-controller="ProdTypeCtrl as vm">
 		<uib-tabset> <uib-tab active="vm.tabs[0].selected"
 			heading="{{vm.tabs[0].title}}" select="vm.resetPage()"
 			ng-click="vm.resetTable()">
 		<div flash-message="3500" class="text-center"></div>
 		<form class="form-horizontal form-margin" novalidate="novalidate"
-			ng-submit="vm.search()" name="vm.prodForm">
+			ng-submit="vm.search()" name="vm.prodTypeForm">
 			<div class="col-md-12">
 				<div class="col-md-4">
 					<div class="form-group">
-						<label class="col-md-4 control-label">รหัสสินค้า</label>
+						<label class="col-md-4 control-label">รหัสประเภทสินค้า</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control"
-								ng-model="vm.prod.prodCode" />
+							<input type="text" class="form-control">
 						</div>
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
-						<label class="col-md-4 control-label">ชื่อสินค้า</label>
+						<label class="control-label col-md-4">ชื่อประเภทสินค้า</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control"
-								ng-model="vm.prod.prodName">
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="form-group">
-						<label class="col-md-4 control-label">ยี่ห้อสินค้า</label>
-						<div class="col-md-8">
-							<input type="text" class="form-control"
-								ng-model="vm.prod.prodBrand">
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-12">
-				<div class="col-md-4">
-					<div class="form-group">
-						<label class="col-md-4 control-label">รุ่นสินค้า</label>
-						<div class="col-md-8">
-							<input type="text" class="form-control"
-								ng-model="vm.prod.prodModel">
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="form-group">
-						<label class="col-md-4 control-label">ประเภทสินค้า</label>
-						<div class="col-md-8">
-							<input type="text" class="form-control"
-								ng-model="vm.prod.productType"></input>
+							<input type="text" class="form-control">
 						</div>
 					</div>
 				</div>
@@ -99,62 +68,7 @@
 			</div>
 		</form>
 		</uib-tab> <uib-tab active="vm.tabs[1].selected" heading="{{vm.tabs[1].title}}"
-			ng-click="vm.resetPage()">
-			<form class="form-horizontal form-margin">
-				<div class="col-md-12">
-					<div class="col-md-4">
-						<div class="form-group">
-							<label class="col-md-4 control-label">รหัสสินค้า</label>
-							<div class="col-md-8">
-								<input type="text" ng-model="vm.prod.prodCode" class="form-control">
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label class="col-md-4 control-label">ชื่อสินค้า</label>
-							<div class="col-md-8">
-								<input type="text" ng-model="vm.prod.prodName" class="form-control">
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label class="col-md-4 control-label">ยี่ห้อสินค้า</label>
-							<div class="col-md-8">
-								<input type="text" ng-model="vm.prod.prodBrand" class="form-control">
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-12">
-					<div class="col-md-4">
-						<div class="form-group">
-							<label class="col-md-4 control-label">สีสินค้า</label>
-							<div class="col-md-8">
-								<input type="text" ng-model="vm.prod.prodColor" class="form-control">
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label class="col-md-4 control-label">ราคาสินค้า</label>
-							<div class="col-md-8">
-								<input type="text" ng-model="vm.prod.prodPrice" class="form-control">
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label class="col-md-4 control-label">ยี่ห้อสินค้า</label>
-							<div class="col-md-8">
-								<input type="text" ng-model="vm.prod.prodBrand" class="form-control">
-							</div>
-						</div>
-					</div>
-				</div>
-			</form>
-			</uib-tab> </uib-tabset>
+			ng-click="vm.resetPage()"> </uib-tab> </uib-tabset>
 
 		<!-- Employee Table -->
 
@@ -223,8 +137,8 @@
 	<script src="./app/app.js">
 		
 	</script>
-	<script src="./app/prod/prod.ctrl.js"></script>
-	<script src="./app/prod/prod.service.js"></script>
+	<script src="./app/product_type/product_type.ctrl.js"></script>
+	<script src="./app/product_type/product_type.service.js"></script>
 	<!-- BOOTSTRAP -->
 	<script src="./assets/js/jquery.min.js"></script>
 	<script src="./assets/js/bootstrap.min.js"></script>

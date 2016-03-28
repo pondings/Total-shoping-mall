@@ -1,18 +1,18 @@
 'use strict';
-angular.module('app.prod').controller('ProdCtrl', ProdCtrl);
-ProdCtrl.$inject = [ '$scope', 'SweetAlert', 'Flash', '$ngBootbox',
-		'ProdService' ];
+angular.module('app.prodType').controller('ProdTypeCtrl', ProdTypeCtrl);
+ProdTypeCtrl.$inject = [ '$scope', 'SweetAlert', 'Flash', '$ngBootbox',
+		'ProdTypeService' ];
 
-function ProdCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdService) {
+function ProdTypeCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdTypeService) {
 	var vm = this;
 
 	/** tab * */
 	vm.tabs = [ {
-		title : 'ค้นหาข้อมูลสินค้า',
+		title : 'ค้นหาประเภทสินค้า',
 		tabIdx : 0,
 		selected : true
 	}, {
-		title : 'เพิ่มแก้ไข ข้อมูลสินค้า',
+		title : 'เพิ่มแก้ไข ประเภทสินค้า',
 		tabIdx : 0,
 		selected : false
 	} ];
@@ -46,7 +46,7 @@ function ProdCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdService) {
 
 	/** smart-table * */
 
-	$scope.displayedProd = [].concat(vm.prodList);
+	$scope.displayedProdType = [].concat(vm.prodTypeList);
 	$scope.displayedPages = 5;
 
 	/** Declare Func * */
@@ -63,16 +63,16 @@ function ProdCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdService) {
 	/** Function * */
 
 	function resetDefault() {
-		vm.prod = angular.copy(vm.substitute);
-		vm.prod.prodDateAttended = new Date(vm.substitute.prodDateAttended);
+		vm.prodType = angular.copy(vm.substitute);
+		vm.prodType.prodDateAttended = new Date(vm.substitute.prodDateAttended);
 	}
 
 	function remove(id) {
-		ProdService.remove(id).then(function(data) {
+		ProdTypeService.remove(id).then(function(data) {
 			Flash.create('success', 'Deleted', 'custom-class');
-			for (var i = 0; i < vm.prodList.length; i++) {
-				if (vm.prodList[i].id == id) {
-					vm.prodList.splice(i, 1);
+			for (var i = 0; i < vm.prodTypeList.length; i++) {
+				if (vm.prodTypeList[i].id == id) {
+					vm.prodTypeList.splice(i, 1);
 					break;
 				}
 			}
@@ -82,11 +82,11 @@ function ProdCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdService) {
 	}
 
 	function formControl() {
-		if (vm.prod.id != null) {
-			ProdService.update(vm.prod).then(
+		if (vm.prodType.id != null) {
+			ProdTypeService.update(vm.prodType).then(
 					function(data) {
-						for (var i = 0; i < vm.prodList.length; i++) {
-							if (vm.prodList[i].id == data.id) {
+						for (var i = 0; i < vm.prodTypeList.length; i++) {
+							if (vm.prodTypeList[i].id == data.id) {
 								$scope.displayedProd[i] = data;
 								break;
 							}
@@ -104,8 +104,8 @@ function ProdCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdService) {
 	}
 
 	function create() {
-		ProdService.create(vm.prod).then(function(data) {
-			vm.prodList.push(data);
+		ProdTypeService.create(vm.prodType).then(function(data) {
+			vm.prodTypeList.push(data);
 			Flash.create('success', 'Created', 'custom-class');
 			vm.resetForm();
 		}, function(errRs) {
@@ -114,16 +114,16 @@ function ProdCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdService) {
 	}
 
 	function update(prod) {
-		vm.prod = angular.copy(prod);
+		vm.prodType = angular.copy(prod);
 		vm.substitute = angular.copy(prod);
-		vm.prod.prodDateAttended = new Date(prod.prodDateAttended);
+		vm.prodType.prodDateAttended = new Date(prod.prodDateAttended);
 		vm.tabs[1].selected = true;
 	}
 
 	function search() {
-		ProdService.search(vm.prod).then(
+		ProdTypeService.search(vm.prodType).then(
 				function(data) {
-					vm.prodList = data;
+					vm.prodTypeList = data;
 					Flash
 							.create('success', "Found " + data.length
 									+ " reccord", 'custom-class');
@@ -133,8 +133,8 @@ function ProdCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdService) {
 	}
 
 	function resetPage() {
-		vm.prodList = [];
-		vm.prod = {
+		vm.prodTypeList = [];
+		vm.prodType = {
 			id : null,
 			prodCode : null,
 			prodName : null,
@@ -144,16 +144,16 @@ function ProdCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdService) {
 			prodColor : null,
 			prodPrice : null
 		};
-		vm.prodForm.$setPristine();
+		vm.prodTypeForm.$setPristine();
 	}
 
 	function resetForm() {
-		vm.prod = {
+		vm.prodType = {
 			id : null,
 			prodCode : null,
 			prodName : null,
 			prodDateAttended : undefined
 		};
-		vm.prodForm.$setPristine();
+		vm.prodTypeForm.$setPristine();
 	}
 };
