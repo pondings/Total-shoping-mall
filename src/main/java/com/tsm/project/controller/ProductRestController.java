@@ -14,13 +14,13 @@ import com.tsm.project.model.Product;
 import com.tsm.project.service.ProductService;
 
 @RestController
-@RequestMapping("/prod")
+@RequestMapping("prod")
 public class ProductRestController {
 
 	@Autowired
 	ProductService productService ;
 	
-	@RequestMapping(value="/search",method=RequestMethod.POST)
+	@RequestMapping(value="search",method=RequestMethod.POST)
 	ResponseEntity<?> search(@RequestBody Product product){
 		return new ResponseEntity<List<Product>>(productService.search(product),HttpStatus.OK) ;
 	}

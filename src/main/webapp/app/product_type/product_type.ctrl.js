@@ -64,7 +64,6 @@ function ProdTypeCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdTypeService) {
 
 	function resetDefault() {
 		vm.prodType = angular.copy(vm.substitute);
-		vm.prodType.prodDateAttended = new Date(vm.substitute.prodDateAttended);
 	}
 
 	function remove(id) {
@@ -116,7 +115,6 @@ function ProdTypeCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdTypeService) {
 	function update(prod) {
 		vm.prodType = angular.copy(prod);
 		vm.substitute = angular.copy(prod);
-		vm.prodType.prodDateAttended = new Date(prod.prodDateAttended);
 		vm.tabs[1].selected = true;
 	}
 
@@ -136,13 +134,9 @@ function ProdTypeCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdTypeService) {
 		vm.prodTypeList = [];
 		vm.prodType = {
 			id : null,
-			prodCode : null,
-			prodName : null,
-			prodDateAttended : undefined,
-			prodBrand : null,
-			prodName : null,
-			prodColor : null,
-			prodPrice : null
+			typeCode : null,
+			typeName : null,
+			typeDesc : null
 		};
 		vm.prodTypeForm.$setPristine();
 	}
@@ -150,9 +144,9 @@ function ProdTypeCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdTypeService) {
 	function resetForm() {
 		vm.prodType = {
 			id : null,
-			prodCode : null,
-			prodName : null,
-			prodDateAttended : undefined
+			typeCode : null,
+			typeName : null,
+			typeDesc : null
 		};
 		vm.prodTypeForm.$setPristine();
 	}

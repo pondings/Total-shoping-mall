@@ -34,7 +34,8 @@
 					<div class="form-group">
 						<label class="col-md-4 control-label">รหัสประเภทสินค้า</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control">
+							<input type="text" class="form-control"
+								ng-model="vm.prodType.typeCode">
 						</div>
 					</div>
 				</div>
@@ -42,7 +43,8 @@
 					<div class="form-group">
 						<label class="control-label col-md-4">ชื่อประเภทสินค้า</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control">
+							<input type="text" class="form-control"
+								ng-model="vm.prodType.typeName">
 						</div>
 					</div>
 				</div>
@@ -59,7 +61,7 @@
 					<div class="col-md-1 text-center">
 						<button class="btn btn-default"
 							ng-click="vm.emp.id == null ? vm.resetForm() : vm.resetDefault()"
-							type="button" ng-disabled="vm.empForm.$pristine">
+							type="button" ng-disabled="vm.prodTypeForm.$pristine">
 							<fa name="remove" size="1" title="Reset"></fa>
 							ยกเลิก
 						</button>
@@ -68,9 +70,64 @@
 			</div>
 		</form>
 		</uib-tab> <uib-tab active="vm.tabs[1].selected" heading="{{vm.tabs[1].title}}"
-			ng-click="vm.resetPage()"> </uib-tab> </uib-tabset>
+			ng-click="vm.resetPage()">
+		<div flash-message="3500" class="text-center"></div>
+		<form class="form-horizontal form-margin" novalidate="novalidate"
+			name="vm.prodTypeForm" ng-submit="vm.formControl()"
+			name="vm.prodTypeForm">
+			<div class="col-md-12">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label class="control-label col-md-4">รหัสประเภท</label>
+						<div class="col-md-8">
+							<input type="text" class="form-control"
+								ng-model="vm.prodType.typeCode" required>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label class="control-label col-md-4">ชื่อประเภท</label>
+						<div class="col-md-8">
+							<input type="text" class="form-control"
+								ng-model="vm.prodType.typeName" required>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label class="control-label col-md-4">รายละเอียด</label>
+						<div class="col-md-8">
+							<textarea class="form-control" ng-model="vm.prodType.typeDesc"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12 col-sm-12">
+				<div class="form-group">
+					<div class="col-md-1 col-md-offset-5 text-center">
+						<button class="btn btn-default" type="submit"
+							ng-disabled="vm.prodTypeForm.$invalid">
+							<fa name="floppy-o" size="1" tital="Save"></fa>
+							บันทึก
+						</button>
+					</div>
+					<div class="col-md-1 text-center">
+						<button class="btn btn-default"
+							ng-click="vm.prodType.id == null ? vm.resetForm() : vm.resetDefault()"
+							type="button" ng-disabled="vm.prodTypeForm.$pristine">
+							<fa name="remove" size="1" title="Reset"></fa>
+							ยกเลิก
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+		</uib-tab> </uib-tabset>
 
-		<!-- Employee Table -->
+		<!-- Product_type Table -->
 
 		<div class="col-md-12">
 			<div class="pull-right">
@@ -81,41 +138,26 @@
 			</div>
 		</div>
 		<div class="col-md-12">
-			<table st-table="displayedProd" wt-responsive-table
-				st-safe-src="vm.prodList" class="table table-striped table-bordered">
+			<table st-table="displayedProdType" wt-responsive-table
+				st-safe-src="vm.prodTypeList"
+				class="table table-striped table-bordered">
 				<thead>
 					<tr>
-						<th class="text-center"></th>
-						<th class="text-center" st-sort="prodCode">รหัสสินค้า</th>
-						<th class="text-center" st-sort="prodName">ชื่อสินค้า</th>
-						<th class="text-center" st-sort="prodBrand">ยี่ห้อ</th>
-						<th class="text-center" st-sort="prodModel">รุ่น</th>
-						<th class="text-center" st-sort="prodColor">สี</th>
-						<th class="text-center" st-sort="prodPrice">ราคา</th>
-						<th class="text-center" st-sort="prodQuantity">จำนวน</th>
-						<th class="text-center" st-sort="productType">ประเภท</th>
-						<th class="text-center" st-sort="prodStatus">สถานะ</th>
+						<th class="text-center" st-sort="typeCode">รหัสประเภท</th>
+						<th class="text-center" st-sort="typeName">ชื่อประเภท</th>
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="prod in displayedProd">
-						<td class="text-center"></td>
-						<td class="text-center">{{prod.prodCode}}</td>
-						<td class="text-center">{{prod.prodName}}</td>
-						<td class="text-center">{{prod.prodBrand}}td>
-						<td class="text-center">{{prod.prodModel}}</td>
-						<td class="text-center">{{prod.prodColor}}</td>
-						<td class="text-center">{{prod.prodPrice}}</td>
-						<td class="text-right">{{prod.prodQuantity}}</td>
-						<td class="text-right">{{prod.productType}}</td>
-						<td class="text-right">{{prod.prodStatus}}</td>
+					<tr ng-repeat="prodType in displayedProdType">
+						<td class="text-center">{{prodType.typeCode}}</td>
+						<td class="text-center">{{prodType.typeName}}</td>
 						<td class="text-center"><button class="btn btn-info"
-								ng-click="vm.update(emp)">
+								ng-click="vm.update(prodType)">
 								<fa name="edit"></fa>
 							</button>
 
-							<button class="btn btn-danger" ng-click="vm.remove(emp.id)">
+							<button class="btn btn-danger" ng-click="vm.remove(prodType.id)">
 								<fa name="trash-o"></fa>
 							</button></td>
 					</tr>

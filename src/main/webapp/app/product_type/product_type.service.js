@@ -17,9 +17,10 @@ function ProdTypeService($http, $q) {
 
 	function create(prodType) {
 		var deferred = $q.defer();
-		$http.post(urlBase + '/prodType/create', prodType).success(function(dataArr) {
-			deferred.resolve(dataArr);
-		}).error(function(errMs, errCode) {
+		$http.post(urlBase + '/prodType/create', prodType).success(
+				function(dataArr) {
+					deferred.resolve(dataArr);
+				}).error(function(errMs, errCode) {
 			var err = {
 				errMessage : errMs,
 				errCode : errCode
@@ -30,10 +31,12 @@ function ProdTypeService($http, $q) {
 	}
 
 	function update(prodType) {
+		console.log(prodType);
 		var deferred = $q.defer();
-		$http.put(urlBase + '/prodType/update', prodType).success(function(dataArr) {
-			deferred.resolve(dataArr);
-		}).error(function(errMs, errCode) {
+		$http.put(urlBase + '/prodType/update', prodType).success(
+				function(dataArr) {
+					deferred.resolve(dataArr);
+				}).error(function(errMs, errCode) {
 			var err = {
 				errMessage : errMs,
 				errCode : errCode
@@ -60,9 +63,10 @@ function ProdTypeService($http, $q) {
 
 	function search(prodType) {
 		var deferred = $q.defer();
-		$http.post(urlBase + '/prodType/search/', prodType).success(function(dataArr) {
-			deferred.resolve(dataArr);
-		}).error(function(errMs, errCode) {
+		$http.post(urlBase + '/prodType/search/', prodType).success(
+				function(dataArr) {
+					deferred.resolve(dataArr);
+				}).error(function(errMs, errCode) {
 			var err = {
 				errMessage : errMs,
 				errCode : errCode
