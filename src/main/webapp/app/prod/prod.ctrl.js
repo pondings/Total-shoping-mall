@@ -43,10 +43,12 @@ function ProdCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdService) {
 		number : 30
 	} ];
 	vm.selectedNumPerPage = vm.numPerPages[0];
+	vm.selectedNumPerPagDialog = vm.numPerPages[0];
 
 	/** smart-table * */
 
 	$scope.displayedProd = [].concat(vm.prodList);
+	$scope.displayedProdType = [].concat($scope.prodTypeList);
 	$scope.displayedPages = 5;
 
 	/** Declare Func * */
@@ -59,12 +61,29 @@ function ProdCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdService) {
 	vm.remove = remove;
 	vm.resetDefault = resetDefault;
 	vm.resetForm = resetForm;
+	vm.getProdType = getProdType;
 
 	/** Function * */
 
+	$scope.setClickedRow = function(prodType) {
+		vm.prod.productType = prodType;
+		$ngBootbox.hideAll();
+	}
+
+	function getProdType() {
+		ProdService.prodType().then(
+				function(data) {
+					$scope.prodTypeList = data;
+				},
+				function(errRs) {
+					Flash.create('danger', "ไม่สามารถรับข้อมูล Type ได้",
+							'custom-class');
+				})
+
+	}
+
 	function resetDefault() {
 		vm.prod = angular.copy(vm.substitute);
-		vm.prod.prodDateAttended = new Date(vm.substitute.prodDateAttended);
 	}
 
 	function remove(id) {
@@ -116,7 +135,6 @@ function ProdCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdService) {
 	function update(prod) {
 		vm.prod = angular.copy(prod);
 		vm.substitute = angular.copy(prod);
-		vm.prod.prodDateAttended = new Date(prod.prodDateAttended);
 		vm.tabs[1].selected = true;
 	}
 
@@ -136,13 +154,17 @@ function ProdCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdService) {
 		vm.prodList = [];
 		vm.prod = {
 			id : null,
+			prodQuantity : null,
 			prodCode : null,
 			prodName : null,
-			prodDateAttended : undefined,
 			prodBrand : null,
 			prodName : null,
+			prodModel : null,
 			prodColor : null,
-			prodPrice : null
+			prodPrice : null,
+			productType : {
+				typeName : null
+			}
 		};
 		vm.prodForm.$setPristine();
 	}
@@ -150,10 +172,44 @@ function ProdCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdService) {
 	function resetForm() {
 		vm.prod = {
 			id : null,
+			prodQuantity : null,
 			prodCode : null,
 			prodName : null,
-			prodDateAttended : undefined
+			prodBrand : null,
+			prodName : null,
+			prodModel : null,
+			prodColor : null,
+			prodPrice : null,
+			productType : {
+				typeName : null
+			}
 		};
 		vm.prodForm.$setPristine();
 	}
+
+	/** Modal * */
+	vm.viewDialogButton = {
+		main : {
+			label : "Close",
+			className : "btn-primary",
+			callback : function() {
+			}
+		}
+	};
+
+	vm.viewProdTypeModal = {
+		scope : $scope,
+		title : 'Product Type',
+		onEscape : function() {
+		},
+		show : true,
+		backdrop : true,
+		closeButton : true,
+		animate : true,
+		buttons : vm.viewDialogButton,
+		size : 'large',
+		className : 'info-class',
+		message : 'info'
+	};
+
 };

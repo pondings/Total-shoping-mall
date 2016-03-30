@@ -1,0 +1,44 @@
+<head>
+<meta charset="UTF-8" />
+<style type="text/css">
+</style>
+</head>
+
+<div class="pull-right">
+	<select ng-model="vm.selectedNumPerPagDialog"
+		ng-selected="vm.numPerPage = vm.selectedNumPerPage.number"
+		ng-options="n.number for n in vm.numPerPages"
+		class="input-sm form-control selector-option"></select>
+</div>
+<table st-table="displayedProdType" wt-responsive-table
+	st-safe-src="prodTypeList" class="table table-striped table-bordered">
+	<thead>
+		<tr>
+			<th class="text-center" st-sort="typeCode">รหัสประเภท</th>
+			<th class="text-center" st-sort="typeName">ชื่อประเภท</th>
+		</tr>
+		<tr>
+			<td><input type="text" placeholder="รหัสประเภท"
+				st-search="typeCode" class="form-control"></td>
+			<td><input type="text" placeholder="ชื่อประเภท"
+				st-search="typeName" class="form-control"></td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="row in displayedProdType"
+			ng-class="{'selected':row == vm.prod.productType}"
+			ng-click="setClickedRow(row)">
+			<td>{{row.typeCode}}</td>
+			<td>{{row.typeName}}</td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="11" class="text-center">
+				<div st-pagination="" st-items-by-page="vm.numPerPage"
+					st-displayed-pages="displayedPages"
+					st-template="app/common/pagination/pagination.tpl.html"></div>
+			</td>
+		</tr>
+	</tfoot>
+</table>

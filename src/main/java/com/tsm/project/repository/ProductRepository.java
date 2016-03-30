@@ -15,9 +15,10 @@ import com.tsm.project.model.Product;
 public interface ProductRepository extends CrudRepository<Product, Integer> {
 
 	@Query("SELECT prod FROM Product prod LEFT JOIN FETCH prod.productType WHERE 1=1 AND (prod.prodCode like %:#{#param.prodCode != null ? #param.prodCode : ''}%) "
-			+ "AND (prod.prodName like %:#{#param.prodName != null ? #param.prodName:''}%) "
-			+ "AND (prod.prodBrand like %:#{#param.prodBrand != null ? #param.prodBrand:''}%) "
-			+ "AND (prod.prodModel like %:#{#param.prodModel != null ? #param.prodModel:''}%)")
+			+ "AND (prod.prodName like %:#{#param.prodName != null ? #param.prodName :''}%) "
+			+ "AND (prod.prodBrand like %:#{#param.prodBrand != null ? #param.prodBrand :''}%) "
+			+ "AND (prod.prodModel like %:#{#param.prodModel != null ? #param.prodModel :''}%) "
+			+ "AND (prod.productType.typeName like %:#{#param.productType.typeName != null ? #param.productType.typeName :''}%)")
 	List<Product> search(@Param("param") Product product);
 
 }

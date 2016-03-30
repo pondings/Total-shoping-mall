@@ -10,10 +10,29 @@ function ProdService($http, $q) {
 		create : create,
 		update : update,
 		remove : remove,
-		search : search
+		search : search,
+		prodType : prodType
 	};
 
 	return service;
+
+	function prodType() {
+		var deferred = $q.defer();
+		var prodType = {
+			typeCode : null
+		};
+		$http.post(urlBase + '/prodType/search', prodType).success(
+				function(dataArr) {
+					deferred.resolve(dataArr);
+				}).error(function(errMs, errCode) {
+			var err = {
+				errMessage : errMs,
+				errCode : errCode
+			}
+			deferred.reject(err);
+		});
+		return deferred.promise;
+	}
 
 	function create(prod) {
 		var deferred = $q.defer();
@@ -30,6 +49,7 @@ function ProdService($http, $q) {
 	}
 
 	function update(prod) {
+		console.log(prod) ;
 		var deferred = $q.defer();
 		$http.put(urlBase + '/prod/update', prod).success(function(dataArr) {
 			deferred.resolve(dataArr);
