@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Telosys Database Repository --><root>
-<tableList databaseId="1" databaseName="tsm_finalProject" databaseProductName="PostgreSQL" generation="2016-03-28 20:31:37">
-<table catalog="" databaseType="TABLE" javaBean="CustInfo" name="cust_info" schema="main"/>
+<tableList databaseId="1" databaseName="tsm_finalProject" databaseProductName="PostgreSQL" generation="2016-04-03 23:50:26">
+<table catalog="" databaseType="TABLE" javaBean="Customer" name="customer" schema="main">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="nextval('main.customer_id_seq'::regclass)" dbName="id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="serial" inputType="number" javaName="id" javaType="java.lang.Integer" jdbcTypeCode="4" label="Id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="cust_title" dbNotNull="false" dbPosition="2" dbSize="10" dbTypeName="bpchar" inputType="text" javaName="custTitle" javaType="java.lang.String" jdbcTypeCode="1" label="Cust title" maxLength="10" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="cust_code" dbNotNull="false" dbPosition="3" dbSize="10" dbTypeName="bpchar" inputType="text" javaName="custCode" javaType="java.lang.String" jdbcTypeCode="1" label="Cust code" maxLength="10" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="cust_name" dbNotNull="false" dbPosition="4" dbSize="40" dbTypeName="bpchar" inputType="text" javaName="custName" javaType="java.lang.String" jdbcTypeCode="1" label="Cust name" maxLength="40" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="cust_phone" dbNotNull="false" dbPosition="5" dbSize="10" dbTypeName="bpchar" inputType="text" javaName="custPhone" javaType="java.lang.String" jdbcTypeCode="1" label="Cust phone" maxLength="10" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="cust_fax" dbNotNull="false" dbPosition="6" dbSize="12" dbTypeName="bpchar" inputType="text" javaName="custFax" javaType="java.lang.String" jdbcTypeCode="1" label="Cust fax" maxLength="12" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="cust_desc" dbNotNull="false" dbPosition="7" dbSize="100" dbTypeName="bpchar" inputType="text" javaName="custDesc" javaType="java.lang.String" jdbcTypeCode="1" label="Cust desc" maxLength="100" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="created_by" dbNotNull="false" dbPosition="8" dbSize="20" dbTypeName="bpchar" inputType="text" javaName="createdBy" javaType="java.lang.String" jdbcTypeCode="1" label="Created by" maxLength="20" notNull="false" selected="true"/>
+<column dateType="D" dbComment="" dbDefaultValue="" dbName="created_date" dbNotNull="false" dbPosition="9" dbSize="13" dbTypeName="date" inputType="date" javaName="createdDate" javaType="java.util.Date" jdbcTypeCode="91" label="Created date" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="updated_by" dbNotNull="false" dbPosition="10" dbSize="20" dbTypeName="bpchar" inputType="text" javaName="updatedBy" javaType="java.lang.String" jdbcTypeCode="1" label="Updated by" maxLength="20" notNull="false" selected="true"/>
+<column dateType="D" dbComment="" dbDefaultValue="" dbName="updated_date" dbNotNull="false" dbPosition="11" dbSize="13" dbTypeName="date" inputType="date" javaName="updatedDate" javaType="java.util.Date" jdbcTypeCode="91" label="Updated date" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="cust_address" dbNotNull="false" dbPosition="12" dbSize="100" dbTypeName="bpchar" inputType="text" javaName="custAddress" javaType="java.lang.String" jdbcTypeCode="1" label="Cust address" maxLength="100" notNull="false" selected="true"/>
+</table>
 <table catalog="" databaseType="TABLE" javaBean="EmpInfo" name="emp_info" schema="main">
 <column dbAutoIncremented="true" dbComment="" dbDefaultValue="nextval('main.emp_id_seq'::regclass)" dbName="id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="serial" inputType="number" javaName="id" javaType="java.lang.Integer" jdbcTypeCode="4" label="Id" notNull="true" selected="true"/>
 <column dbComment="" dbDefaultValue="" dbName="emp_code" dbNotNull="false" dbPosition="2" dbSize="6" dbTypeName="bpchar" inputType="text" javaName="empCode" javaType="java.lang.String" jdbcTypeCode="1" label="Emp code" maxLength="6" notNull="false" selected="true"/>
@@ -19,6 +32,7 @@
 <column dateType="D" dbComment="" dbDefaultValue="" dbName="update_date" dbNotNull="false" dbPosition="14" dbSize="13" dbTypeName="date" inputType="date" javaName="updateDate" javaType="java.util.Date" jdbcTypeCode="91" label="Update date" notNull="false" selected="true"/>
 <column dateType="D" dbComment="" dbDefaultValue="" dbName="emp_date_attended" dbNotNull="false" dbPosition="15" dbSize="13" dbTypeName="date" inputType="date" javaName="empDateAttended" javaType="java.util.Date" jdbcTypeCode="91" label="Emp date attended" notNull="false" selected="true"/>
 <column dbComment="" dbDefaultValue="" dbName="emp_position" dbNotNull="false" dbPosition="16" dbSize="50" dbTypeName="varchar" inputType="text" javaName="empPosition" javaType="java.lang.String" jdbcTypeCode="12" label="Emp position" maxLength="50" notNull="false" selected="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="user-&gt;emp" id="LINK_FK_user-&gt;emp_I" inverseSideOf="LINK_FK_user-&gt;emp_O" javaName="listOfUser" javaType="java.util.List" joinTableName="" mappedBy="empInfo" optional="UNDEFINED" owningSide="false" sourceTableName="emp_info" targetEntity="User" targetTableName="user" used="true"/>
 </table>
 <table catalog="" databaseType="TABLE" javaBean="Product" name="product" schema="main">
 <column dbComment="" dbDefaultValue="" dbName="create_by" dbNotNull="false" dbPosition="1" dbSize="45" dbTypeName="varchar" inputType="text" javaName="createBy" javaType="java.lang.String" jdbcTypeCode="12" label="Create by" maxLength="45" notNull="false" selected="true"/>
@@ -64,7 +78,16 @@
 <column dbComment="" dbDefaultValue="" dbName="username" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="45" dbTypeName="bpchar" inputType="text" javaName="username" javaType="java.lang.String" jdbcTypeCode="1" label="Username" maxLength="45" notEmpty="true" notNull="true" selected="true"/>
 <column dbComment="" dbDefaultValue="" dbName="enabled" dbNotNull="false" dbPosition="2" dbSize="1" dbTypeName="bool" inputType="checkbox" javaName="enabled" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Enabled" notNull="false" selected="true"/>
 <column dbComment="" dbDefaultValue="" dbName="password" dbNotNull="false" dbPosition="3" dbSize="8" dbTypeName="bpchar" inputType="text" javaName="password" javaType="java.lang.String" jdbcTypeCode="1" label="Password" maxLength="8" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbForeignKey="true" dbName="emp" dbNotNull="false" dbPosition="4" dbSize="10" dbTypeName="int4" inputType="number" javaName="emp" javaType="java.lang.Integer" jdbcTypeCode="4" label="Emp" notNull="false" selected="true"/>
+<fk name="user-&gt;emp">
+<fkcol colname="emp" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="user" tableref="emp_info" updaterule="3"/>
+</fk>
 <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="ref" id="LINK_FK_ref_I" inverseSideOf="LINK_FK_ref_O" javaName="listOfUserRole" javaType="java.util.List" joinTableName="" mappedBy="user" optional="UNDEFINED" owningSide="false" sourceTableName="user" targetEntity="UserRole" targetTableName="user_role" used="true"/>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="user-&gt;emp" id="LINK_FK_user-&gt;emp_O" inverseSideOf="" javaName="empInfo" javaType="EmpInfo" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="user" targetEntity="EmpInfo" targetTableName="emp_info" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="emp" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
 </table>
 <table catalog="" databaseType="TABLE" javaBean="UserRole" name="user_role" schema="main">
 <column dbAutoIncremented="true" dbComment="" dbDefaultValue="nextval('main.user_role_id_seq'::regclass)" dbName="id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="serial" inputType="number" javaName="id" javaType="java.lang.Integer" jdbcTypeCode="4" label="Id" notNull="true" selected="true"/>

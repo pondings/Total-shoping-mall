@@ -67,9 +67,7 @@
 						<label class="col-md-4 control-label">สถานะการใช้งาน</label>
 						<div class="col-md-8">
 							<select ng-model="vm.selectedStatus"
-								ng-options="u.title for u in vm.userStatus"
-								ng-change="vm.userRole.user.enabled = vm.selectedStatus.value"
-								class="form-control"></select>
+								ng-options="u.title for u in vm.userStatus" ng-change="vm.userRole.user.enabled = vm.selectedStatus.value" class="form-control"></select>
 						</div>
 					</div>
 				</div>
@@ -99,27 +97,18 @@
 		<form class="form-horizontal form-margin" novalidate="novalidate"
 			name="vm.userForm" ng-submit="vm.formControl()">
 			<div class="col-md-12">
-				<div class="col-md-4">
+				<div class="col-md-6">
 					<div class="form-group">
-						<label class="control-label col-md-4">ชื่อผู้ใช้งาน</label>
+						<label class="control-label col-md-4">รหัสประเภท</label>
 						<div class="col-md-8">
 							<input type="text" class="form-control"
 								ng-model="vm.userRole.user.typeCode" required>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-6">
 					<div class="form-group">
-						<label class="control-label col-md-4">รหัสผ่าน</label>
-						<div class="col-md-8">
-							<input type="text" class="form-control"
-								ng-model="vm.userRole.user.typeName" required>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="form-group">
-						<label class="control-label col-md-4">ยืนยันรหัสผ่าน</label>
+						<label class="control-label col-md-4">ชื่อประเภท</label>
 						<div class="col-md-8">
 							<input type="text" class="form-control"
 								ng-model="vm.userRole.user.typeName" required>
@@ -128,63 +117,12 @@
 				</div>
 			</div>
 			<div class="col-md-12">
-				<div class="col-md-4">
+				<div class="col-md-6">
 					<div class="form-group">
-						<label class="control-label col-md-4">ระดับผู้ใช้งาน</label>
+						<label class="control-label col-md-4">รายละเอียด</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control">
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="form-group">
-						<label class="control-label col-md-4">พนักงาน</label>
-						<div class="col-md-8">
-							<input type="text" class="form-control">
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-12">
-				<div class="col-md-4">
-					<div class="form-group">
-						<label class="control-label col-md-4">รหัสพนักงาน</label>
-						<div class="col-md-8">
-							<input type="text" readonly class="form-control">
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="form-group">
-						<label class="control-label col-md-4">ชื่อพนักงาน</label>
-						<div class="col-md-8">
-							<input type="text" readonly class="form-control">
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="form-group">
-						<label class="control-label col-md-4">เบอร์โทร</label>
-						<div class="col-md-8">
-							<input type="text" readonly class="form-control">
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-12">
-				<div class="col-md-4">
-					<div class="form-group">
-						<label class="control-label col-md-4">สถานที่อยู่</label>
-						<div class="col-md-8">
-							<input type="text" readonly class="form-control">
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="form-group">
-						<label class="control-label col-md-4">รายละเอียดอื่นๆ</label>
-						<div class="col-md-8">
-							<textarea  class="form-control" readonly></textarea>
+							<textarea class="form-control"
+								ng-model="vm.userRole.user.typeDesc"></textarea>
 						</div>
 					</div>
 				</div>
@@ -226,10 +164,10 @@
 				st-safe-src="vm.userList" class="table table-striped table-bordered">
 				<thead>
 					<tr>
-						<th class="text-center" st-sort="username">ชื่อผู้ใช้งาน</th>
-						<th class="text-center" st-sort="password">รหัสผ่าน</th>
-						<th class="text-center" st-sort="userRole">ระดับผู้ใช้</th>
-						<th class="text-center" st-sort="enabled">สถานะ</th>
+						<th class="text-center" st-sort="username">รหัสประเภท</th>
+						<th class="text-center" st-sort="password">ชื่อประเภท</th>
+						<th class="text-center" st-sort="userRole">รหัสประเภท</th>
+						<th class="text-center" st-sort="enabled">ชื่อประเภท</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -238,8 +176,7 @@
 						<td class="text-center">{{user.user.username}}</td>
 						<td class="text-center">{{user.user.password}}</td>
 						<td class="text-center">{{user.role}}</td>
-						<td class="text-center">{{user.user.enabled == true ?
-							'active' : 'inactive'}}</td>
+						<td class="text-center">{{user.user.enabled}}</td>
 						<td class="text-center"><button class="btn btn-info"
 								ng-click="vm.update(user)">
 								<fa name="edit"></fa>
@@ -261,6 +198,7 @@
 				</tfoot>
 			</table>
 		</div>
+		{{vm.userRole}}
 	</div>
 
 	<!-- APPLICATION -->

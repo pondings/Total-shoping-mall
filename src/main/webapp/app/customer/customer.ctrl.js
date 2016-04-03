@@ -8,11 +8,11 @@ function UserCtrl($scope, SweetAlert, Flash, $ngBootbox, UserService) {
 
 	/** tab * */
 	vm.tabs = [ {
-		title : 'ค้นหา ผู้ใช้งาน',
+		title : 'ค้นหาประเภทสินค้า',
 		tabIdx : 0,
 		selected : true
 	}, {
-		title : 'เพิ่มแก้ไข ผู้ใช้งาน',
+		title : 'เพิ่มแก้ไข ประเภทสินค้า',
 		tabIdx : 0,
 		selected : false
 	} ];

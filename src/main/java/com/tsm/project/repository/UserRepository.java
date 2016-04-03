@@ -17,7 +17,7 @@ public interface UserRepository extends CrudRepository<UserRole, Integer> {
 
 	@Query("SELECT role FROM UserRole role LEFT JOIN FETCH role.user WHERE 1=1 AND (role.user.username like %:#{#param.user.username != null ? #param.user.username :''}%) "
 			+ "AND (role.role like %:#{#param.role != null ? #param.role:''}%) "
-			+ "AND (role.user.enabled IS NOT :#{#param.user.enabled != null ? #param.user.enabled:NULL})")
+			+ "AND (role.user.enabled = :#{#param.user.enabled})")
 	List<User> search(@Param("param")UserRole userRole) ;
 	
 	@Query("SELECT role.role FROM UserRole role")
