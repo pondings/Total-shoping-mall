@@ -20,37 +20,19 @@
 <script src="assets/js/angular.min.js"></script>
 </head>
 <body ng-cloak>
-	<header ng-controller="NavbarCtrl as vm">
-		<nav class="navbar navbar-default navbar-fixed-top navbar-inner">
-			<div class="contain-fluid">
-				<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" ui-sref="employee">
-				<fa name="windows"></fa>
-				Ass
-				</a>
-				</div>'
-				
-				<!-- Collet the nav links and other content for toggling -->
-				<div class ="collapse navbar-collapse" id="navbar-collapse-1">
-				<ul class="nav navbar-nav">
-				<li ng-repeat="li in navs" ng-class="{active: isActive(li.url)}"><a ui-sref="{{li.name}}">{{li.label}}</a></li>
-				</ul>
-				
-				
-				</div>
-			</div>
-		</nav>
-
-	</header>
-
+<header> <div class="panel panel-primary">
+    <div class="panel-heading"><h1>Total Shopping Mall</h1></div>
+    </div> </header>
+<div ng-controller="NavbarCtrl as vm ">
+<nav class="col-md-2 sidebar-offcanvas navbar navbar-default " id="sidebar" role="navigation" ng-controller="NavbarCtrl as vm">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li ng-repeat="li in navs" ng-class="{active: isActive(li.url)}"><a ui-sref="{{li.name}}">{{li.label}}</a></li>
+            </ul>
+        </nav>
 <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT -->
-	<div ui-view></div>
+	<div class="col-md-9" ui-view></div>
+	</div>
 
 
 	<!-- Application -->
