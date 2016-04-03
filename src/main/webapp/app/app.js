@@ -5,7 +5,7 @@ angular.module('app', [
 /* common modules */
 'app.core', 'app.widgets',
 /* Feature modules */
-'app.emp', 'app.prod','app.prodType','app.user' ]);
+'app.navbar','app.emp', 'app.prod','app.prodType','app.user' ]);
 /* validate */
 
 /* Employee */
@@ -42,3 +42,23 @@ angular.module('app.core', [
 var app = angular.module('app.widgets', [ 'ui.bootstrap',
 		'picardy.fontawesome', 'ngBootbox', 'oitozero.ngSweetAlert', 'flash',
 		'wt.responsive', 'smart-table' ]);
+
+/* Navbar Feature */
+angular.module('app.navbar',['app.core']);
+
+/* navbar Employee Feature*/
+angular.module('app.emp',['app.core','app.widgets']);
+
+/* navebar Customer Feature*/
+angular.module('app.customer',['app.core','app.widgets']);
+
+/* navebar Product Feature*/
+angular.module('app.prod',['app.core','app.widgets']);
+
+/* navebar Product Type Feature*/
+angular.module('app.prodType',['app.core','app.widgets']);
+
+/* navebar User Feature*/
+angular.module('app.user',['app.core','app.widgets']);
+
+

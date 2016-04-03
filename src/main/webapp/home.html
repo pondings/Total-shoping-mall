@@ -1,10 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
 <head>
+<meta http-equiv="X-UA-Compatible" content="IE-edge" />
 <meta charset="UTF-8">
-<title>Insert title sdfsafhere</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Home Page Jaaa!!</title>
+<!-- Main Style -->
+<link rel="stylesheet" href="assets/css/main.css" />
+<!-- Boot Strap -->
+<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+<!-- Font Awesome -->
+<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+<!-- Sweet Alert -->
+<link rel="stylesheet" href="assets/css/sweetalert.css" />
+<!-- Angular Responsive Tables -->
+<link rel="stylesheet"
+	href="assets/css/angular-responsive-tables.min.css" />
+<!-- Angular Js -->
+<script src="assets/js/angular.min.js"></script>
 </head>
-<body>
+<body ng-cloak>
+<header> <div class="panel panel-primary">
+    <div class="panel-heading"><h1>Total Shopping Mall</h1></div>
+    </div> </header>
+<div ng-controller="NavbarCtrl as vm ">
+<nav class="col-md-2 sidebar-offcanvas navbar navbar-default " id="sidebar" role="navigation" ng-controller="NavbarCtrl as vm">
+            <ul class="nav">
+              <li ng-repeat="li in navs" ng-class="{active: isActive(li.url)}"><a ui-sref="{{li.name}}">{{li.label}}</a></li>
+            </ul>
+        </nav>
+<!-- THIS IS WHERE WE WILL INJECT OUR CONTENT -->
+	<div class="col-md-9" ui-view></div>
+	</div>
 
+
+	<!-- Application -->
+	<script src="app/app.js"></script>
+	<script src="app/app.config.js"></script>
+	<!-- Bootstrap -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<!-- Navbar -->
+	<script src="app/common/navbar/navbar.ctrl.js"></script>
+	<!-- Employee -->
+	<script src="app/emp/emp.ctrl.js"></script>
+	<script src="app/emp/emp.service.js"></script>
+	<!-- Customer -->
+	<script src="app/customer/customer.ctrl.js"></script>
+	<script src="app/customer/customer.service.js"></script>
+	<!-- Product -->
+	<script src="app/prod/prod.ctrl.js"></script>
+	<script src="app/prod/prod.service.js"></script>
+	<!-- Product Type -->
+	<script src="app/product_type/product_type.ctrl.js"></script>
+	<script src="app/product_type/product_type.service.js"></script>
+	<!-- User -->
+	<script src="app/user/user.ctrl.js"></script>
+	<script src="app/user/user.service.js"></script>
+	<!-- Angular Ui Bootstrap -->
+	<script src="assets/js/ui-bootstrap-tpls.min.js"></script>
+	<!-- Angular Font Awesome -->
+	<script src="assets/js/angular-fontawesome.min.js"></script>
+	<!-- Angular BootBox -->
+	<script src="assets/js/bootbox.js"></script>
+	<script src="assets/js/ngBootbox.min.js"></script>
+	<!-- Angular Sweet Alert -->
+	<script src="assets/js/ngSweetAlert.min.js"></script>
+	<script src="assets/js/sweetalert.min.js"></script>
+	<!-- Angular Flash -->
+	<script src="assets/js/angular-flash.min.js"></script>
+	<!-- Angular Auto Validate -->
+	<script src="assets/js/jcs-auto-validate.min.js"></script>
+	<!-- AngularUI Router -->
+	<script src="assets/js/angular-ui-router.min.js"></script>
+	<!-- Angular Responsive Tables -->
+	<script src="assets/js/angular-responsive-tables.min.js"></script>
+	<!-- Angular Smart Table -->
+	<script src="assets/js/smart-table.min.js"></script>
 </body>
 </html>
