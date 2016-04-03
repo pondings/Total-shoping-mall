@@ -1,9 +1,14 @@
 package com.tsm.project.service;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.List;
 
 import com.tsm.project.model.User;
+import com.tsm.project.model.UserRole;
 
 public interface UserService {
 
+	
+	List<User> search(UserRole userRole);
+	
+	List<UserRole> getRole() ;
 }

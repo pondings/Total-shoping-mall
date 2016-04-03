@@ -9,12 +9,17 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tsm.project.model.User;
+import com.tsm.project.model.UserRole;
 
-@Transactional(readOnly = true)
 @Repository
-public interface UserRepository extends CrudRepository<User, Integer> {
+@Transactional(readOnly=true)
+public interface UserRepository extends CrudRepository<UserRole, Integer> {
 
-	@Query("SELECT user FROM User user WHERE 1=1 AND user.username = :#{#param}")
-	User findUser(@Param("param") String username);
-
+	@Query("SELECT role FROM UserRole role LEFT JOIN FETCH role.user WHERE 1=1 AND (role.user.username like %:#{#param.user.username != null ? #param.user.username :''}%) "
+			+ "AND (role.role like %:#{#param.role != null ? #param.role:''}%) "
+			+ "AND (role.user.enabled IS NOT :#{#param.user.enabled != null ? #param.user.enabled:NULL})")
+	List<User> search(@Param("param")UserRole userRole) ;
+	
+	@Query("SELECT role.role FROM UserRole role")
+	List<UserRole> getRole() ;
 }
