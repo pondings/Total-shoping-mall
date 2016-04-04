@@ -14,7 +14,7 @@ import com.tsm.project.model.User;
 @Repository
 public interface SpringSecurityRepository extends CrudRepository<User, Integer> {
 
-	@Query("SELECT user FROM User user WHERE 1=1 AND user.username = :#{#param}")
+	@Query("SELECT user FROM User user WHERE 1=1 AND user.username = :param")
 	User findUser(@Param("param") String username);
 
 }

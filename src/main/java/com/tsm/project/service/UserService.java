@@ -11,4 +11,6 @@ public interface UserService {
 	List<User> search(UserRole userRole);
 	
 	List<UserRole> getRole() ;
+	
+	UserRole create(UserRole userRole) ;
 }

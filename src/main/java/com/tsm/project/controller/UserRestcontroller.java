@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tsm.project.dto.userDto;
 import com.tsm.project.model.User;
 import com.tsm.project.model.UserRole;
-import com.tsm.project.repository.UserRepository;
+import com.tsm.project.repository.UserRoleRepository;
 import com.tsm.project.service.UserService;
 import com.tsm.project.service.impl.ProductServiceImpl;
 
@@ -24,7 +25,7 @@ public class UserRestcontroller {
 	UserService userService ; 
 	
 	@Autowired
-	UserRepository repo;
+	UserRoleRepository repo;
 	
 	@RequestMapping(value="search" , method = RequestMethod.POST)
 	ResponseEntity<?> search(@RequestBody UserRole userRole){
@@ -39,5 +40,10 @@ public class UserRestcontroller {
 	@RequestMapping(value="findall" , method = RequestMethod.GET)
 	Iterable<UserRole> find(){
 		return repo.findAll();
+	}
+	
+	@RequestMapping(value="create" , method = RequestMethod.POST)
+	ResponseEntity<UserRole> create(@RequestBody UserRole userRole){
+		return new ResponseEntity<UserRole>(userService.create(userRole),HttpStatus.OK);
 	}
 }

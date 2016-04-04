@@ -1,0 +1,48 @@
+<head>
+<meta charset="UTF-8" />
+<style type="text/css">
+</style>
+</head>
+
+<div class="pull-right">
+	<select ng-model="vm.selectedNumPerPagDialog"
+		ng-selected="vm.numPerPage = vm.selectedNumPerPage.number"
+		ng-options="n.number for n in vm.numPerPages"
+		class="input-sm form-control selector-option"></select>
+</div>
+<table st-table="displayedEmp" wt-responsive-table st-safe-src="empList"
+	class="table table-striped table-bordered">
+	<thead>
+		<tr>
+			<th class="text-center" st-sort="empCode">รหัสพนักงาน</th>
+			<th class="text-center" st-sort="empName">ชื่อพนักงาน</th>
+			<th class="text-center" st-sort="empPosition">ตำแหน่ง</th>
+		</tr>
+		<tr>
+			<td><input type="text" placeholder="รหัสพนักงาน"
+				st-search="empCode" class="form-control"></td>
+			<td><input type="text" placeholder="ชื่อพนักงาน"
+				st-search="empName" class="form-control"></td>
+			<td><input type="text" placeholder="ตำแหน่ง"
+				st-search="empPosition" class="form-control"></td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="row in displayedEmp"
+			ng-class="{'selected':row == vm.userRole.user.empInfo.empName}"
+			ng-click="setClickedEmpRow(row)">
+			<td>{{row.empCode}}</td>
+			<td>{{row.empName}}</td>
+			<td>{{row.empPosition}}</td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="11" class="text-center">
+				<div st-pagination="" st-items-by-page="vm.numPerPage"
+					st-displayed-pages="displayedPages"
+					st-template="app/common/pagination/pagination.tpl.html"></div>
+			</td>
+		</tr>
+	</tfoot>
+</table>

@@ -11,10 +11,29 @@ function UserService($http, $q) {
 		update : update,
 		remove : remove,
 		search : search,
-		getRole : getRole
+		getRole : getRole,
+		getEmp : getEmp
 	};
 
 	return service;
+
+	function getEmp() {
+		var deferred = $q.defer();
+		var emp = {
+			empCode : null
+		};
+		$http.post(urlBase + '/emp/search', emp).success(function(dataArr) {
+			deferred.resolve(dataArr);
+		}).error(function(errMs, errCode) {
+			var err = {
+				errMessage : errMs,
+				errCode : errCode
+			}
+			deferred.reject(err);
+		});
+		return deferred.promise;
+
+	}
 
 	function getRole() {
 		var deferred = $q.defer();
@@ -32,6 +51,7 @@ function UserService($http, $q) {
 
 	function create(user) {
 		var deferred = $q.defer();
+		console.log(user) ;
 		$http.post(urlBase + '/user/create', user).success(function(dataArr) {
 			deferred.resolve(dataArr);
 		}).error(function(errMs, errCode) {

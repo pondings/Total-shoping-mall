@@ -25,10 +25,10 @@
 	</thead>
 	<tbody>
 		<tr ng-repeat="row in displayedUserRole"
-			ng-class="{'selected':row == vm.userRole.role"
-			ng-click="setClickedRow(row)">
+			ng-class="{'selected':row.role == vm.userRole.role"
+			ng-click="setClickedRoleRow(row)">
 			<td>{{$index+1}}</td>
-			<td class="text-center">{{row}}</td>
+			<td class="text-center">{{row.role}}</td>
 		</tr>
 	</tbody>
 	<tfoot>

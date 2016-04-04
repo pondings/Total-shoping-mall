@@ -5,7 +5,7 @@ UserCtrl.$inject = [ '$scope', 'SweetAlert', 'Flash', '$ngBootbox',
 
 function UserCtrl($scope, SweetAlert, Flash, $ngBootbox, UserService) {
 	var vm = this;
-
+ vm.id = 0 ;
 	/** tab * */
 	vm.tabs = [ {
 		title : 'ค้นหา ผู้ใช้งาน',
@@ -43,11 +43,13 @@ function UserCtrl($scope, SweetAlert, Flash, $ngBootbox, UserService) {
 		number : 30
 	} ];
 	vm.selectedNumPerPage = vm.numPerPages[0];
+	vm.selectedNumPerPagDialog = vm.numPerPages[0];
 
 	/** smart-table * */
 
 	$scope.displayedUser = [].concat(vm.userList);
 	$scope.displayedUserRole = [].concat($scope.displayedUserRole);
+	$scope.displayedEmp = [].concat($scope.empList);
 	$scope.displayedPages = 5;
 
 	/** Declare Value * */
@@ -72,11 +74,27 @@ function UserCtrl($scope, SweetAlert, Flash, $ngBootbox, UserService) {
 	vm.resetDefault = resetDefault;
 	vm.resetForm = resetForm;
 	vm.getRole = getRole;
+	vm.getEmp = getEmp;
 
 	/** Function * */
 
-	$scope.setClickedRow = function(role) {
-		vm.userRole.role = role;
+	function getEmp() {
+		UserService.getEmp().then(function(data) {
+			$scope.empList = data;
+			console.log($scope.empList);
+		}, function(errRs) {
+			Flash.create('danger', errRs.errMessage, 'custom-class');
+		})
+	}
+
+	$scope.setClickedEmpRow = function(emp) {
+		vm.userRole.user.empInfo = emp;
+		$ngBootbox.hideAll();
+	}
+	
+	$scope.setClickedRoleRow = function(role) {
+		vm.userRole.role = role.role ;
+		vm.userRole.id = role.id;
 		$ngBootbox.hideAll();
 	}
 
@@ -108,7 +126,7 @@ function UserCtrl($scope, SweetAlert, Flash, $ngBootbox, UserService) {
 	}
 
 	function formControl() {
-		if (vm.userRole.id != null) {
+		if (1 == 2) {
 			UserService.update(vm.userRole).then(
 					function(data) {
 						for (var i = 0; i < vm.userList.length; i++) {
@@ -176,13 +194,7 @@ function UserCtrl($scope, SweetAlert, Flash, $ngBootbox, UserService) {
 	function resetForm() {
 		vm.userRole = {
 			id : null,
-			role : null,
-			user : {
-				username : null,
-				enabled : null,
-				password : null,
-				listOfUserRole : null
-			}
+			role : null
 		};
 		vm.userForm.$setPristine();
 	}
@@ -200,6 +212,20 @@ function UserCtrl($scope, SweetAlert, Flash, $ngBootbox, UserService) {
 	vm.viewRoleModal = {
 		scope : $scope,
 		title : 'Select Role',
+		onEscape : function() {
+		},
+		show : true,
+		backdrop : true,
+		closeButton : true,
+		animate : true,
+		buttons : vm.viewDialogButton,
+		className : 'info-class',
+		message : 'info'
+	};
+
+	vm.viewCustModal = {
+		scope : $scope,
+		title : 'Select Customer',
 		onEscape : function() {
 		},
 		show : true,
