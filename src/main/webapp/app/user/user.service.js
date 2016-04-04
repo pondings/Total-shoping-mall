@@ -9,7 +9,7 @@ function UserService($http, $q) {
 	var service = {
 		create : create,
 		update : update,
-		remove : remove,
+		setStatus : setStatus,
 		search : search,
 		getRole : getRole,
 		getEmp : getEmp
@@ -79,9 +79,10 @@ function UserService($http, $q) {
 		return deferred.promise;
 	}
 
-	function remove(id) {
+	function setStatus(user) {
 		var deferred = $q.defer();
-		$http['delete'](urlBase + '/user/delete/' + id).success(
+		console.log(user) ;
+		$http.post(urlBase + '/user/setStatus/',user).success(
 				function(dataArr) {
 					deferred.resolve(dataArr);
 				}).error(function(errMs, errCode) {

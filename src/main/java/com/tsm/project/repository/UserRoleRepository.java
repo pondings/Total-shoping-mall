@@ -20,7 +20,7 @@ public interface UserRoleRepository extends CrudRepository<UserRole, Integer> {
 			+ "AND (role.user.enabled = :#{#param.user.enabled})")
 	List<User> search(@Param("param")UserRole userRole) ;
 	
-	@Query("SELECT NEW com.tsm.project.dto.userDto(role.id,role.role) FROM UserRole role")
+	@Query("SELECT DISTINCT role.role FROM UserRole role")
 	List<UserRole> getRole() ;
 	
 }

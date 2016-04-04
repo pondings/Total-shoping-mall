@@ -5,7 +5,7 @@ UserCtrl.$inject = [ '$scope', 'SweetAlert', 'Flash', '$ngBootbox',
 
 function UserCtrl($scope, SweetAlert, Flash, $ngBootbox, UserService) {
 	var vm = this;
- vm.id = 0 ;
+	vm.id = 0;
 	/** tab * */
 	vm.tabs = [ {
 		title : 'ค้นหา ผู้ใช้งาน',
@@ -70,7 +70,7 @@ function UserCtrl($scope, SweetAlert, Flash, $ngBootbox, UserService) {
 	vm.formControl = formControl;
 	vm.create = create;
 	vm.update = update;
-	vm.remove = remove;
+	vm.setStatus = setStatus;
 	vm.resetDefault = resetDefault;
 	vm.resetForm = resetForm;
 	vm.getRole = getRole;
@@ -87,14 +87,27 @@ function UserCtrl($scope, SweetAlert, Flash, $ngBootbox, UserService) {
 		})
 	}
 
+	function setStatus(userRole) {
+		UserService.setStatus(userRole.user).then(function(data) {
+			Flash.create('success','ทำการเปลี่ยนแปลงเรียบร้อย','custom-class') ;
+			for(var i = 0 ; i < vm.userList.length ; i++){
+				if (vm.userList[i].user.id = data.id) {
+					vm.userList.splice(i, 1) ;				
+					break ;
+				}
+			}
+		}, function(errRs) {
+			Flash.create('danger', errRs.errMessage, 'custom-class');
+		})
+	}
+
 	$scope.setClickedEmpRow = function(emp) {
 		vm.userRole.user.empInfo = emp;
 		$ngBootbox.hideAll();
 	}
-	
+
 	$scope.setClickedRoleRow = function(role) {
-		vm.userRole.role = role.role ;
-		vm.userRole.id = role.id;
+		vm.userRole.role = role;
 		$ngBootbox.hideAll();
 	}
 
@@ -111,26 +124,14 @@ function UserCtrl($scope, SweetAlert, Flash, $ngBootbox, UserService) {
 		vm.userRole = angular.copy(vm.substitute);
 	}
 
-	function remove(id) {
-		UserService.remove(id).then(function(data) {
-			Flash.create('success', 'Deleted', 'custom-class');
-			for (var i = 0; i < vm.userList.length; i++) {
-				if (vm.userList[i].id == id) {
-					vm.userList.splice(i, 1);
-					break;
-				}
-			}
-		}, function(errRs) {
-			Flash.create('danger', errRs.errMessage, 'custom-class');
-		})
-	}
-
 	function formControl() {
-		if (1 == 2) {
+		if (vm.userRole.user.password != vm.confirmPassword) {
+			alert("รหัสผ่านไม่ตรงกัน");
+		} else if (vm.updateValid == true) {
 			UserService.update(vm.userRole).then(
 					function(data) {
 						for (var i = 0; i < vm.userList.length; i++) {
-							if (vm.userList[i].id == data.id) {
+							if (vm.userList[i].user.id == data.user.id) {
 								$scope.displayedUser[i] = data;
 								break;
 							}
@@ -158,6 +159,9 @@ function UserCtrl($scope, SweetAlert, Flash, $ngBootbox, UserService) {
 	}
 
 	function update(userRole) {
+		console.log(userRole);
+		$scope.emp = false;
+		vm.updateValid = true;
 		vm.userRole = angular.copy(userRole);
 		vm.substitute = angular.copy(userRole);
 		vm.tabs[1].selected = true;
@@ -170,6 +174,7 @@ function UserCtrl($scope, SweetAlert, Flash, $ngBootbox, UserService) {
 					Flash
 							.create('success', "Found " + data.length
 									+ " reccord", 'custom-class');
+					console.log(vm.userList);
 				}, function(errRs) {
 					Flash.create('danger', errRs.errMessage, 'custom-class');
 				})
@@ -188,14 +193,23 @@ function UserCtrl($scope, SweetAlert, Flash, $ngBootbox, UserService) {
 				listOfUserRole : null
 			}
 		};
+		$scope.emp = true;
+		vm.updateValid = false;
 		vm.userForm.$setPristine();
 	}
 
 	function resetForm() {
 		vm.userRole = {
 			id : null,
-			role : null
+			role : null,
+			user : {
+				username : null,
+				enabled : true,
+				password : null,
+				listOfUserRole : null
+			}
 		};
+		vm.confirmPassword = null;
 		vm.userForm.$setPristine();
 	}
 

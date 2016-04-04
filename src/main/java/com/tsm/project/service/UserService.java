@@ -13,4 +13,10 @@ public interface UserService {
 	List<UserRole> getRole() ;
 	
 	UserRole create(UserRole userRole) ;
+	
+	UserRole createRole(User user,UserRole userRole) ;
+	
+	UserRole update(UserRole userRole) ;
+	
+	User setStatus(User user) ;
 }
