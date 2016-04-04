@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tsm.project.dto.userDto;
 import com.tsm.project.model.User;
 import com.tsm.project.model.UserRole;
 import com.tsm.project.repository.UserRoleRepository;
@@ -45,5 +44,16 @@ public class UserRestcontroller {
 	@RequestMapping(value="create" , method = RequestMethod.POST)
 	ResponseEntity<UserRole> create(@RequestBody UserRole userRole){
 		return new ResponseEntity<UserRole>(userService.create(userRole),HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="update" , method = RequestMethod.PUT)
+	ResponseEntity<UserRole> update(@RequestBody UserRole userRole){
+		return new ResponseEntity<UserRole>(userService.update(userRole),HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="setStatus" , method = RequestMethod.POST)
+	ResponseEntity<User> setEnabled(@RequestBody User user){
+		System.out.println("accessed");
+		return new ResponseEntity<User>(userService.setStatus(user),HttpStatus.OK) ;
 	}
 }

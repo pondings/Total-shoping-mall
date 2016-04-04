@@ -104,7 +104,7 @@
 						<label class="control-label col-md-4">ชื่อผู้ใช้งาน</label>
 						<div class="col-md-8">
 							<input type="text" class="form-control"
-								ng-model="vm.userRole.user.username"  >
+								ng-model="vm.userRole.user.username" ng-readonly="vm.userRole.user.username != null">
 						</div>
 					</div>
 				</div>
@@ -113,7 +113,7 @@
 						<label class="control-label col-md-4">รหัสผ่าน</label>
 						<div class="col-md-8">
 							<input type="text" class="form-control"
-								ng-model="vm.userRole.user.password"  >
+								ng-model="vm.userRole.user.password">
 						</div>
 					</div>
 				</div>
@@ -122,7 +122,7 @@
 						<label class="control-label col-md-4">ยืนยันรหัสผ่าน</label>
 						<div class="col-md-8">
 							<input type="text" class="form-control"
-								ng-model="vm.userRole.user.password"  >
+								ng-model="vm.confirmPassword">
 						</div>
 					</div>
 				</div>
@@ -151,70 +151,85 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4">
-					<div class="form-group">
-						<label class="control-label col-md-4">พนักงาน</label>
-						<div class="col-md-8">
-							<div class="input-group">
-								<input type="text" class="form-control"
-									aria-describedby="credit" ng-model="vm.userRole.user.empInfo.empName" readonly><span
-									class="input-group-btn">
-									<button title="search" ng-bootbox-custom-dialog
-										ng-bootbox-custom-dialog-template="common/partials/select-emp-dialog.tpl.html"
-										ng-bootbox-options="vm.viewCustModal" ng-click="vm.getEmp()"
-										class="btn btn-default" type="button">
-										<fa name="search" size="1"></fa>
-									</button>
-								</span> <span class="input-group-btn"><button title="Reset"
-										ng-click="vm.userRole.user.empInfo = null" class="btn btn-default"
-										type="button">
-										<fa name="remove" size="1"></fa>
-									</button></span>
+			</div>
+			<div ng-hide="emp"></div>
+			<div ng-show="emp">
+				<div class="col-md-12">
+					<br>
+					<br>
+					<hr>
+					<br>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="control-label col-md-4">พนักงาน</label>
+							<div class="col-md-8">
+								<div class="input-group">
+									<input type="text" class="form-control"
+										aria-describedby="credit"
+										ng-model="vm.userRole.user.empInfo.empName" readonly><span
+										class="input-group-btn">
+										<button title="search" ng-bootbox-custom-dialog
+											ng-bootbox-custom-dialog-template="common/partials/select-emp-dialog.tpl.html"
+											ng-bootbox-options="vm.viewCustModal" ng-click="vm.getEmp()"
+											class="btn btn-default" type="button">
+											<fa name="search" size="1"></fa>
+										</button>
+									</span> <span class="input-group-btn"><button title="Reset"
+											ng-click="vm.userRole.user.empInfo = null"
+											class="btn btn-default" type="button">
+											<fa name="remove" size="1"></fa>
+										</button></span>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-md-12">
-				<div class="col-md-4">
-					<div class="form-group">
-						<label class="control-label col-md-4">รหัสพนักงาน</label>
-						<div class="col-md-8">
-							<input type="text" readonly class="form-control" ng-model="vm.userRole.user.empInfo.empCode">
+				<div class="col-md-12">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="control-label col-md-4">รหัสพนักงาน</label>
+							<div class="col-md-8">
+								<input type="text" readonly class="form-control"
+									ng-model="vm.userRole.user.empInfo.empCode">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="control-label col-md-4">ชื่อพนักงาน</label>
+							<div class="col-md-8">
+								<input type="text" readonly class="form-control"
+									ng-model="vm.userRole.user.empInfo.empName">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="control-label col-md-4">เบอร์โทร</label>
+							<div class="col-md-8">
+								<input type="text" readonly class="form-control"
+									ng-model="vm.userRole.user.empInfo.empPhone">
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4">
-					<div class="form-group">
-						<label class="control-label col-md-4">ชื่อพนักงาน</label>
-						<div class="col-md-8">
-							<input type="text" readonly class="form-control" ng-model="vm.userRole.user.empInfo.empName">
+				<div class="col-md-12">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="control-label col-md-4">สถานที่อยู่</label>
+							<div class="col-md-8">
+								<input type="text" readonly class="form-control"
+									ng-model="vm.userRole.user.empInfo.empAddress">
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="form-group">
-						<label class="control-label col-md-4">เบอร์โทร</label>
-						<div class="col-md-8">
-							<input type="text" readonly class="form-control" ng-model="vm.userRole.user.empInfo.empPhone">
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-12">
-				<div class="col-md-4">
-					<div class="form-group">
-						<label class="control-label col-md-4">สถานที่อยู่</label>
-						<div class="col-md-8">
-							<input type="text" readonly class="form-control" ng-model="vm.userRole.user.empInfo.empAddress">
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="form-group">
-						<label class="control-label col-md-4">รายละเอียดอื่นๆ</label>
-						<div class="col-md-8">
-							<textarea class="form-control" readonly ng-model="vm.userRole.user.empInfo.empDesc"></textarea>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="control-label col-md-4">รายละเอียดอื่นๆ</label>
+							<div class="col-md-8">
+								<textarea class="form-control" readonly
+									ng-model="vm.userRole.user.empInfo.empDesc"></textarea>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -275,8 +290,8 @@
 								<fa name="edit"></fa>
 							</button>
 
-							<button class="btn btn-danger" ng-click="vm.remove(user.id)">
-								<fa name="trash-o"></fa>
+							<button class="btn btn-danger" ng-click="vm.setStatus(user)">
+								<i class="fa fa-exchange"></i>
 							</button></td>
 					</tr>
 				</tbody>
@@ -291,7 +306,6 @@
 				</tfoot>
 			</table>
 		</div>
-		{{vm.userRole}}
 	</div>
 
 	<!-- APPLICATION -->

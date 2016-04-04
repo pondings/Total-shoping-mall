@@ -14,45 +14,92 @@ import com.tsm.project.service.UserService;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
 	@Autowired
-	UserRoleRepository userRepo ;
-	
+	UserRoleRepository userRoleRepository;
+
 	@Autowired
-	UserRepository userRepository ;
-	
+	UserRepository userRepository;
+
 	@Override
 	public List<User> search(UserRole userRole) {
 		// TODO Auto-generated method stub
-		return userRepo.search(userRole);
+		return userRoleRepository.search(userRole);
 	}
 
 	@Override
 	public List<UserRole> getRole() {
 		// TODO Auto-generated method stub
-		return userRepo.getRole();
+		return userRoleRepository.getRole();
 	}
 
 	@Override
 	public UserRole create(UserRole userRole) {
-		
-		User insertUser = new User() ;
-		insertUser.setEmpInfo(userRole.getUser().getEmpInfo()); 
+
+		User insertUser = new User();
+		insertUser.setEmpInfo(userRole.getUser().getEmpInfo());
 		insertUser.setUsername(userRole.getUser().getUsername());
 		insertUser.setPassword(userRole.getUser().getPassword());
 		insertUser.setEnabled(true);
-		
-		userRepository.save(insertUser) ;
-		
-		UserRole userRoleInsert = new UserRole() ;
-		
-		userRoleInsert.setRole(userRole.getRole());
-		userRoleInsert.setUser(userRole.getUser());
-		
-		userRepo.save(userRoleInsert) ;
-		
-		return userRole ;
+
+		UserRole insertRole = new UserRole();
+
+		insertRole.setRole(userRole.getRole());
+		insertRole.setUser(userRepository.save(insertUser));
+
+		return userRoleRepository.save(insertRole);
+	}
+
+	@Override
+	public UserRole createRole(User user, UserRole userRole) {
+		// TODO Auto-generated method stub
+
+		UserRole insertRole = new UserRole();
+
+		insertRole.setRole(userRole.getRole());
+		insertRole.setUser(user);
+
+		return userRoleRepository.save(insertRole);
+	}
+
+	@Override
+	public UserRole update(UserRole userRole) {
+		User inserUser = new User();
+
+		inserUser.setId(userRole.getUser().getId());
+		inserUser.setUsername(userRole.getUser().getUsername());
+		inserUser.setPassword(userRole.getUser().getPassword());
+		inserUser.setEmpInfo(userRole.getUser().getEmpInfo());
+		inserUser.setEnabled(userRole.getUser().getEnabled());
+
+		userRoleRepository.delete(userRole.getId());
+
+		UserRole insertUserRole = new UserRole();
+
+		insertUserRole.setRole(userRole.getRole());
+		insertUserRole.setUser(userRepository.save(inserUser));
+
+		return userRoleRepository.save(insertUserRole);
+	}
+
+	@Override
+	public User setStatus(User user) {
+		// TODO Auto-generated method stub
+		User insertUser = new User();
+
+		insertUser.setEmpInfo(user.getEmpInfo());
+		insertUser.setId(user.getId());
+		insertUser.setPassword(user.getPassword());
+		insertUser.setUsername(user.getUsername());
+
+		if (user.getEnabled() == true) {
+			insertUser.setEnabled(false);
+			return userRepository.save(insertUser);
+		} else {
+			insertUser.setEnabled(true);
+			return userRepository.save(insertUser);
+		}
 	}
 
 }
