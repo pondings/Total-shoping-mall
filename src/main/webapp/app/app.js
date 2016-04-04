@@ -5,7 +5,7 @@ angular.module('app', [
 /* common modules */
 'app.core', 'app.widgets',
 /* Feature modules */
-'app.navbar','app.emp', 'app.prod','app.prodType','app.user' ]);
+'app.navbar','app.emp', 'app.prod','app.prodType','app.user','app.customer' ]);
 /* validate */
 
 /* Employee */
@@ -28,6 +28,12 @@ angular.module('app.prodType', [ 'app.core', 'app.widgets', 'jcs-autoValidate' ]
 
 /* User */
 angular.module('app.user', [ 'app.core', 'app.widgets', 'jcs-autoValidate' ])
+.run([ 'validator', function(validator) {
+	validator.setValidElementStyling(false);
+} ]);
+
+/* Customer */
+angular.module('app.customer', [ 'app.core', 'app.widgets', 'jcs-autoValidate' ])
 .run([ 'validator', function(validator) {
 	validator.setValidElementStyling(false);
 } ]);

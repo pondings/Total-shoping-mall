@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html ng-app="app.customer">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Customer Management</title>
+<!-- MAIN STYLE -->
+<link rel="stylesheet" href="./assets/css/main.css" />
+<!-- BOOTSTRAP -->
+<link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
+<!-- FONT AWESOME -->
+<link rel="stylesheet" href="./assets/css/font-awesome.min.css" />
+<!-- SWEET ALERT -->
+<link rel="stylesheet" href="./assets/css/sweetalert.css" />
+<!-- ANGULAR RESPONSIVE TABLES -->
+<link rel="stylesheet"
+	href="./assets/css/angular-responsive-tables.min.css" />
+<!-- ANGULAR JS -->
+<script src="./assets/js/angular.min.js"></script>
+</head>
+<body ng-cloak>
+	<div class="container-fluid container-margin"
+		ng-controller = "CustomerCtrl as vm">
+
+		<!-- Start tabset -->
+		<uib-tabset> <!-- Search Customer --> <uib-tab
+			active="vm.tabs[0].selected" heading="{{vm.tabs[0].title}}"
+			select="vm.resetPage()" ng-click="vm.resetTable()">
+		<div flash-message="3500" class="text-center"></div>
+		<form class="form-horizontal form-margin" novalidate="novalidate"
+			ng-submit="vm.search()">
+			<div class="col-md-12">
+				<div class="col-md-4">
+					<div class="form-group">
+						<label class="col-md-4 control-label">รหัสลูกค้า</label>
+						<div class="col-md-8">
+							<input type="text" class="form-control" ng-model="vm.cus.custCode" />
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label class="col-md-4 control-label">ชื่อลูกค้า</label>
+						<div class="col-md-8">
+							<input type="text" class="form-control" ng-model="vm.cus.custName">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<div class="col-md-3">
+							<button class="btn btn-default">
+								<fa name="search" size="1" title="search"></fa>
+								ค้นหา
+							</button>
+						</div>
+						<div class="col-md-3">
+							<button class="btn btn-default" ng-click="vm.resetPage()"
+								type="reset">
+								<fa name="remove" size="1" title="Reset"></fa>
+								ยกเลิก
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		</uib-tab> <!-- New employee --> <uib-tab active="vm.tabs[1].selected"
+			heading="{{vm.tabs[1].title}}" ng-click="vm.resetPage()">
+		<div flash-message="3500" class="text-center"></div>
+		<form class="form-horizontal form-margin" novalidate="novalidate"
+			ng-submit="vm.submit(vm.cus)" name="vm.cusForm">
+			<div class="col-md-12">
+				<div class="col-md-12">
+					<div class="form-group">
+					<div class="col-md-4">
+							<label class="col-md-4 control-label">คำนำหน้า</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control"
+									ng-model="vm.cus.custTitle">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<label class="col-md-4 control-label">ชื่อลูกค้า</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control"
+									ng-model="vm.cus.custName" required>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<label class="col-md-4 control-label">รหัสลูกค้า</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control"
+									ng-model="vm.cus.custCode" required>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="form-group">
+						<div class="col-md-4">
+							<label class="col-md-4 control-label">เบอร์โทร</label>
+							<div class="col-md-8">
+								<input type="tel" class="form-control"
+									ng-model="vm.cus.custPhone">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<label class="col-md-4 control-label">แฟกซ์</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control"
+									ng-model="vm.cus.custFax">
+							</div>
+						</div>
+							<div class="col-md-4">
+							<label class="col-md-4 control-label">รายละเอียด</label>
+							<div class="col-md-8">
+								<textarea class="form-control" ng-model="vm.cus.cusDesc"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12 col-sm-12">
+					<div class="form-group">
+						<div class="col-md-1 col-md-offset-5 text-center">
+							<button class="btn btn-default" type="submit"
+								ng-disabled="vm.cusForm.$invalid">
+								<fa name="floppy-o" size="1" tital="Save"></fa>
+								บันทึก
+							</button>
+						</div>
+						<div class="col-md-1 text-center">
+							<button class="btn btn-default"
+								ng-click="vm.cus.id == null ? vm.resetForm() : vm.resetDefault()"
+								type="button" ng-disabled="vm.cusForm.$pristine">
+								<fa name="remove" size="1" title="Reset"></fa>
+								ยกเลิก
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		</uib-tab> </uib-tabset>
+
+		<!-- Customer Table -->
+
+		<div class="col-md-12">
+			<div class="pull-right">
+				<select ng-model="vm.selectedNumPerPage"
+					ng-selected="vm.numPerPage = vm.selectedNumPerPage.number"
+					ng-options="n.number for n in vm.numPerPages"
+					class="input-sm form-control selector-option"></select>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<table st-table="displayedCustomer" wt-responsive-table
+				st-safe-src="vm.cusList" class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th class="text-center" st-sort="custCode">รหัสลูกค้า</th>
+						<th class="text-center" st-sort="custTitle">คำนำหน้า</th>
+						<th class="text-center" st-sort="custName">ชื่อลูกค้า</th>
+						<th class="text-center" st-sort="custPhone">เบอร์โทร</th>
+						<th class="text-center" st-sort="custFax">แฟกซ์</th>
+						<th class="text-center" st-sort="custDesc">รายละเอียด</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="cus in displayedCustomer">
+						<td class="text-center">{{cus.custCode | uppercase}}</td>
+						<td class="text-center">{{cus.custTitle}}</td>
+						<td class="text-center">{{cus.custName}}</td>
+						<td class="text-center">{{cus.custPhone}}</td>
+						<td class="text-center">{{cus.custFax}}</td>
+						<td class="text-center"><textarea readonly
+								class="form-control">{{cus.custDesc}}</textarea></td>
+						<td class="text-center"><button class="btn btn-info"
+								ng-click="vm.update(cus)">
+								<fa name="edit"></fa>
+							</button>
+
+							<button class="btn btn-danger" ng-click="vm.remove(cus.id)">
+								<fa name="trash-o"></fa>
+							</button></td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="11" class="text-center">
+							<div st-pagination="" st-items-by-page="vm.numPerPage"
+								st-displayed-pages="displayedPages"
+								st-template="app/common/pagination/pagination.tpl.html"></div>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+
+	<!-- APPLICATION -->
+	<script src="./app/app.js">
+		</script>
+	<script src="./app/customer/customer.ctrl.js"></script>
+	<script src="./app/customer/customer.service.js"></script>
+	<!-- BOOTSTRAP -->
+	<script src="./assets/js/jquery.min.js"></script>
+	<script src="./assets/js/bootstrap.min.js"></script>
+	<!-- ANGULAR UI BOOTSTRAP -->
+	<script src="./assets/js/ui-bootstrap-tpls.min.js"></script>
+	<!-- ANGULAR FONT AWESOME -->
+	<script src="./assets/js/angular-fontawesome.min.js"></script>
+	<!-- ANGULAR BOOTBOX -->
+	<script src="./assets/js/bootbox.js"></script>
+	<script src="./assets/js/ngBootbox.min.js"></script>
+	<!-- ANGULAR SWEET ALERT -->
+	<script src="./assets/js/ngSweetAlert.min.js"></script>
+	<script src="./assets/js/sweetalert.min.js"></script>
+	<!-- ANGULAR FLASH -->
+	<script src="./assets/js/angular-flash.min.js"></script>
+	<!-- ANGULAR AUTO VALIDATE -->
+	<script src="./assets/js/jcs-auto-validate.min.js"></script>
+	<!-- AngularUI Router -->
+	<script src="./assets/js/angular-ui-router.min.js"></script>
+	<!-- ANGULAR RESPONSIVE TABLES -->
+	<script src="./assets/js/angular-responsive-tables.min.js"></script>
+	<!-- ANGULAR SMART TABLE -->
+	<script src="./assets/js/smart-table.min.js"></script>
+</body>
+</html>
