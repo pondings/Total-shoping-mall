@@ -40,4 +40,9 @@ public class ProductRestController {
 	void delete(@PathVariable int id){
 		productService.delete(id);
 	}
+	
+	@RequestMapping(value="searchCode" , method = RequestMethod.POST)
+	ResponseEntity<Product> searchCode(@RequestBody Product product){
+		return new ResponseEntity<Product>(productService.searchProd(product),HttpStatus.OK);
+	}
 }

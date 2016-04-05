@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html ng-app="app.prodType">
+<html ng-app="app.tradeSystem">
 <head>
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Product Management</title>
+<title>Trade System</title>
 <link rel="shortcut icon" type="image/png" href="./img/3gs_icon.png" />
 <!-- MAIN STYLE -->
 <link rel="stylesheet" href="./assets/css/main.css" />
@@ -22,40 +22,86 @@
 </head>
 <body ng-cloak>
 	<div class="container-fluid container-margin"
-		ng-controller="ProdTypeCtrl as vm">
-		<uib-tabset> <uib-tab active="vm.tabs[0].selected"
-			heading="{{vm.tabs[0].title}}" select="vm.resetPage()"
-			ng-click="vm.resetTable()">
+		ng-controller="TradeSystemCtrl as vm" ng-init="vm.resetPage()">
+		<h1>
+			<center>TSM Project</center>
+		</h1>
 		<div flash-message="3500" class="text-center"></div>
 		<form class="form-horizontal form-margin" novalidate="novalidate"
-			ng-submit="vm.search()" name="vm.prodTypeForm">
-			
-		</form>
-		</uib-tab> <uib-tab active="vm.tabs[1].selected" heading="{{vm.tabs[1].title}}"
-			ng-click="vm.resetPage()">
-		<div flash-message="3500" class="text-center"></div>
-		<form class="form-horizontal form-margin" novalidate="novalidate"
-			name="vm.prodTypeForm" ng-submit="vm.formControl()">
-				<div class="form-group">
-					<div class="col-md-1 col-md-offset-5 text-center">
-						<button class="btn btn-default" type="submit"
-							ng-disabled="vm.prodTypeForm.$invalid">
-							<fa name="floppy-o" size="1" tital="Save"></fa>
-							บันทึก
-						</button>
+			ng-submit="vm.getProd()">
+			<div class="col-md-12">
+				<div class="col-md-4">
+					<div class="form-group">
+						<label class="control-label col-md-4">ลูกค้า</label>
+						<div class="col-md-8">
+							<div class="input-group">
+								<input type="text" class="form-control"
+									ng-model="vm.order.customer.custName" readonly><span
+									class="input-group-btn">
+									<button title="search" ng-bootbox-custom-dialog
+										ng-click="vm.getCust()"
+										ng-bootbox-custom-dialog-template="common/partials/select-cust-dialog.tpl.html"
+										ng-bootbox-options="vm.viewCustModal" class="btn btn-default"
+										type="button">
+										<fa name="search" size="1"></fa>
+									</button>
+								</span> <span class="input-group-btn"><button title="Reset"
+										ng-click="vm.order.customer = null" class="btn btn-default"
+										type="button">
+										<fa name="remove" size="1"></fa>
+									</button></span>
+							</div>
+						</div>
 					</div>
-					<div class="col-md-1 text-center">
-						<button class="btn btn-default"
-							ng-click="vm.prodType.id == null ? vm.resetForm() : vm.resetDefault()"
-							type="button" ng-disabled="vm.prodTypeForm.$pristine">
-							<fa name="remove" size="1" title="Reset"></fa>
-							ยกเลิก
-						</button>
+				</div>
+				<div ng-hide="getCust"></div>
+				<div ng-show="getCust">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="control-label col-md-4">เบอร์โทร</label>
+							<div class="col-md-8">
+								<input type="text" ng-model="vm.order.customer.custPhone"
+									class="form-control" readonly>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="control-label col-md-4">รายละเอียด</label>
+							<div class="col-md-8">
+								<textarea class="form-control"
+									ng-model="vm.order.customer.custDesc" readonly></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="col-md-4">
+					<div class="form-group">
+						<label class="control-label col-md-4">สินค้า</label>
+						<div class="col-md-8">
+							<div class="input-group">
+								<input type="text" class="form-control" ng-model="vm.prodCode"><span
+									class="input-group-btn">
+									<button title="search" class="btn btn-default" type="submit">
+										<fa name="search" size="1"></fa>
+									</button>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label class="col-md-4 control-label">จำนวน</label>
+						<div class="col-md-4">
+							<input type="text" class="form-control" ng-model="">
+						</div>
 					</div>
 				</div>
 			</div>
 		</form>
-		</uib-tab> </uib-tabset>
 
 		<!-- Product_type Table -->
 
@@ -68,28 +114,29 @@
 			</div>
 		</div>
 		<div class="col-md-12">
-			<table st-table="displayedProdType" wt-responsive-table
-				st-safe-src="vm.prodTypeList"
+			<table st-table="displayedOrder" wt-responsive-table
+				st-safe-src="vm.orderList"
 				class="table table-striped table-bordered">
 				<thead>
 					<tr>
-						<th class="text-center" st-sort="typeCode">รหัสประเภท</th>
-						<th class="text-center" st-sort="typeName">ชื่อประเภท</th>
+						<th class="text-center" st-sort="prodCode">รหัสสินค้า</th>
+						<th class="text-center" st-sort="prodName">ชื่อสินค้า</th>
+						<th class="text-center" st-sort="prodPrice">ราคา</th>
+						<th class="text-center">จำนวน</th>
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="prodType in displayedProdType">
-						<td class="text-center">{{prodType.typeCode}}</td>
-						<td class="text-center">{{prodType.typeName}}</td>
-						<td class="text-center"><button class="btn btn-info"
-								ng-click="vm.update(prodType)">
-								<fa name="edit"></fa>
-							</button>
-
+					<tr ng-repeat="order in displayedOrder">
+						<td class="text-center">{{order.prodCode}}</td>
+						<td class="text-center">{{order.prodName}}</td>
+						<td class="text-center">{{order.prodPrice}}</td>
+						<td class="text-center">{{order.quantity}}</td>
+						<td class="text-center">
 							<button class="btn btn-danger" ng-click="vm.remove(prodType.id)">
 								<fa name="trash-o"></fa>
-							</button></td>
+							</button>
+						</td>
 					</tr>
 				</tbody>
 				<tfoot>
@@ -103,15 +150,18 @@
 				</tfoot>
 			</table>
 		</div>
+		{{vm.orderList}}
 	</div>
 
 	<!-- APPLICATION -->
 	<script src="./app/app.js">
+		
 	</script>
 	<script src="./app/app.config.js">
+		
 	</script>
-	<script src="./app/product_type/product_type.ctrl.js"></script>
-	<script src="./app/product_type/product_type.service.js"></script>
+	<script src="./app/trade/trade_system.ctrl.js"></script>
+	<script src="./app/trade/trade_sysytem.service.js"></script>
 	<!-- BOOTSTRAP -->
 	<script src="./assets/js/jquery.min.js"></script>
 	<script src="./assets/js/bootstrap.min.js"></script>

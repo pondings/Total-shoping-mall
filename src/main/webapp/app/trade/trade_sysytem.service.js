@@ -2,25 +2,27 @@
 
 var urlBase = 'http://localhost:8080/project';
 
-angular.module('app.tradeSystem').service('TradeSystemService', TradeSystemService);
+angular.module('app.tradeSystem').service('TradeSystemService',
+		TradeSystemService);
 TradeSystemService.$inject = [ '$http', '$q' ];
 
 function TradeSystemService($http, $q) {
 	var service = {
 		create : create,
-		update : update,
-		remove : remove,
-		search : search
+		getCust : getCust,
+		getProd : getProd
 	};
 
 	return service;
 
-	function create(tradeSystem) {
+	function getProd(prodCode) {
 		var deferred = $q.defer();
-		$http.post(urlBase + '/tradeSystem/create', tradeSystem).success(
-				function(dataArr) {
-					deferred.resolve(dataArr);
-				}).error(function(errMs, errCode) {
+		var prod = {
+			prodCode : prodCode
+		}
+		$http.post(urlBase + '/prod/searchCode', prod).success(function(dataArr) {
+			deferred.resolve(dataArr);
+		}).error(function(errMs, errCode) {
 			var err = {
 				errMessage : errMs,
 				errCode : errCode
@@ -30,13 +32,14 @@ function TradeSystemService($http, $q) {
 		return deferred.promise;
 	}
 
-	function update(tradeSystem) {
-		console.log(tradeSystem);
+	function getCust() {
 		var deferred = $q.defer();
-		$http.put(urlBase + '/tradeSystem/update', tradeSystem).success(
-				function(dataArr) {
-					deferred.resolve(dataArr);
-				}).error(function(errMs, errCode) {
+		var cust = {
+			custCode : null
+		};
+		$http.post(urlBase + '/cus/search', cust).success(function(dataArr) {
+			deferred.resolve(dataArr);
+		}).error(function(errMs, errCode) {
 			var err = {
 				errMessage : errMs,
 				errCode : errCode
@@ -46,27 +49,11 @@ function TradeSystemService($http, $q) {
 		return deferred.promise;
 	}
 
-	function remove(id) {
+	function create(order) {
 		var deferred = $q.defer();
-		$http['delete'](urlBase + '/tradeSystem/delete/' + id).success(
-				function(dataArr) {
-					deferred.resolve(dataArr);
-				}).error(function(errMs, errCode) {
-			var err = {
-				errMessage : errMs,
-				errCode : errCode
-			}
-			deferred.reject(err);
-		});
-		return deferred.promise;
-	}
-
-	function search(tradeSystem) {
-		var deferred = $q.defer();
-		$http.post(urlBase + '/tradeSystem/search/', tradeSystem).success(
-				function(dataArr) {
-					deferred.resolve(dataArr);
-				}).error(function(errMs, errCode) {
+		$http.post(urlBase + '/order/create', order).success(function(dataArr) {
+			deferred.resolve(dataArr);
+		}).error(function(errMs, errCode) {
 			var err = {
 				errMessage : errMs,
 				errCode : errCode
