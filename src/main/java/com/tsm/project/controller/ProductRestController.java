@@ -43,6 +43,7 @@ public class ProductRestController {
 	
 	@RequestMapping(value="searchCode" , method = RequestMethod.POST)
 	ResponseEntity<Product> searchCode(@RequestBody Product product){
+		System.out.println(product.getProdCode());
 		return new ResponseEntity<Product>(productService.searchProd(product),HttpStatus.OK);
 	}
 }

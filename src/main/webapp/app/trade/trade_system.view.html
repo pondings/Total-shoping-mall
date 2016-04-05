@@ -96,7 +96,8 @@
 					<div class="form-group">
 						<label class="col-md-4 control-label">จำนวน</label>
 						<div class="col-md-4">
-							<input type="text" class="form-control" ng-model="">
+							<input type="number" class="form-control"
+								ng-model="vm.calculate.count">
 						</div>
 					</div>
 				</div>
@@ -123,6 +124,7 @@
 						<th class="text-center" st-sort="prodName">ชื่อสินค้า</th>
 						<th class="text-center" st-sort="prodPrice">ราคา</th>
 						<th class="text-center">จำนวน</th>
+						<th class="text-center">ทั้งหมด</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -132,6 +134,7 @@
 						<td class="text-center">{{order.prodName}}</td>
 						<td class="text-center">{{order.prodPrice}}</td>
 						<td class="text-center">{{order.quantity}}</td>
+						<td class="text-center">{{order.total}}</td>
 						<td class="text-center">
 							<button class="btn btn-danger" ng-click="vm.remove(prodType.id)">
 								<fa name="trash-o"></fa>
@@ -139,6 +142,16 @@
 						</td>
 					</tr>
 				</tbody>
+				<tfoot>
+					<tr>
+						<td class="text-center">รวม</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td class="text-center">{{vm.calculate.net}} บาท</td>
+						<td></td>
+					</tr>
+				</tfoot>
 				<tfoot>
 					<tr>
 						<td colspan="11" class="text-center">
@@ -150,7 +163,6 @@
 				</tfoot>
 			</table>
 		</div>
-		{{vm.orderList}}
 	</div>
 
 	<!-- APPLICATION -->

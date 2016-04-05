@@ -42,39 +42,37 @@ function TradeSystemCtrl($scope, SweetAlert, Flash, $ngBootbox,
 
 	vm.getCust = getCust;
 	vm.getProd = getProd;
+	vm.calNet = calNet;
 	vm.resetPage = resetPage;
 	vm.create = create;
 	vm.resetForm = resetForm;
 
 	/** Function * */
 
+	function calNet(total) {
+		vm.calculate.net = vm.calculate.net + total ;
+	}
+
 	function getProd() {
-		TradeSystemService
-				.getProd(vm.prodCode)
-				.then(
-						function(data) {
-							if (data.prodCode != null) {
-								if (vm.orderList.length > 0) {
-									for (var i = 0; i < vm.orderList.length; i++) {
-										if (vm.orderList[i].prodCode == data.prodCode) {
-											vm.orderList[i].quantity = vm.orderList[i].quantity + 1;
-											break;
-										}
-									}
-								} else {
-									data.quantity = 1;
-									vm.orderList.push(data);
-								}
-							} else {
-								Flash.create('danger',
-										"กรอกรหัสสินค้าไม่ถูกต้อง",
-										'custom-class');
-							}
-						},
-						function(errRs) {
-							Flash.create('danger', errRs.errMessage,
-									'custom-class');
-						})
+		TradeSystemService.getProd(vm.prodCode).then(
+				function(data) {
+					console.log(data, vm.orderList.length)
+					if (data.prodCode != null) {
+						if (1 == 1) {
+							data.quantity = vm.calculate.count;
+							data.total = data.prodPrice * vm.calculate.count;
+							vm.orderList.push(data);
+							vm.calculate.count = 1;
+							vm.calNet(data.total) ;
+						}
+
+					} else {
+						Flash.create('danger', "กรอกรหัสสินค้าไม่ถูกต้อง",
+								'custom-class');
+					}
+				}, function(errRs) {
+					Flash.create('danger', errRs.errMessage, 'custom-class');
+				})
 	}
 
 	function getCust() {
@@ -95,7 +93,13 @@ function TradeSystemCtrl($scope, SweetAlert, Flash, $ngBootbox,
 	}
 
 	function resetPage() {
+		vm.push = false;
 		vm.orderList = [];
+		vm.calculate = {
+			count : 1,
+			total : null,
+			net : 0
+		};
 		vm.order = {
 			id : null,
 			orderNet : null,
@@ -116,6 +120,12 @@ function TradeSystemCtrl($scope, SweetAlert, Flash, $ngBootbox,
 	}
 
 	function resetForm() {
+		vm.push = false;
+		vm.calculate = {
+			count : 1,
+			total : null,
+			net : 0
+		};
 		vm.order = {
 			id : null,
 			orderNet : null,
