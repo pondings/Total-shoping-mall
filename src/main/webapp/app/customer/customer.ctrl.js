@@ -56,10 +56,13 @@ function CustomerCtrl($scope, SweetAlert, Flash, $ngBootbox, CustomerService) {
 	vm.submit = submit;
 	vm.create = create;
 	vm.search = search;
+	vm.remove = remove;
+	vm.edit = edit;
+	
 	
 	function submit() {
 		if (vm.cus.id != null) {
-			CusService.update(vm.cus).then(
+			CustomerService.update(vm.cus).then(
 					function(data) {
 						for (var i = 0; i < vm.cusList.length; i++) {
 							if (vm.cusList[i].id == data.id) {
@@ -80,7 +83,7 @@ function CustomerCtrl($scope, SweetAlert, Flash, $ngBootbox, CustomerService) {
 	}
 	
 	function create() {
-		CusService.create(vm.cus).then(function(data) {
+		CustomerService.create(vm.cus).then(function(data) {
 			vm.cusList.push(data);
 			Flash.create('success', 'Created', 'custom-class');
 			vm.resetForm();
@@ -90,8 +93,14 @@ function CustomerCtrl($scope, SweetAlert, Flash, $ngBootbox, CustomerService) {
 		
 	}
 	
+	function edit(cus) {
+		vm.cus = angular.copy(cus);
+		vm.cusbak = angular.copy(cus);
+		vm.tabs[1].selected = true;
+	}
+	
 	function search() {
-		CustomerService.search(vm.customer).then(
+		CustomerService.search(vm.cus).then(
 				function(data) {
 					vm.cusList = data;
 					Flash
@@ -102,9 +111,22 @@ function CustomerCtrl($scope, SweetAlert, Flash, $ngBootbox, CustomerService) {
 				})
 	}
 	
+	function remove(id) {
+		CustomerService.remove(id).then(function(data) {
+			Flash.create('success', 'Deleted', 'custom-class');
+			for (var i = 0; i < vm.cusList.length; i++) {
+				if (vm.cusList[i].id == id) {
+					vm.cusList.splice(i, 1);
+					break;
+				}
+			}
+		}, function(errRs) {
+			Flash.create('danger', errRs.errMessage, 'custom-class');
+		})
+	}
+	
 	function resetDefault() {
-		vm.emp = angular.copy(vm.substitute);
-		vm.emp.empDateAttended = new Date(vm.substitute.empDateAttended);
+		vm.cus = angular.copy(vm.cusbak);
 	}
 	
 	function resetPage() {

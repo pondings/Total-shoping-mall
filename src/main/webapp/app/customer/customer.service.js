@@ -29,9 +29,9 @@ function CustomerService($http, $q) {
 		return deferred.promise;
 	}
 
-	function update(emp) {
+	function update(cus) {
 		var deferred = $q.defer();
-		$http.put(urlBase + '/emp/update', emp).success(function(dataArr) {
+		$http.put(urlBase + '/cus/update', cus).success(function(dataArr) {
 			deferred.resolve(dataArr);
 		}).error(function(errMs, errCode) {
 			var err = {
@@ -45,7 +45,7 @@ function CustomerService($http, $q) {
 
 	function remove(id) {
 		var deferred = $q.defer();
-		$http['delete'](urlBase + '/emp/delete/' + id).success(
+		$http['delete'](urlBase + '/cus/delete/' + id).success(
 				function(dataArr) {
 					deferred.resolve(dataArr);
 				}).error(function(errMs, errCode) {
@@ -60,6 +60,7 @@ function CustomerService($http, $q) {
 
 	function search(cus) {
 		var deferred = $q.defer();
+		console.log(cus);
 		$http.post(urlBase + '/cus/search/',cus).success(function(dataArr) {
 			deferred.resolve(dataArr);
 		}).error(function(errMs, errCode) {
