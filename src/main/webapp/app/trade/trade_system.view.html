@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html ng-app="app.prodType">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Product Management</title>
+<link rel="shortcut icon" type="image/png" href="./img/3gs_icon.png" />
+<!-- MAIN STYLE -->
+<link rel="stylesheet" href="./assets/css/main.css" />
+<!-- BOOTSTRAP -->
+<link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
+<!-- FONT AWESOME -->
+<link rel="stylesheet" href="./assets/css/font-awesome.min.css" />
+<!-- SWEET ALERT -->
+<link rel="stylesheet" href="./assets/css/sweetalert.css" />
+<!-- ANGULAR RESPONSIVE TABLES -->
+<link rel="stylesheet"
+	href="./assets/css/angular-responsive-tables.min.css" />
+<!-- ANGULAR JS -->
+<script src="./assets/js/angular.min.js"></script>
+</head>
+<body ng-cloak>
+	<div class="container-fluid container-margin"
+		ng-controller="ProdTypeCtrl as vm">
+		<uib-tabset> <uib-tab active="vm.tabs[0].selected"
+			heading="{{vm.tabs[0].title}}" select="vm.resetPage()"
+			ng-click="vm.resetTable()">
+		<div flash-message="3500" class="text-center"></div>
+		<form class="form-horizontal form-margin" novalidate="novalidate"
+			ng-submit="vm.search()" name="vm.prodTypeForm">
+			
+		</form>
+		</uib-tab> <uib-tab active="vm.tabs[1].selected" heading="{{vm.tabs[1].title}}"
+			ng-click="vm.resetPage()">
+		<div flash-message="3500" class="text-center"></div>
+		<form class="form-horizontal form-margin" novalidate="novalidate"
+			name="vm.prodTypeForm" ng-submit="vm.formControl()">
+				<div class="form-group">
+					<div class="col-md-1 col-md-offset-5 text-center">
+						<button class="btn btn-default" type="submit"
+							ng-disabled="vm.prodTypeForm.$invalid">
+							<fa name="floppy-o" size="1" tital="Save"></fa>
+							บันทึก
+						</button>
+					</div>
+					<div class="col-md-1 text-center">
+						<button class="btn btn-default"
+							ng-click="vm.prodType.id == null ? vm.resetForm() : vm.resetDefault()"
+							type="button" ng-disabled="vm.prodTypeForm.$pristine">
+							<fa name="remove" size="1" title="Reset"></fa>
+							ยกเลิก
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+		</uib-tab> </uib-tabset>
+
+		<!-- Product_type Table -->
+
+		<div class="col-md-12">
+			<div class="pull-right">
+				<select ng-model="vm.selectedNumPerPage"
+					ng-selected="vm.numPerPage = vm.selectedNumPerPage.number"
+					ng-options="n.number for n in vm.numPerPages"
+					class="input-sm form-control selector-option"></select>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<table st-table="displayedProdType" wt-responsive-table
+				st-safe-src="vm.prodTypeList"
+				class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th class="text-center" st-sort="typeCode">รหัสประเภท</th>
+						<th class="text-center" st-sort="typeName">ชื่อประเภท</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="prodType in displayedProdType">
+						<td class="text-center">{{prodType.typeCode}}</td>
+						<td class="text-center">{{prodType.typeName}}</td>
+						<td class="text-center"><button class="btn btn-info"
+								ng-click="vm.update(prodType)">
+								<fa name="edit"></fa>
+							</button>
+
+							<button class="btn btn-danger" ng-click="vm.remove(prodType.id)">
+								<fa name="trash-o"></fa>
+							</button></td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="11" class="text-center">
+							<div st-pagination="" st-items-by-page="vm.numPerPage"
+								st-displayed-pages="displayedPages"
+								st-template="app/common/pagination/pagination.tpl.html"></div>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+
+	<!-- APPLICATION -->
+	<script src="./app/app.js">
+	</script>
+	<script src="./app/app.config.js">
+	</script>
+	<script src="./app/product_type/product_type.ctrl.js"></script>
+	<script src="./app/product_type/product_type.service.js"></script>
+	<!-- BOOTSTRAP -->
+	<script src="./assets/js/jquery.min.js"></script>
+	<script src="./assets/js/bootstrap.min.js"></script>
+	<!-- ANGULAR UI BOOTSTRAP -->
+	<script src="./assets/js/ui-bootstrap-tpls.min.js"></script>
+	<!-- ANGULAR FONT AWESOME -->
+	<script src="./assets/js/angular-fontawesome.min.js"></script>
+	<!-- ANGULAR BOOTBOX -->
+	<script src="./assets/js/bootbox.js"></script>
+	<script src="./assets/js/ngBootbox.min.js"></script>
+	<!-- ANGULAR SWEET ALERT -->
+	<script src="./assets/js/ngSweetAlert.min.js"></script>
+	<script src="./assets/js/sweetalert.min.js"></script>
+	<!-- ANGULAR FLASH -->
+	<script src="./assets/js/angular-flash.min.js"></script>
+	<!-- ANGULAR AUTO VALIDATE -->
+	<script src="./assets/js/jcs-auto-validate.min.js"></script>
+	<!-- AngularUI Router -->
+	<script src="./assets/js/angular-ui-router.min.js"></script>
+	<!-- ANGULAR RESPONSIVE TABLES -->
+	<script src="./assets/js/angular-responsive-tables.min.js"></script>
+	<!-- ANGULAR SMART TABLE -->
+	<script src="./assets/js/smart-table.min.js"></script>
+</body>
+</html>
