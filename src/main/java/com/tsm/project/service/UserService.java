@@ -14,7 +14,6 @@ public interface UserService {
 	
 	UserRole create(UserRole userRole) ;
 	
-	UserRole createRole(User user,UserRole userRole) ;
 	
 	UserRole update(UserRole userRole) ;
 	

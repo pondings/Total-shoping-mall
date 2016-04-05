@@ -52,18 +52,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserRole createRole(User user, UserRole userRole) {
-		// TODO Auto-generated method stub
-
-		UserRole insertRole = new UserRole();
-
-		insertRole.setRole(userRole.getRole());
-		insertRole.setUser(user);
-
-		return userRoleRepository.save(insertRole);
-	}
-
-	@Override
 	public UserRole update(UserRole userRole) {
 		User inserUser = new User();
 
