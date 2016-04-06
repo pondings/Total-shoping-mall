@@ -1,10 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app.login">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert tasdsadadasditle here</title>
+<meta http-equiv="X-UA-Compatible" content="IE-edge" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Home Page Jaaa!!</title>
+<!-- Main Style -->
+<link rel="stylesheet" href="assets/css/main.css" />
+<!-- Boot Strap -->
+<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+<!-- Font Awesome -->
+<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+<!-- Sweet Alert -->
+<link rel="stylesheet" href="assets/css/sweetalert.css" />
+<!-- Angular Responsive Tables -->
+<link rel="stylesheet"
+	href="assets/css/angular-responsive-tables.min.css" />
+<!-- Angular Js -->
+<script src="assets/js/angular.min.js"></script>
 </head>
-<body>
+<body ng-cloak>
+<div ng-controller="loginCtrl">
+<header> <div class="panel panel-primary">
+    <div class="panel-heading"><h1>Total Shopping Mall</h1></div>
+    </div> </header>
+            <div class="login-container">
+                <div class="login-card">
+                    <div class="login-form">
+                        <form class="form-horizontal" ng-submit="vm.login">
+                           <div class="col-md-offset-4" >
+                            <div class="input-group input-sm  col-md-2">
+                                <label class="input-group-addon" for="username"><i class="fa fa-user"></i></label>
+                                <input type="text" class="form-control" ng-model="vm.user.username"  placeholder="Enter Username" required>
+                            </div>
+                            <div class="input-group input-sm col-md-2">
+                                <label class="input-group-addon" for="password"><i class="fa fa-lock"></i></label> 
+                                <input type="password" class="form-control" ng-model="vm.user.password" placeholder="Enter Password" required>
+                            </div>
+                                 
+                            <div class="form-actions col-md-1">
+                                <input type="submit"
+                                    class="btn btn-block btn-primary btn-default" value="Log in">
+                            </div>
+                            <div class="form-actions col-md-1">
+                                <input type="button"
+                                    class="btn btn-block btn-primary btn-default" value="Cancel">
+                            </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
+</div>
+	<!-- APPLICATION -->
+	<script src="./app/app.js">
+		</script>
+	<script src="./app/login/login.ctrl.js"></script>
+	<script src="./app/login/login.service.js"></script>
+	<!-- BOOTSTRAP -->
+	<script src="./assets/js/jquery.min.js"></script>
+	<script src="./assets/js/bootstrap.min.js"></script>
+	<!-- ANGULAR UI BOOTSTRAP -->
+	<script src="./assets/js/ui-bootstrap-tpls.min.js"></script>
+	<!-- ANGULAR FONT AWESOME -->
+	<script src="./assets/js/angular-fontawesome.min.js"></script>
+	<!-- ANGULAR BOOTBOX -->
+	<script src="./assets/js/bootbox.js"></script>
+	<script src="./assets/js/ngBootbox.min.js"></script>
+	<!-- ANGULAR SWEET ALERT -->
+	<script src="./assets/js/ngSweetAlert.min.js"></script>
+	<script src="./assets/js/sweetalert.min.js"></script>
+	<!-- ANGULAR FLASH -->
+	<script src="./assets/js/angular-flash.min.js"></script>
+	<!-- ANGULAR AUTO VALIDATE -->
+	<script src="./assets/js/jcs-auto-validate.min.js"></script>
+	<!-- AngularUI Router -->
+	<script src="./assets/js/angular-ui-router.min.js"></script>
+	<!-- ANGULAR RESPONSIVE TABLES -->
+	<script src="./assets/js/angular-responsive-tables.min.js"></script>
+	<!-- ANGULAR SMART TABLE -->
+	<script src="./assets/js/smart-table.min.js"></script>
 </body>
 </html>

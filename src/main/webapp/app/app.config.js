@@ -54,6 +54,6 @@ function navbarConfig($stateProvider, $urlRouterProvider){
 			templateUrl :'login',
 	};
 	
-	$urlRouterProvider.otherwise("/");
+	$urlRouterProvider.otherwise("/employee");
 	$stateProvider.state(product).state(employee).state(customer).state(user).state(prodType).state(Home).state(Login);
 }
