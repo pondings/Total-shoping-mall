@@ -25,4 +25,9 @@ public class OrderRestcontroller {
 		return new ResponseEntity<List<Order>>(orderService.search(order),HttpStatus.OK) ;
 	}
 	
+	@RequestMapping(value="create",method = RequestMethod.POST)
+	ResponseEntity<Order> create(@RequestBody Order order){
+		return new ResponseEntity<Order>(orderService.create(order),HttpStatus.OK) ;
+	}
+	
 }

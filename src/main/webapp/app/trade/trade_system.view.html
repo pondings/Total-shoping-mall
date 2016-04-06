@@ -136,7 +136,7 @@
 						<td class="text-center">{{order.quantity}}</td>
 						<td class="text-center">{{order.total}}</td>
 						<td class="text-center">
-							<button class="btn btn-danger" ng-click="vm.remove(prodType.id)">
+							<button class="btn btn-danger" ng-click="vm.remove(order.id)">
 								<fa name="trash-o"></fa>
 							</button>
 						</td>
@@ -162,6 +162,24 @@
 					</tr>
 				</tfoot>
 			</table>
+			<div class="col-md-12 col-sm-12">
+				<div class="form-group">
+					<div class="col-md-1 col-md-offset-5 text-center">
+						<button class="btn btn-default" type="button"
+							ng-disabled="vm.orderList < 1" ng-click="vm.create()">
+							<fa name="floppy-o" size="1" tital="Save"></fa>
+							บันทึก
+						</button>
+					</div>
+					<div class="col-md-1 text-center">
+						<button class="btn btn-default" ng-click="vm.resetPage()"
+							type="button" ng-disabled="vm.orderList < 1">
+							<fa name="remove" size="1" title="Reset"></fa>
+							ยกเลิก
+						</button>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
