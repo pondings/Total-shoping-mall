@@ -1,66 +1,67 @@
 package com.tsm.project.dto;
 
+import java.util.Date;
+
 public class orderDto {
 
-	private String prodCode;
-	private String prodName;
-	private Long prodPrice;
-	private Integer subQuantity;
-	private Integer subTotal;
-	
+	private String custCode;
+	private String empCode;
+	private String orderCode;
+	private Date startDate;
+	private Date endDate;
+
 	public orderDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public orderDto(String prodCode, String prodName, Long prodPrice, Integer subQuantity, Integer subTotal) {
+	public orderDto(String custCode, String empCode, String orderCode, Date startDate, Date endDate) {
 		super();
-		this.prodCode = prodCode;
-		this.prodName = prodName;
-		this.prodPrice = prodPrice;
-		this.subQuantity = subQuantity;
-		this.subTotal = subTotal;
+		this.custCode = custCode;
+		this.empCode = empCode;
+		this.orderCode = orderCode;
+		this.startDate = startDate;
+		this.endDate = endDate;
 	}
 
-	public String getProdCode() {
-		return prodCode;
+	public String getCustCode() {
+		return custCode;
 	}
 
-	public void setProdCode(String prodCode) {
-		this.prodCode = prodCode;
+	public void setCustCode(String custCode) {
+		this.custCode = custCode;
 	}
 
-	public String getProdName() {
-		return prodName;
+	public String getEmpCode() {
+		return empCode;
 	}
 
-	public void setProdName(String prodName) {
-		this.prodName = prodName;
+	public void setEmpCode(String empCode) {
+		this.empCode = empCode;
 	}
 
-	public Long getProdPrice() {
-		return prodPrice;
+	public String getOrderCode() {
+		return orderCode;
 	}
 
-	public void setProdPrice(Long prodPrice) {
-		this.prodPrice = prodPrice;
+	public void setOrderCode(String orderCode) {
+		this.orderCode = orderCode;
 	}
 
-	public Integer getSubQuantity() {
-		return subQuantity;
+	public Date getStartDate() {
+		return startDate;
 	}
 
-	public void setSubQuantity(Integer subQuantity) {
-		this.subQuantity = subQuantity;
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
 	}
 
-	public Integer getSubTotal() {
-		return subTotal;
+	public Date getEndDate() {
+		return endDate;
 	}
 
-	public void setSubTotal(Integer subTotal) {
-		this.subTotal = subTotal;
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
-	
 
 }
