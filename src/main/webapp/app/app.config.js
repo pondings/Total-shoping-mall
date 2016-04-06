@@ -51,7 +51,7 @@ function navbarConfig($stateProvider, $urlRouterProvider){
 	var Login = {
 			name:'login',
 			url:'/login',
-			templateUrl :'logins',
+			templateUrl :'logins'
 	};
 	
 	var Trade = {
@@ -59,9 +59,16 @@ function navbarConfig($stateProvider, $urlRouterProvider){
 			url:'/trade',
 			templateUrl:'trade',
 			controller : 'TradeSystemCtrl'
+	};
+				
+	var Report = {
+			name:'report',
+			url:'/report',
+			templateUrl:'report',
+			controller : 'ReportCtrl'			
 			
 	};
 	
 	$urlRouterProvider.otherwise("/trade");
-	$stateProvider.state(product).state(employee).state(customer).state(user).state(prodType).state(Home).state(Login).state(Trade);
+	$stateProvider.state(product).state(employee).state(customer).state(user).state(prodType).state(Home).state(Login).state(Trade).state(Report);
 }

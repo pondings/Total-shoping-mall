@@ -14,19 +14,6 @@ import com.tsm.project.service.impl.SpringSecurityUserServiceImpl;
 @RequestMapping("logins")
 public class LoginRestController {
 
-	@Configuration
-	  @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-	  protected static class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-	    @Override
-	    protected void configure(HttpSecurity http) throws Exception {
-	      http
-	        .httpBasic()
-	      .and()
-	        .authorizeRequests()
-	          .antMatchers("/logins", "/").access(attribute)
-	          .anyRequest().authenticated();
-	    }
-	  }
 	
 	
 }

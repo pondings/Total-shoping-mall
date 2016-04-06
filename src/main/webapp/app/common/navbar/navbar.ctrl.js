@@ -17,6 +17,10 @@ function NavbarCtrl($scope,$location){
 		name:'customer',
 		url:'/customer'
 	},{
+		label:'Report',
+		name:'report',
+		url:'/report'
+	},{
 		label : 'Employee',
 		name: 'employee',
 		url:'/employee'
