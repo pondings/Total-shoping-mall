@@ -17,6 +17,7 @@ function loginService($http, $q) {
 
 	function login(user) {
 		var deferred = $q.defer();
+		console.log("service"+user);
 		$http.post(urlBase + '/logins/login', user).success(function(dataArr) {
 			deferred.resolve(dataArr);
 		}).error(function(errMs, errCode) {

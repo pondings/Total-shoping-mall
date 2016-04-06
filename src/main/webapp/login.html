@@ -4,7 +4,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE-edge" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Home Page Jaaa!!</title>
+<title>Login Jaaa!!</title>
 <!-- Main Style -->
 <link rel="stylesheet" href="assets/css/main.css" />
 <!-- Boot Strap -->
@@ -20,20 +20,16 @@
 <script src="assets/js/angular.min.js"></script>
 </head>
 <body ng-cloak>
-<div ng-controller="loginCtrl as vm">
-<header> <div class="panel panel-primary">
-    <div class="panel-heading"><h1>Total Shopping Mall</h1></div>
-    </div> </header>
-    
-    
+
+    <div ng-controller="loginCtrl as vm">
             <div class="login-container">
                 <div class="login-card">
-                    <div class="login-form" select="vm.resetForm()">
-                        <form class="form-horizontal form-group " ng-submit="vm.login()" >
+                    <div class="login-form">
+                        <form class="form-horizontal form-group " ng-submit="vm.login(vm.user)" >
                            <div class="col-md-offset-4" >
                             <div class="input-group input-sm  col-md-4">
                                 <label class="input-group-addon" for="username"><i class="fa fa-user"></i></label>
-                                <input type="text" class="form-control" name="username" ng-model="vm.user.username"  placeholder="Enter Username" required>
+                                <input type="text" class="form-control"  ng-model="vm.user.username"  placeholder="Enter Username" required>
                             </div>
                             <div class="input-group input-sm col-md-4">
                                 <label class="input-group-addon" for="password"><i class="fa fa-lock"></i></label> 
@@ -45,11 +41,13 @@
                                     class="btn btn-block btn-primary btn-default" value="Log in">
                             </div>
                             <div class="form-actions col-md-2">
-                                <input type="button"
+                                <input type="reset"
                                     class="btn btn-block btn-primary btn-default" value="Cancel">
                             </div>
                             </div>
                         </form>
+                        
+                        
                     </div>
                 </div>
             </div>

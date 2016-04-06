@@ -3,11 +3,11 @@
  */
 'use strict';
 angular.module('app.login').controller('loginCtrl', loginCtrl);
-loginCtrl.$inject = [ '$scope',  'Flash', '$ngBootbox', 'loginService'];
+loginCtrl.$inject = [ '$scope','Flash', 'SweetAlert',  '$ngBootbox', 'loginService'];
 
-function loginCtrl($scope,  Flash, $ngBootbox, loginService) {
+function loginCtrl($scope, Flash, SweetAlert, $ngBootbox, loginService) {
 	var vm = this;
-
+	
 	/** Declare Function * */
 	vm.login = login;
 	vm.resetForm = resetForm;
@@ -15,7 +15,6 @@ function loginCtrl($scope,  Flash, $ngBootbox, loginService) {
 	/** Function * */
 
 	function login(user) {
-		console.log(user);
 		console.log(user);
 		loginService.login(user).then(function(data) {
 	if(data.username){
@@ -29,7 +28,6 @@ function loginCtrl($scope,  Flash, $ngBootbox, loginService) {
 	}
 
 	function resetForm() {
-		alert("commonnnn");
 		vm.user = {
 			username : null,
 			password : null,
