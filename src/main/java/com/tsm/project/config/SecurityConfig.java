@@ -27,8 +27,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers("/","/employee", "/product", "/customer" ,"/user" ,"/product_type","/trade").access("hasRole('ROLE_ADMIN  ')")
-				.and().formLogin().usernameParameter("username").passwordParameter("password").and().csrf().disable();
+		http.authorizeRequests()
+				.antMatchers("/", "/employee", "/product", "/customer", "/user", "/product_type", "/trade")
+				.access("hasRole('ROLE_ADMIN  ')").and().formLogin().loginPage("/login").permitAll()
+				.usernameParameter("username").passwordParameter("password").and().csrf().disable();
 	}
 
 	@Bean

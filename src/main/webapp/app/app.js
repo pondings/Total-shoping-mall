@@ -5,20 +5,22 @@ angular.module('app', [
 /* common modules */
 'app.core', 'app.widgets',
 /* Feature modules */
-'app.navbar','app.emp', 'app.prod','app.prodType','app.user','app.customer','app.tradeSystem','app.login','app.report' ]);
+'app.navbar', 'app.emp', 'app.prod', 'app.prodType', 'app.user',
+		'app.customer', 'app.tradeSystem', 'app.login', 'app.report' ]);
 /* validate */
 
 /* Report */
 angular.module('app.report', [ 'app.core', 'app.widgets', 'jcs-autoValidate' ])
-.run([ 'validator', function(validator) {
-	validator.setValidElementStyling(false);
-} ]);
+		.run([ 'validator', function(validator) {
+			validator.setValidElementStyling(false);
+		} ]);
 
 /* Trade System */
-angular.module('app.tradeSystem', [ 'app.core', 'app.widgets', 'jcs-autoValidate' ])
-.run([ 'validator', function(validator) {
-	validator.setValidElementStyling(false);
-} ]);
+angular.module('app.tradeSystem',
+		[ 'app.core', 'app.widgets', 'jcs-autoValidate' ]).run(
+		[ 'validator', function(validator) {
+			validator.setValidElementStyling(false);
+		} ]);
 
 /* Employee */
 angular.module('app.emp', [ 'app.core', 'app.widgets', 'jcs-autoValidate' ])
@@ -33,28 +35,30 @@ angular.module('app.prod', [ 'app.core', 'app.widgets', 'jcs-autoValidate' ])
 		} ]);
 
 /* Product Type */
-angular.module('app.prodType', [ 'app.core', 'app.widgets', 'jcs-autoValidate' ])
-.run([ 'validator', function(validator) {
-	validator.setValidElementStyling(false);
-} ]);
+angular.module('app.prodType',
+		[ 'app.core', 'app.widgets', 'jcs-autoValidate' ]).run(
+		[ 'validator', function(validator) {
+			validator.setValidElementStyling(false);
+		} ]);
 
 /* User */
 angular.module('app.user', [ 'app.core', 'app.widgets', 'jcs-autoValidate' ])
-.run([ 'validator', function(validator) {
-	validator.setValidElementStyling(false);
-} ]);
+		.run([ 'validator', function(validator) {
+			validator.setValidElementStyling(false);
+		} ]);
 
 /* Customer */
-angular.module('app.customer', [ 'app.core', 'app.widgets', 'jcs-autoValidate' ])
-.run([ 'validator', function(validator) {
-	validator.setValidElementStyling(false);
-} ]);
+angular.module('app.customer',
+		[ 'app.core', 'app.widgets', 'jcs-autoValidate' ]).run(
+		[ 'validator', function(validator) {
+			validator.setValidElementStyling(false);
+		} ]);
 
 /* Login */
 angular.module('app.login', [ 'app.core', 'app.widgets', 'jcs-autoValidate' ])
-.run([ 'validator', function(validator) {
-	validator.setValidElementStyling(false);
-} ]);
+		.run([ 'validator', function(validator) {
+			validator.setValidElementStyling(false);
+		} ]);
 
 /* require module */
 angular.module('app.core', [
@@ -68,21 +72,22 @@ var app = angular.module('app.widgets', [ 'ui.bootstrap',
 		'wt.responsive', 'smart-table' ]);
 
 /* Navbar Feature */
-angular.module('app.navbar',['app.core']);
+angular.module('app.navbar', [ 'app.core' ]);
 
-/* navbar Employee Feature*/
-angular.module('app.emp',['app.core','app.widgets']);
+/* navbar Employee Feature */
+angular.module('app.emp', [ 'app.core', 'app.widgets' ]);
 
-/* navebar Customer Feature*/
-angular.module('app.customer',['app.core','app.widgets']);
+/* report */
+angular.module('app.report', [ 'app.core', 'app.widgets', 'ng-fusioncharts' ]);
 
-/* navebar Product Feature*/
-angular.module('app.prod',['app.core','app.widgets']);
+/* navebar Customer Feature */
+angular.module('app.customer', [ 'app.core', 'app.widgets' ]);
 
-/* navebar Product Type Feature*/
-angular.module('app.prodType',['app.core','app.widgets']);
+/* navebar Product Feature */
+angular.module('app.prod', [ 'app.core', 'app.widgets' ]);
 
-/* navebar User Feature*/
-angular.module('app.user',['app.core','app.widgets']);
+/* navebar Product Type Feature */
+angular.module('app.prodType', [ 'app.core', 'app.widgets' ]);
 
-
+/* navebar User Feature */
+angular.module('app.user', [ 'app.core', 'app.widgets' ]);
