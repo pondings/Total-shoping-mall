@@ -5,7 +5,7 @@ angular.module('app', [
 /* common modules */
 'app.core', 'app.widgets',
 /* Feature modules */
-'app.navbar','app.emp', 'app.prod','app.prodType','app.user','app.customer','app.tradeSystem' ]);
+'app.navbar','app.emp', 'app.prod','app.prodType','app.user','app.customer','app.tradeSystem','app.login' ]);
 /* validate */
 
 /* Trade System */

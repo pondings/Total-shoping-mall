@@ -62,6 +62,6 @@ function navbarConfig($stateProvider, $urlRouterProvider){
 			
 	};
 	
-	$urlRouterProvider.otherwise("/employee");
+	$urlRouterProvider.otherwise("/trade");
 	$stateProvider.state(product).state(employee).state(customer).state(user).state(prodType).state(Home).state(Login).state(Trade);
 }
