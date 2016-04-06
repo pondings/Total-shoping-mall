@@ -219,6 +219,16 @@
 									st-template="app/common/pagination/pagination.tpl.html"></div>
 							</td>
 						</tr>
+						<tr>
+							<td colspan="11">รวมจำนวนเงินทั้งหมด :: {{vm.net}} บาท</td>
+						</tr>
+						<tr>
+							<td colspan="11">รายการค้นหาตั้งแต่วันที่ ::
+								{{vm.getDate.startDate == null ? 'ไม่กำหนด' :
+								vm.getDate.startDate | date:'MM/dd/yyyy'}} -
+								{{vm.getDate.endDate == null ? 'ไม่กำหนด' : vm.getDate.endDate |
+								date:'MM/dd/yyyy'}}</td>
+						</tr>
 					</tfoot>
 				</table>
 			</div>

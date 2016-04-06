@@ -103,6 +103,7 @@ function ReportCtrl($scope, SweetAlert, Flash, $ngBootbox, ReportService) {
 	}
 
 	function orderSearch() {
+		vm.net = 0 ;
 		vm.getDate = {
 			startDate : vm.order.startDate,
 			endDate : vm.order.endDate
@@ -111,7 +112,6 @@ function ReportCtrl($scope, SweetAlert, Flash, $ngBootbox, ReportService) {
 				function(data) {
 					console.log(data);
 					vm.orderList = data;
-					vm.net = 0;
 					for (var i = 0; i < vm.orderList.length; i++) {
 						vm.net = vm.net + vm.orderList[i].orderNet;
 					}
@@ -140,6 +140,7 @@ function ReportCtrl($scope, SweetAlert, Flash, $ngBootbox, ReportService) {
 	}
 
 	function resetPage() {
+		vm.net = 0;
 		vm.orderList = [];
 		vm.subOrderList = [];
 		$scope.unSelect = true;
