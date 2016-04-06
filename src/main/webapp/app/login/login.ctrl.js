@@ -14,8 +14,8 @@ function loginCtrl($scope, SweetAlert, Flash, $ngBootbox, loginService) {
 
 	/** Function * */
 
-	function login(id) {
-		loginService.login(id).then(function(data) {
+	function login(user) {
+		loginService.login(user).then(function(data) {
 	
 		}, function(errRs) {
 			Flash.create('danger', errRs.errMessage, 'custom-class');

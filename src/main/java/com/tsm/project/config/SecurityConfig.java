@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers("/employee", "/product", "/customer" ,"/user" ,"/product_type").access("hasRole('ROLE_ADMIN  ')")
+		http.authorizeRequests().antMatchers("/","/employee", "/product", "/customer" ,"/user" ,"/product_type").access("hasRole('ROLE_ADMIN  ')")
 				.and().formLogin().usernameParameter("username").passwordParameter("password").and().csrf().disable();
 	}
 

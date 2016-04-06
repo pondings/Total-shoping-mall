@@ -9,13 +9,9 @@ NavbarCtrl.$inject = ['$scope','$location'];
 function NavbarCtrl($scope,$location){
 	
 	$scope.navs = [{
-		label:'Login',
-		name:'login',
-		url:'/login'
-	},{
-		label:'Home',
-		name:'home',
-		url:'/'
+		label:'Trade',
+		name:'trade',
+		url:'/trade'
 	},{
 		label:'Customer',
 		name:'customer',
@@ -36,6 +32,10 @@ function NavbarCtrl($scope,$location){
 		label:'User',
 		name:'user',
 		url:'/user'
+	},{
+		label:'Login',
+		name:'login',
+		url:'/login'
 	}];
 	
 	$scope.isActive = isActive;
