@@ -76,7 +76,7 @@
 											<fa name="search" size="1"></fa>
 										</button>
 									</span> <span class="input-group-btn"><button title="Reset"
-											ng-click="vm.order.empInfo = null" class="btn btn-default"
+											ng-click="vm.order.empInfo = null ; vm.order.empInfo.empCode = null" class="btn btn-default"
 											type="button">
 											<fa name="remove" size="1"></fa>
 										</button></span>
@@ -100,7 +100,7 @@
 											<fa name="search" size="1"></fa>
 										</button>
 									</span> <span class="input-group-btn"><button title="Reset"
-											ng-click="vm.order.customer = null" class="btn btn-default"
+											ng-click="vm.order.customer = null ; vm.order.customer.custCode = null" class="btn btn-default"
 											type="button">
 											<fa name="remove" size="1"></fa>
 										</button></span>
@@ -157,7 +157,7 @@
 							</button>
 						</div>
 						<div class="col-md-1 text-center">
-							<button class="btn btn-default" type="reset">
+							<button class="btn btn-default" type="reset" ng-click="vm.resetPage()">
 								<fa name="remove" size="1" title="Reset"></fa>
 								ยกเลิก
 							</button>

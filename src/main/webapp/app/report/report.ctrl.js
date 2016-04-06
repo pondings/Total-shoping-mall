@@ -55,6 +55,7 @@ function ReportCtrl($scope, SweetAlert, Flash, $ngBootbox, ReportService) {
 		number : 30
 	} ];
 	vm.selectedNumPerPage = vm.numPerPages[0];
+	vm.selectedNumPerPageDialog = vm.numPerPages[0] ;
 
 	/** smart-table * */
 
@@ -143,9 +144,6 @@ function ReportCtrl($scope, SweetAlert, Flash, $ngBootbox, ReportService) {
 		vm.net = 0;
 		vm.orderList = [];
 		vm.subOrderList = [];
-		$scope.unSelect = true;
-		$scope.byDate = false;
-		$scope.chart = false;
 		vm.order = {
 			orderCode : null,
 			customer : {
