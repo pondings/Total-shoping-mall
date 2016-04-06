@@ -1,0 +1,76 @@
+<meta charset="UTF-8" />
+<div class="container-fluid container-margin">
+	<div class="col-md-12">
+		<div class="col-md-offset-2">
+			<label class="col-md-4">รหัสสั่งซื้อ</label>
+			<div class="col-md-8">{{vm.orderView.orderCode}}</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="col-md-offset-2">
+			<label class="col-md-4">ราคารวม</label>
+			<div class="col-md-8">{{vm.orderView.orderNet}}</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="col-md-offset-2">
+			<label class="col-md-4">ชื่อลูกค้า</label>
+			<div class="col-md-8">{{vm.orderView.customer.custName}}</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="col-md-offset-2">
+			<label class="col-md-4">ชื่อพนักงาน</label>
+			<div class="col-md-8">{{vm.orderView.empInfo.empName}}</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="pull-right">
+			<select ng-model="vm.selectedNumPerPage"
+				ng-selected="vm.numPerPage = vm.selectedNumPerPage.number"
+				ng-options="n.number for n in vm.numPerPages"
+				class="input-sm form-control selector-option"></select>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<table st-table="displayedSubOrderList" wt-responsive-table
+			st-safe-src="vm.subOrderList"
+			class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th class="text-center" st-sort="product.prodCode">รหัสสินค้า</th>
+					<th class="text-center" st-sort="product.prodName">ชื่อสินค้า</th>
+					<th class="text-center" st-sort="product.prodPrice">ราคา</th>
+					<th class="text-center">จำนวน</th>
+					<th class="text-center">ทั้งหมด</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="order in displayedSubOrderList">
+					<td class="text-center">{{order.product.prodCode}}</td>
+					<td class="text-center">{{order.product.prodName}}</td>
+					<td class="text-center">{{order.product.prodPrice}}</td>
+					<td class="text-center">{{order.subQuantity}}</td>
+					<td class="text-center">{{order.subTotal}}</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td class="text-center">รวม</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td class="text-center">{{vm.orderView.orderNet}} บาท</td>
+				</tr>
+			</tfoot>
+			<tfoot>
+				<tr>
+					<td colspan="11" class="text-center">
+						<div st-pagination="" st-items-by-page="vm.numPerPage"
+							st-displayed-pages="displayedPages"
+							st-template="app/common/pagination/pagination.tpl.html"></div>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>

@@ -9,10 +9,25 @@ function ReportService($http, $q) {
 	var service = {
 		orderSearch : orderSearch,
 		getEmp : getEmp,
-		getCust : getCust
+		getCust : getCust,
+		getSubOrder : getSubOrder
 	};
 
 	return service;
+
+	function getSubOrder(order) {
+		var deferred = $q.defer();
+		$http.post(urlBase + '/subOrder/searchSubOrderByOrder', order).success(function(dataArr) {
+			deferred.resolve(dataArr);
+		}).error(function(errMs, errCode) {
+			var err = {
+				errMessage : errMs,
+				errCode : errCode
+			}
+			deferred.reject(err);
+		});
+		return deferred.promise;
+	}
 
 	function getCust() {
 		var deferred = $q.defer();

@@ -59,6 +59,8 @@ function ReportCtrl($scope, SweetAlert, Flash, $ngBootbox, ReportService) {
 	/** smart-table * */
 
 	$scope.displayedEmp = [].concat($scope.empList);
+	$scope.displayedOrder = [].concat(vm.orderList);
+	$scope.displayedSubOrderList = [].concat(vm.subOrderList) ;
 	$scope.displayedPages = 5;
 
 	/** Declare Func * */
@@ -68,8 +70,19 @@ function ReportCtrl($scope, SweetAlert, Flash, $ngBootbox, ReportService) {
 	vm.orderSearch = orderSearch;
 	vm.getCust = getCust;
 	vm.getEmp = getEmp;
+	vm.orderViewInfo = orderViewInfo;
 
 	/** Function * */
+
+	function orderViewInfo(order) {
+		vm.orderView = angular.copy(order);
+		ReportService.getSubOrder(order).then(function(data) {
+			vm.subOrderList = data;
+			console.log(vm.subOrderList);
+		}, function(errRs) {
+			Flash.create('danger', errRs.errMessage, 'custom-class');
+		})
+	}
 
 	function getCust() {
 		ReportService.getCust().then(function(data) {
@@ -89,10 +102,10 @@ function ReportCtrl($scope, SweetAlert, Flash, $ngBootbox, ReportService) {
 	}
 
 	function orderSearch() {
-		console.log(vm.order);
 		ReportService.orderSearch(vm.order).then(
 				function(data) {
 					console.log(data);
+					vm.orderList = data;
 					Flash
 							.create('success', "Found " + data.length
 									+ " reccord", 'custom-class');
@@ -118,6 +131,8 @@ function ReportCtrl($scope, SweetAlert, Flash, $ngBootbox, ReportService) {
 	}
 
 	function resetPage() {
+		vm.orderList = [];
+		vm.subOrderList = [];
 		$scope.unSelect = true;
 		$scope.byDate = false;
 		$scope.chart = false;
@@ -156,6 +171,21 @@ function ReportCtrl($scope, SweetAlert, Flash, $ngBootbox, ReportService) {
 			callback : function() {
 			}
 		}
+	};
+
+	vm.viewOrderInfoModal = {
+		scope : $scope,
+		title : 'มุมมอง',
+		onEscape : function() {
+		},
+		show : true,
+		backdrop : true,
+		closeButton : true,
+		animate : true,
+		size : 'large',
+		buttons : vm.viewDialogButton,
+		className : 'info-class',
+		message : 'info'
 	};
 
 	vm.viewCustModal = {
