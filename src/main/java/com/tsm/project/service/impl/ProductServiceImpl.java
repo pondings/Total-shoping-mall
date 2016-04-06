@@ -50,4 +50,10 @@ public class ProductServiceImpl  implements ProductService{
 		prodRepo.delete(id);
 	}
 
+	@Override
+	public Product searchProd(Product product) {
+		// TODO Auto-generated method stub
+		return prodRepo.searchCode(product);
+	}
+
 }

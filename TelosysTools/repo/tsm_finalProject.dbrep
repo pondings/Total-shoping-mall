@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Telosys Database Repository --><root>
-<tableList databaseId="1" databaseName="tsm_finalProject" databaseProductName="PostgreSQL" generation="2016-04-05 01:41:25">
+<tableList databaseId="1" databaseName="tsm_finalProject" databaseProductName="PostgreSQL" generation="2016-04-05 22:44:23">
 <table catalog="" databaseType="TABLE" javaBean="Customer" name="customer" schema="main">
 <column dbAutoIncremented="true" dbComment="" dbDefaultValue="nextval('main.customer_id_seq'::regclass)" dbName="id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="serial" inputType="number" javaName="id" javaType="java.lang.Integer" jdbcTypeCode="4" label="Id" notNull="true" selected="true"/>
 <column dbComment="" dbDefaultValue="" dbName="cust_title" dbNotNull="false" dbPosition="2" dbSize="10" dbTypeName="bpchar" inputType="text" javaName="custTitle" javaType="java.lang.String" jdbcTypeCode="1" label="Cust title" maxLength="10" notNull="false" selected="true"/>
@@ -14,6 +14,7 @@
 <column dbComment="" dbDefaultValue="" dbName="updated_by" dbNotNull="false" dbPosition="10" dbSize="20" dbTypeName="bpchar" inputType="text" javaName="updatedBy" javaType="java.lang.String" jdbcTypeCode="1" label="Updated by" maxLength="20" notNull="false" selected="true"/>
 <column dateType="D" dbComment="" dbDefaultValue="" dbName="updated_date" dbNotNull="false" dbPosition="11" dbSize="13" dbTypeName="date" inputType="date" javaName="updatedDate" javaType="java.util.Date" jdbcTypeCode="91" label="Updated date" notNull="false" selected="true"/>
 <column dbComment="" dbDefaultValue="" dbName="cust_address" dbNotNull="false" dbPosition="12" dbSize="100" dbTypeName="bpchar" inputType="text" javaName="custAddress" javaType="java.lang.String" jdbcTypeCode="1" label="Cust address" maxLength="100" notNull="false" selected="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="order-&gt;cust" id="LINK_FK_order-&gt;cust_I" inverseSideOf="LINK_FK_order-&gt;cust_O" javaName="listOfOrder" javaType="java.util.List" joinTableName="" mappedBy="customer" optional="UNDEFINED" owningSide="false" sourceTableName="customer" targetEntity="Order" targetTableName="order" used="true"/>
 </table>
 <table catalog="" databaseType="TABLE" javaBean="EmpInfo" name="emp_info" schema="main">
 <column dbAutoIncremented="true" dbComment="" dbDefaultValue="nextval('main.emp_id_seq'::regclass)" dbName="id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="serial" inputType="number" javaName="id" javaType="java.lang.Integer" jdbcTypeCode="4" label="Id" notNull="true" selected="true"/>
@@ -32,7 +33,35 @@
 <column dateType="D" dbComment="" dbDefaultValue="" dbName="update_date" dbNotNull="false" dbPosition="14" dbSize="13" dbTypeName="date" inputType="date" javaName="updateDate" javaType="java.util.Date" jdbcTypeCode="91" label="Update date" notNull="false" selected="true"/>
 <column dateType="D" dbComment="" dbDefaultValue="" dbName="emp_date_attended" dbNotNull="false" dbPosition="15" dbSize="13" dbTypeName="date" inputType="date" javaName="empDateAttended" javaType="java.util.Date" jdbcTypeCode="91" label="Emp date attended" notNull="false" selected="true"/>
 <column dbComment="" dbDefaultValue="" dbName="emp_position" dbNotNull="false" dbPosition="16" dbSize="50" dbTypeName="varchar" inputType="text" javaName="empPosition" javaType="java.lang.String" jdbcTypeCode="12" label="Emp position" maxLength="50" notNull="false" selected="true"/>
-<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="user-&gt;emp" id="LINK_FK_user-&gt;emp_I" inverseSideOf="LINK_FK_user-&gt;emp_O" javaName="listOfUser" javaType="java.util.List" joinTableName="" mappedBy="empInfo" optional="UNDEFINED" owningSide="false" sourceTableName="emp_info" targetEntity="User" targetTableName="user" used="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="order-&gt;emp" id="LINK_FK_order-&gt;emp_I" inverseSideOf="LINK_FK_order-&gt;emp_O" javaName="listOfOrder" javaType="java.util.List" joinTableName="" mappedBy="empInfo" optional="UNDEFINED" owningSide="false" sourceTableName="emp_info" targetEntity="Order" targetTableName="order" used="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="user_emp_fkey" id="LINK_FK_user_emp_fkey_I" inverseSideOf="LINK_FK_user_emp_fkey_O" javaName="listOfUser" javaType="java.util.List" joinTableName="" mappedBy="empInfo" optional="UNDEFINED" owningSide="false" sourceTableName="emp_info" targetEntity="User" targetTableName="user" used="true"/>
+</table>
+<table catalog="" databaseType="TABLE" javaBean="Order" name="order" schema="main">
+<column dbComment="" dbDefaultValue="" dbForeignKey="true" dbName="cust_id" dbNotNull="false" dbPosition="1" dbSize="10" dbTypeName="int4" inputType="number" javaName="custId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Cust id" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbForeignKey="true" dbName="emp_id" dbNotNull="false" dbPosition="2" dbSize="10" dbTypeName="int4" inputType="number" javaName="empId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Emp id" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="order_net" dbNotNull="false" dbPosition="3" dbSize="10" dbTypeName="int4" inputType="number" javaName="orderNet" javaType="java.lang.Integer" jdbcTypeCode="4" label="Order net" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="order_remark" dbNotNull="false" dbPosition="4" dbSize="100" dbTypeName="bpchar" inputType="text" javaName="orderRemark" javaType="java.lang.String" jdbcTypeCode="1" label="Order remark" maxLength="100" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="status" dbNotNull="false" dbPosition="5" dbSize="1" dbTypeName="bool" inputType="checkbox" javaName="status" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Status" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="order_code" dbNotNull="false" dbPosition="6" dbSize="10" dbTypeName="bpchar" inputType="text" javaName="orderCode" javaType="java.lang.String" jdbcTypeCode="1" label="Order code" maxLength="10" notNull="false" selected="true"/>
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="nextval('main.order_id_seq'::regclass)" dbName="id" dbNotNull="true" dbPosition="7" dbPrimaryKey="true" dbSize="10" dbTypeName="serial" inputType="number" javaName="id" javaType="java.lang.Integer" jdbcTypeCode="4" label="Id" notNull="true" selected="true"/>
+<column dateType="D" dbComment="" dbDefaultValue="" dbName="order_date" dbNotNull="false" dbPosition="8" dbSize="13" dbTypeName="date" inputType="date" javaName="orderDate" javaType="java.util.Date" jdbcTypeCode="91" label="Order date" notNull="false" selected="true"/>
+<fk name="order-&gt;cust">
+<fkcol colname="cust_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="order" tableref="customer" updaterule="3"/>
+</fk>
+<fk name="order-&gt;emp">
+<fkcol colname="emp_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="order" tableref="emp_info" updaterule="3"/>
+</fk>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="order-&gt;emp" id="LINK_FK_order-&gt;emp_O" inverseSideOf="" javaName="empInfo" javaType="EmpInfo" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="order" targetEntity="EmpInfo" targetTableName="emp_info" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="emp_id" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_bdirxa60p05qic18mshap6d9l" id="LINK_FK_fk_bdirxa60p05qic18mshap6d9l_I" inverseSideOf="LINK_FK_fk_bdirxa60p05qic18mshap6d9l_O" javaName="listOfSubOrder" javaType="java.util.List" joinTableName="" mappedBy="order" optional="UNDEFINED" owningSide="false" sourceTableName="order" targetEntity="SubOrder" targetTableName="sub_order" used="true"/>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="order-&gt;cust" id="LINK_FK_order-&gt;cust_O" inverseSideOf="" javaName="customer" javaType="Customer" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="order" targetEntity="Customer" targetTableName="customer" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="cust_id" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
 </table>
 <table catalog="" databaseType="TABLE" javaBean="Product" name="product" schema="main">
 <column dbComment="" dbDefaultValue="" dbName="create_by" dbNotNull="false" dbPosition="1" dbSize="45" dbTypeName="varchar" inputType="text" javaName="createBy" javaType="java.lang.String" jdbcTypeCode="12" label="Create by" maxLength="45" notNull="false" selected="true"/>
@@ -59,6 +88,7 @@
 <joinColumn insertable="false" name="type_id" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
 </joinColumns>
 </link>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="sub-&gt;prod" id="LINK_FK_sub-&gt;prod_I" inverseSideOf="LINK_FK_sub-&gt;prod_O" javaName="listOfSubOrder" javaType="java.util.List" joinTableName="" mappedBy="product" optional="UNDEFINED" owningSide="false" sourceTableName="product" targetEntity="SubOrder" targetTableName="sub_order" used="true"/>
 </table>
 <table catalog="" databaseType="TABLE" javaBean="ProductType" name="product_type" schema="main">
 <column dbComment="" dbDefaultValue="" dbName="create_by" dbNotNull="false" dbPosition="1" dbSize="45" dbTypeName="varchar" inputType="text" javaName="createBy" javaType="java.lang.String" jdbcTypeCode="12" label="Create by" maxLength="45" notNull="false" selected="true"/>
@@ -74,32 +104,55 @@
 <column dbComment="" dbDefaultValue="" dbName="prod_name" dbNotNull="false" dbPosition="11" dbSize="45" dbTypeName="varchar" inputType="text" javaName="prodName" javaType="java.lang.String" jdbcTypeCode="12" label="Prod name" maxLength="45" notNull="false" selected="true"/>
 <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="prod-&gt;type" id="LINK_FK_prod-&gt;type_I" inverseSideOf="LINK_FK_prod-&gt;type_O" javaName="listOfProduct" javaType="java.util.List" joinTableName="" mappedBy="productType" optional="UNDEFINED" owningSide="false" sourceTableName="product_type" targetEntity="Product" targetTableName="product" used="true"/>
 </table>
+<table catalog="" databaseType="TABLE" javaBean="SubOrder" name="sub_order" schema="main">
+<column dbAutoIncremented="true" dbComment="" dbDefaultValue="nextval('main.sub_order_id_seq'::regclass)" dbName="id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="serial" inputType="number" javaName="id" javaType="java.lang.Integer" jdbcTypeCode="4" label="Id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbForeignKey="true" dbName="prod_id" dbNotNull="false" dbPosition="2" dbSize="10" dbTypeName="int4" inputType="number" javaName="prodId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Prod id" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="sub_total" dbNotNull="false" dbPosition="3" dbSize="10" dbTypeName="int4" inputType="number" javaName="subTotal" javaType="java.lang.Integer" jdbcTypeCode="4" label="Sub total" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbForeignKey="true" dbName="order_id" dbNotNull="false" dbPosition="4" dbSize="10" dbTypeName="int4" inputType="number" javaName="orderId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Order id" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="sub_quantity" dbNotNull="false" dbPosition="5" dbSize="10" dbTypeName="int4" inputType="number" javaName="subQuantity" javaType="java.lang.Integer" jdbcTypeCode="4" label="Sub quantity" notNull="false" selected="true"/>
+<fk name="fk_bdirxa60p05qic18mshap6d9l">
+<fkcol colname="order_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="sub_order" tableref="order" updaterule="3"/>
+</fk>
+<fk name="sub-&gt;prod">
+<fkcol colname="prod_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="sub_order" tableref="product" updaterule="3"/>
+</fk>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_bdirxa60p05qic18mshap6d9l" id="LINK_FK_fk_bdirxa60p05qic18mshap6d9l_O" inverseSideOf="" javaName="order" javaType="Order" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="sub_order" targetEntity="Order" targetTableName="order" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="order_id" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="sub-&gt;prod" id="LINK_FK_sub-&gt;prod_O" inverseSideOf="" javaName="product" javaType="Product" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="sub_order" targetEntity="Product" targetTableName="product" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="prod_id" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
+</table>
 <table catalog="" databaseType="TABLE" javaBean="User" name="user" schema="main">
-<column dbComment="" dbDefaultValue="" dbName="username" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="45" dbTypeName="bpchar" inputType="text" javaName="username" javaType="java.lang.String" jdbcTypeCode="1" label="Username" maxLength="45" notEmpty="true" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="username" dbNotNull="true" dbPosition="1" dbSize="45" dbTypeName="bpchar" inputType="text" javaName="username" javaType="java.lang.String" jdbcTypeCode="1" label="Username" maxLength="45" notEmpty="true" notNull="true" selected="true"/>
 <column dbComment="" dbDefaultValue="" dbName="enabled" dbNotNull="false" dbPosition="2" dbSize="1" dbTypeName="bool" inputType="checkbox" javaName="enabled" javaType="java.lang.Boolean" jdbcTypeCode="-7" label="Enabled" notNull="false" selected="true"/>
 <column dbComment="" dbDefaultValue="" dbName="password" dbNotNull="false" dbPosition="3" dbSize="8" dbTypeName="bpchar" inputType="text" javaName="password" javaType="java.lang.String" jdbcTypeCode="1" label="Password" maxLength="8" notNull="false" selected="true"/>
 <column dbComment="" dbDefaultValue="" dbForeignKey="true" dbName="emp" dbNotNull="false" dbPosition="4" dbSize="10" dbTypeName="int4" inputType="number" javaName="emp" javaType="java.lang.Integer" jdbcTypeCode="4" label="Emp" notNull="false" selected="true"/>
-<column dbComment="" dbDefaultValue="nextval('main.user_id_seq'::regclass)" dbName="id" dbNotNull="true" dbPosition="5" dbSize="10" dbTypeName="serial" inputType="number" javaName="id" javaType="java.lang.Integer" jdbcTypeCode="4" label="Id" notNull="true" selected="true"/>
-<fk name="user-&gt;emp">
+<column dbComment="" dbDefaultValue="nextval('main.user_id_seq'::regclass)" dbName="id" dbNotNull="true" dbPosition="5" dbPrimaryKey="true" dbSize="10" dbTypeName="serial" inputType="number" javaName="id" javaType="java.lang.Integer" jdbcTypeCode="4" label="Id" notNull="true" selected="true"/>
+<fk name="user_emp_fkey">
 <fkcol colname="emp" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="user" tableref="emp_info" updaterule="3"/>
 </fk>
-<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="ref" id="LINK_FK_ref_I" inverseSideOf="LINK_FK_ref_O" javaName="listOfUserRole" javaType="java.util.List" joinTableName="" mappedBy="user" optional="UNDEFINED" owningSide="false" sourceTableName="user" targetEntity="UserRole" targetTableName="user_role" used="true"/>
-<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="user-&gt;emp" id="LINK_FK_user-&gt;emp_O" inverseSideOf="" javaName="empInfo" javaType="EmpInfo" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="user" targetEntity="EmpInfo" targetTableName="emp_info" used="true">
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="user_emp_fkey" id="LINK_FK_user_emp_fkey_O" inverseSideOf="" javaName="empInfo" javaType="EmpInfo" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="user" targetEntity="EmpInfo" targetTableName="emp_info" used="true">
 <joinColumns>
 <joinColumn insertable="false" name="emp" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
 </joinColumns>
 </link>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="role-&gt;user" id="LINK_FK_role-&gt;user_I" inverseSideOf="LINK_FK_role-&gt;user_O" javaName="listOfUserRole" javaType="java.util.List" joinTableName="" mappedBy="user" optional="UNDEFINED" owningSide="false" sourceTableName="user" targetEntity="UserRole" targetTableName="user_role" used="true"/>
 </table>
 <table catalog="" databaseType="TABLE" javaBean="UserRole" name="user_role" schema="main">
 <column dbAutoIncremented="true" dbComment="" dbDefaultValue="nextval('main.user_role_id_seq'::regclass)" dbName="id" dbNotNull="true" dbPosition="1" dbPrimaryKey="true" dbSize="10" dbTypeName="serial" inputType="number" javaName="id" javaType="java.lang.Integer" jdbcTypeCode="4" label="Id" notNull="true" selected="true"/>
-<column dbComment="" dbDefaultValue="" dbForeignKey="true" dbName="username" dbNotNull="false" dbPosition="2" dbSize="45" dbTypeName="bpchar" inputType="text" javaName="username" javaType="java.lang.String" jdbcTypeCode="1" label="Username" maxLength="45" notNull="false" selected="true"/>
-<column dbComment="" dbDefaultValue="" dbName="role" dbNotNull="false" dbPosition="3" dbSize="12" dbTypeName="bpchar" inputType="text" javaName="role" javaType="java.lang.String" jdbcTypeCode="1" label="Role" maxLength="12" notNull="false" selected="true"/>
-<fk name="ref">
-<fkcol colname="username" colref="username" deferrable="7" deleterule="3" sequence="1" tablename="user_role" tableref="user" updaterule="3"/>
+<column dbComment="" dbDefaultValue="" dbName="role" dbNotNull="false" dbPosition="2" dbSize="12" dbTypeName="bpchar" inputType="text" javaName="role" javaType="java.lang.String" jdbcTypeCode="1" label="Role" maxLength="12" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbForeignKey="true" dbName="user_id" dbNotNull="false" dbPosition="3" dbSize="10" dbTypeName="int4" inputType="number" javaName="userId" javaType="java.lang.Integer" jdbcTypeCode="4" label="User id" notNull="false" selected="true"/>
+<fk name="role-&gt;user">
+<fkcol colname="user_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="user_role" tableref="user" updaterule="3"/>
 </fk>
-<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="ref" id="LINK_FK_ref_O" inverseSideOf="" javaName="user" javaType="User" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="user_role" targetEntity="User" targetTableName="user" used="true">
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="role-&gt;user" id="LINK_FK_role-&gt;user_O" inverseSideOf="" javaName="user" javaType="User" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="user_role" targetEntity="User" targetTableName="user" used="true">
 <joinColumns>
-<joinColumn insertable="false" name="username" nullable="true" referencedColumnName="username" unique="false" updatable="false"/>
+<joinColumn insertable="false" name="user_id" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
 </joinColumns>
 </link>
 </table>

@@ -21,4 +21,7 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
 			+ "AND (prod.productType.typeName like %:#{#param.productType.typeName != null ? #param.productType.typeName :''}%)")
 	List<Product> search(@Param("param") Product product);
 
+	@Query("SELECT prod FROM Product prod WHERE prod.prodCode = :#{#param.prodCode}")
+	Product searchCode(@Param("param") Product product);
+
 }

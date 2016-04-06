@@ -14,4 +14,6 @@ public interface ProductService {
 	
 	void delete(int id) ;
 	
+	Product searchProd(Product product) ;
+	
 }
