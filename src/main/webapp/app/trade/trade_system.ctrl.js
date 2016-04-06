@@ -143,7 +143,7 @@ function TradeSystemCtrl($scope, SweetAlert, Flash, $ngBootbox,
 			vm.resetSubProduct();
 		}
 		if (vm.order.customer.custName == null) {
-			vm.order.customer = null;
+			vm.order.customer = ' ';
 		}
 		vm.order.orderNet = vm.calculate.net;
 		vm.order.status = true;

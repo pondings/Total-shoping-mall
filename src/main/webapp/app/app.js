@@ -8,6 +8,12 @@ angular.module('app', [
 'app.navbar','app.emp', 'app.prod','app.prodType','app.user','app.customer','app.tradeSystem','app.login' ]);
 /* validate */
 
+/* Report */
+angular.module('app.report', [ 'app.core', 'app.widgets', 'jcs-autoValidate' ])
+.run([ 'validator', function(validator) {
+	validator.setValidElementStyling(false);
+} ]);
+
 /* Trade System */
 angular.module('app.tradeSystem', [ 'app.core', 'app.widgets', 'jcs-autoValidate' ])
 .run([ 'validator', function(validator) {
