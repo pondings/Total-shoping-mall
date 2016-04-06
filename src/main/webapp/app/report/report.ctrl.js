@@ -60,7 +60,7 @@ function ReportCtrl($scope, SweetAlert, Flash, $ngBootbox, ReportService) {
 
 	$scope.displayedEmp = [].concat($scope.empList);
 	$scope.displayedOrder = [].concat(vm.orderList);
-	$scope.displayedSubOrderList = [].concat(vm.subOrderList) ;
+	$scope.displayedSubOrderList = [].concat(vm.subOrderList);
 	$scope.displayedPages = 5;
 
 	/** Declare Func * */
@@ -71,6 +71,7 @@ function ReportCtrl($scope, SweetAlert, Flash, $ngBootbox, ReportService) {
 	vm.getCust = getCust;
 	vm.getEmp = getEmp;
 	vm.orderViewInfo = orderViewInfo;
+	vm.exportExel = exportExel;
 
 	/** Function * */
 
@@ -102,10 +103,18 @@ function ReportCtrl($scope, SweetAlert, Flash, $ngBootbox, ReportService) {
 	}
 
 	function orderSearch() {
+		vm.getDate = {
+			startDate : vm.order.startDate,
+			endDate : vm.order.endDate
+		};
 		ReportService.orderSearch(vm.order).then(
 				function(data) {
 					console.log(data);
 					vm.orderList = data;
+					vm.net = 0;
+					for (var i = 0; i < vm.orderList.length; i++) {
+						vm.net = vm.net + vm.orderList[i].orderNet;
+					}
 					Flash
 							.create('success', "Found " + data.length
 									+ " reccord", 'custom-class');
@@ -160,6 +169,18 @@ function ReportCtrl($scope, SweetAlert, Flash, $ngBootbox, ReportService) {
 	$scope.setClickedEmpRow = function(emp) {
 		vm.order.empInfo = emp;
 		$ngBootbox.hideAll();
+	}
+
+	/* Export */
+
+	function exportExel() {
+		var blob = new Blob(
+				[ document.getElementById('exportable').innerHTML ],
+				{
+					type : "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+				});
+		saveAs(blob, "order.xls");
+
 	}
 
 	/** Modal * */
