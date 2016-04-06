@@ -20,17 +20,23 @@
 <script src="assets/js/angular.min.js"></script>
 </head>
 <body ng-cloak>
-<header> <div class="panel panel-primary">
-    <div class="panel-heading"><h1>Total Shopping Mall</h1></div>
-    </div> </header>
-<div ng-controller="NavbarCtrl as vm ">
-<nav class="col-md-2 sidebar-offcanvas navbar navbar-default " id="sidebar" role="navigation" ng-controller="NavbarCtrl as vm">
-            <ul class="nav">
-              <li ng-repeat="li in navs" ng-class="{active: isActive(li.url)}"><a ui-sref="{{li.name}}">{{li.label}}</a></li>
-            </ul>
-        </nav>
-<!-- THIS IS WHERE WE WILL INJECT OUR CONTENT -->
-	<div class="col-md-9" ui-view></div>
+	<header>
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h1>Total Shopping Mall</h1>
+			</div>
+		</div>
+	</header>
+	<div ng-controller="NavbarCtrl as vm ">
+		<nav class="col-md-2 sidebar-offcanvas navbar navbar-default "
+			id="sidebar" role="navigation" ng-controller="NavbarCtrl as vm">
+			<ul class="nav">
+				<li ng-repeat="li in navs" ng-class="{active: isActive(li.url)}"><a
+					ui-sref="{{li.name}}">{{li.label}}</a></li>
+			</ul>
+		</nav>
+		<!-- THIS IS WHERE WE WILL INJECT OUR CONTENT -->
+		<div class="col-md-9" ui-view></div>
 	</div>
 
 
@@ -83,5 +89,8 @@
 	<script src="assets/js/angular-responsive-tables.min.js"></script>
 	<!-- Angular Smart Table -->
 	<script src="assets/js/smart-table.min.js"></script>
+	<script
+		src="http://www.fusioncharts.com/lib/fcassets/3.10.1/fusioncharts.js"></script>
+	<script src="./assets/js/angular-fusioncharts.min.js"></script>
 </body>
 </html>
