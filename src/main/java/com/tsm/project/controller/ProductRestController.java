@@ -26,6 +26,11 @@ public class ProductRestController {
 		return new ResponseEntity<List<Product>>(productService.search(product),HttpStatus.OK) ;
 	}
 	
+	@RequestMapping(value="searchmodal",method=RequestMethod.POST)
+	ResponseEntity<?> searchmodal(@RequestBody Product product){
+		return new ResponseEntity<List<Product>>(productService.searchModal(product),HttpStatus.OK) ;
+	}
+	
 	@RequestMapping(value="create" , method=RequestMethod.POST)
 	ResponseEntity<?> create(@RequestBody Product product){
 		return new ResponseEntity<Product>(productService.create(product),HttpStatus.OK) ;

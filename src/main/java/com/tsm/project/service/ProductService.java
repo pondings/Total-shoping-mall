@@ -8,6 +8,8 @@ public interface ProductService {
 
 	List<Product> search(Product product) ;
 	
+	List<Product> searchModal(Product product) ;
+	
 	Product create(Product product) ;
 	
 	Product update(Product product) ;

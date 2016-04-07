@@ -6,7 +6,7 @@ angular.module('app', [
 'app.core', 'app.widgets',
 /* Feature modules */
 'app.navbar', 'app.emp', 'app.prod', 'app.prodType', 'app.user',
-		'app.customer', 'app.tradeSystem', 'app.login', 'app.report' ]);
+		'app.customer', 'app.tradeSystem', 'app.report' ]);
 /* validate */
 
 /* Report */
@@ -54,11 +54,6 @@ angular.module('app.customer',
 			validator.setValidElementStyling(false);
 		} ]);
 
-/* Login */
-angular.module('app.login', [ 'app.core', 'app.widgets', 'jcs-autoValidate' ])
-		.run([ 'validator', function(validator) {
-			validator.setValidElementStyling(false);
-		} ]);
 
 /* require module */
 angular.module('app.core', [

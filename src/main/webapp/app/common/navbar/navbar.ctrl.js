@@ -37,8 +37,8 @@ function NavbarCtrl($scope,$location){
 		name:'user',
 		url:'/user'
 	},{
-		label:'Login',
-		name:'login',
+		label:'Logout',
+		name:'logout',
 		url:'/login'
 	}];
 	

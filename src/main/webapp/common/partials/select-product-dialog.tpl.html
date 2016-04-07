@@ -1,0 +1,42 @@
+<head>
+<meta charset="UTF-8" />
+</head>
+
+<div class="pull-right">
+	<select ng-model="vm.selectedNumPerPage"
+		ng-selected="vm.numPerPage = vm.selectedNumPerPage.number"
+		ng-options="n.number for n in vm.numPerPages"
+		class="input-sm form-control selector-option"></select>
+</div>
+<table st-table="displayedProdModal" wt-responsive-table
+	st-safe-src="prodList" class="table table-striped table-bordered">
+	<thead>
+		<tr>
+			<th class="text-center">รหัสสินค้า</th>
+			<th class="text-center">ชื่อสินค้า</th>
+		</tr>
+		<tr>
+			<td><input type="text" placeholder="รหัสสินค้า"
+				st-search="prodCode" class="form-control"></td>
+			<td><input type="text" placeholder="ชื่อสินค้า"
+				st-search="prodName" class="form-control"></td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="row in displayedProdModal"
+			ng-class="{'selected':row == vm.stockhistorylog}"
+			ng-click="setClickedProduct(row)">
+			<td>{{row.prodQuantity}}</td>
+			<td>{{row.prodName}}</td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="2" class="text-center">
+				<div st-pagination="" st-items-by-page="vm.numPerPage"
+					st-displayed-pages="displayedPages"
+					st-template="common/pagination/pagination.tpl.html"></div>
+			</td>
+		</tr>
+	</tfoot>
+</table>

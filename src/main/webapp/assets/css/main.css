@@ -67,3 +67,20 @@
 	border-radius: 0;
 	box-shadow: none;
 }
+
+html, body,.container-table {
+    height: 95%;
+}
+.container-table {
+    display: table;
+}
+.vertical-center-row {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+span.glyphicon-user {
+    font-size: 5.2em;
+}
+
+

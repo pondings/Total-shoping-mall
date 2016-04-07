@@ -11,7 +11,8 @@ function ProdService($http, $q) {
 		update : update,
 		remove : remove,
 		search : search,
-		prodType : prodType
+		prodType : prodType,
+		searchProductModal : searchProductModal
 	};
 
 	return service;
@@ -79,8 +80,26 @@ function ProdService($http, $q) {
 	}
 
 	function search(prod) {
+		console.log(prod);
 		var deferred = $q.defer();
 		$http.post(urlBase + '/prod/search/', prod).success(function(dataArr) {
+			deferred.resolve(dataArr);
+		}).error(function(errMs, errCode) {
+			var err = {
+				errMessage : errMs,
+				errCode : errCode
+			}
+			deferred.reject(err);
+		});
+		return deferred.promise;
+	}
+	
+	function searchProductModal() {
+		var deferred = $q.defer();
+		var prod={
+				prodCode :null
+		}
+		$http.post(urlBase + '/prod/searchmodal/', prod).success(function(dataArr) {
 			deferred.resolve(dataArr);
 		}).error(function(errMs, errCode) {
 			var err = {

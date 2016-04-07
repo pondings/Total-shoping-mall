@@ -56,4 +56,10 @@ public class ProductServiceImpl  implements ProductService{
 		return prodRepo.searchCode(product);
 	}
 
+	@Override
+	public List<Product> searchModal(Product product) {
+		// TODO Auto-generated method stub
+		return prodRepo.searchmodal(product);
+	}
+
 }

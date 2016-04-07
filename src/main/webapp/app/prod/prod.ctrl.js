@@ -6,13 +6,32 @@ ProdCtrl.$inject = [ '$scope', 'SweetAlert', 'Flash', '$ngBootbox',
 function ProdCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdService) {
 	var vm = this;
 
+	vm.stockhistorylog = {
+			amount :null,
+			logId : null,
+			detail : null,
+			lotNo : null,
+			logType : null,
+			productId : null,	
+			createdBy : null,
+			createdDate : null
+	};
+	
 	/** tab * */
 	vm.tabs = [ {
-		title : 'ค้นหาข้อมูลสินค้า',
+		title : 'ค้นหา ข้อมูลสินค้า',
 		tabIdx : 0,
 		selected : true
 	}, {
-		title : 'เพิ่มแก้ไข ข้อมูลสินค้า',
+		title : 'เพิ่ม/แก้ไข ข้อมูลสินค้า',
+		tabIdx : 0,
+		selected : false
+	}, {
+		title : 'นำเข้าสินค้า',
+		tabIdx : 0,
+		selected : false
+	}, {
+		title : 'ส่งออกสินค้า',
 		tabIdx : 0,
 		selected : false
 	} ];
@@ -48,6 +67,7 @@ function ProdCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdService) {
 	/** smart-table * */
 
 	$scope.displayedProd = [].concat(vm.prodList);
+	$scope.displayedProdModal = [].concat($scope.prodList);
 	$scope.displayedProdType = [].concat($scope.prodTypeList);
 	$scope.displayedPages = 5;
 
@@ -55,6 +75,7 @@ function ProdCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdService) {
 
 	vm.resetPage = resetPage;
 	vm.search = search;
+	vm.searchProductModal = searchProductModal;
 	vm.formControl = formControl;
 	vm.create = create;
 	vm.update = update;
@@ -62,14 +83,27 @@ function ProdCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdService) {
 	vm.resetDefault = resetDefault;
 	vm.resetForm = resetForm;
 	vm.getProdType = getProdType;
+	vm.importProd = importProd;
 
 	/** Function * */
 
+	$scope.setClickedProduct = function(pick) {
+		console.log(pick);
+		console.log(vm.stockhistorylog);
+		vm.stockhistorylog.productId = pick;
+		$ngBootbox.hideAll();
+	}
+	
 	$scope.setClickedRow = function(prodType) {
+		console.log(prodType);
 		vm.prod.productType = prodType;
 		$ngBootbox.hideAll();
 	}
 
+	function importProd(importProd){
+		
+	}
+	
 	function getProdType() {
 		ProdService.prodType().then(
 				function(data) {
@@ -150,6 +184,18 @@ function ProdCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdService) {
 				})
 	}
 
+	function searchProductModal() {
+		ProdService.searchProductModal().then(
+				function(data) {
+					$scope.prodList = data;
+					Flash
+							.create('success', "Import " + data.length
+									+ " reccord", 'custom-class');
+				}, function(errRs) {
+					Flash.create('danger', errRs.errMessage, 'custom-class');
+				})
+	}
+	
 	function resetPage() {
 		vm.prodList = [];
 		vm.prod = {
@@ -184,7 +230,9 @@ function ProdCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdService) {
 				typeName : null
 			}
 		};
+		vm.StockHistoryLog = null;
 		vm.prodForm.$setPristine();
+		vm.importForm.$setPristine();
 	}
 
 	/** Modal * */
@@ -195,6 +243,21 @@ function ProdCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdService) {
 			callback : function() {
 			}
 		}
+	};
+	
+	vm.viewProductViewOptions = {
+			scope: $scope,
+			title: 'Product-Import',
+			onEscape: function(){
+			},
+			show: true,
+			backdrop: true,
+			size: 'large' ,
+			closeButton: true,
+			animate: true,
+			className: 'info-class',
+			buttons:vm.ViewDialogButton,
+			message:'info'
 	};
 
 	vm.viewProdTypeModal = {
