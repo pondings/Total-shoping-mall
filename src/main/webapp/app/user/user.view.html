@@ -85,7 +85,7 @@
 					<div class="col-md-1 text-center">
 						<button class="btn btn-default"
 							ng-click="vm.emp.id == null ? vm.resetForm() : vm.resetDefault()"
-							type="button" ng-disabled="vm.userForm.$pristine">
+							type="button" >
 							<fa name="remove" size="1" title="Reset"></fa>
 							ยกเลิก
 						</button>
@@ -112,7 +112,7 @@
 					<div class="form-group">
 						<label class="control-label col-md-4">รหัสผ่าน</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control"
+							<input type="password" class="form-control"
 								ng-model="vm.userRole.user.password">
 						</div>
 					</div>
