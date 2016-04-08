@@ -1,6 +1,7 @@
 'use strict';
 angular.module('app.customer').controller('CustomerCtrl', CustomerCtrl);
-CustomerCtrl.$inject = [ '$scope', 'SweetAlert', 'Flash', '$ngBootbox', 'CustomerService' ];
+CustomerCtrl.$inject = [ '$scope', 'SweetAlert', 'Flash', '$ngBootbox',
+		'CustomerService' ];
 
 function CustomerCtrl($scope, SweetAlert, Flash, $ngBootbox, CustomerService) {
 	var vm = this;
@@ -17,14 +18,14 @@ function CustomerCtrl($scope, SweetAlert, Flash, $ngBootbox, CustomerService) {
 		selected : false
 	} ];
 
-//	/** calendar * */
-//
-//	vm.calendar = {
-//		opened : false
-//	}
-//	vm.calDate = function($event) {
-//		vm.calendar.opened = true;
-//	}
+	// /** calendar * */
+	//
+	// vm.calendar = {
+	// opened : false
+	// }
+	// vm.calDate = function($event) {
+	// vm.calendar.opened = true;
+	// }
 
 	/** pagination * */
 
@@ -48,8 +49,8 @@ function CustomerCtrl($scope, SweetAlert, Flash, $ngBootbox, CustomerService) {
 
 	$scope.displayedCustomer = [].concat(vm.cusList);
 	$scope.displayedPages = 5;
-	
-	/** Declare Func **/
+
+	/** Declare Func * */
 	vm.resetPage = resetPage;
 	vm.resetDefault = resetDefault;
 	vm.resetForm = resetForm;
@@ -58,8 +59,7 @@ function CustomerCtrl($scope, SweetAlert, Flash, $ngBootbox, CustomerService) {
 	vm.search = search;
 	vm.remove = remove;
 	vm.edit = edit;
-	
-	
+
 	function submit() {
 		if (vm.cus.id != null) {
 			CustomerService.update(vm.cus).then(
@@ -81,7 +81,7 @@ function CustomerCtrl($scope, SweetAlert, Flash, $ngBootbox, CustomerService) {
 			vm.create();
 		}
 	}
-	
+
 	function create() {
 		CustomerService.create(vm.cus).then(function(data) {
 			vm.cusList.push(data);
@@ -90,15 +90,15 @@ function CustomerCtrl($scope, SweetAlert, Flash, $ngBootbox, CustomerService) {
 		}, function(errRs) {
 			Flash.create('danger', errRs.errMessage, 'custom-class');
 		})
-		
+
 	}
-	
+
 	function edit(cus) {
 		vm.cus = angular.copy(cus);
 		vm.cusbak = angular.copy(cus);
 		vm.tabs[1].selected = true;
 	}
-	
+
 	function search() {
 		CustomerService.search(vm.cus).then(
 				function(data) {
@@ -110,25 +110,47 @@ function CustomerCtrl($scope, SweetAlert, Flash, $ngBootbox, CustomerService) {
 					Flash.create('danger', errRs.errMessage, 'custom-class');
 				})
 	}
-	
-	function remove(id) {
-		CustomerService.remove(id).then(function(data) {
-			Flash.create('success', 'Deleted', 'custom-class');
-			for (var i = 0; i < vm.cusList.length; i++) {
-				if (vm.cusList[i].id == id) {
-					vm.cusList.splice(i, 1);
-					break;
-				}
+
+	function remove(cus) {
+		SweetAlert.swal({
+			title : 'ยืนยันการลบ',
+			text : 'ต้องการลบข้อมูล  ' + '"' + cus.custCode + ' '
+					+ cus.custName + '"' + '?',
+			type : 'warning',
+			showCancelButton : true,
+			confirmButtonColor : '#DD6B55',
+			confirmButtonText : 'Continue',
+			closeOnConfirm : false,
+		}, function(isConfirm) {
+			if (isConfirm) {
+				CustomerService.remove(cus.id).then(function(data) {
+					Flash.create('success', 'Deleted', 'custom-class');
+					for (var i = 0; i < vm.cusList.length; i++) {
+						if (vm.cusList[i].id == cus.id) {
+							vm.cusList.splice(i, 1);
+							break;
+						}
+					}
+					SweetAlert.swal({
+						title : 'ลบเรียบร้อย',
+						text : 'ทำการลบ  ' + '"' + cus.custCode + ' '
+								+ cus.custName + ' ' + ' เรียบร้อย',
+						timer : 1500,
+						showConfirmButton : false,
+						type : 'success'
+					});
+				}, function(errRs) {
+					Flash.create('danger', errRs.errMessage, 'custom-class');
+				})
+			} else {
 			}
-		}, function(errRs) {
-			Flash.create('danger', errRs.errMessage, 'custom-class');
-		})
+		});
 	}
-	
+
 	function resetDefault() {
 		vm.cus = angular.copy(vm.cusbak);
 	}
-	
+
 	function resetPage() {
 		vm.cusList = [];
 		vm.resetForm();
@@ -142,5 +164,5 @@ function CustomerCtrl($scope, SweetAlert, Flash, $ngBootbox, CustomerService) {
 		};
 		vm.cusForm.$setPristine();
 	}
-	
+
 };

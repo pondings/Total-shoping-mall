@@ -67,18 +67,40 @@ function EmpCtrl($scope, SweetAlert, Flash, $ngBootbox, EmpService) {
 		vm.emp.empDateAttended = new Date(vm.substitute.empDateAttended);
 	}
 
-	function remove(id) {
-		EmpService.remove(id).then(function(data) {
-			Flash.create('success', 'Deleted', 'custom-class');
-			for (var i = 0; i < vm.empList.length; i++) {
-				if (vm.empList[i].id == id) {
-					vm.empList.splice(i, 1);
-					break;
-				}
+	function remove(emp) {
+		SweetAlert.swal({
+			title : 'ยืนยันการลบ',
+			text : 'ต้องการลบข้อมูล  ' + '"' + emp.empCode + ' '
+					+ emp.empName + '"' + '?',
+			type : 'warning',
+			showCancelButton : true,
+			confirmButtonColor : '#DD6B55',
+			confirmButtonText : 'Continue',
+			closeOnConfirm : false,
+		}, function(isConfirm) {
+			if (isConfirm) {
+				EmpService.remove(emp.id).then(function(data) {
+					Flash.create('success', 'Deleted', 'custom-class');
+					for (var i = 0; i < vm.empList.length; i++) {
+						if (vm.empList[i].id == emp.id) {
+							vm.empList.splice(i, 1);
+							break;
+						}
+					}
+					SweetAlert.swal({
+						title : 'ลบเรียบร้อย',
+						text : 'ทำการลบ  ' + '"' + emp.empCode + ' '
+								+ emp.empName + ' ' + ' เรียบร้อย',
+						timer : 1500,
+						showConfirmButton : false,
+						type : 'success'
+					});
+				}, function(errRs) {
+					Flash.create('danger', errRs.errMessage, 'custom-class');
+				})
+			} else {
 			}
-		}, function(errRs) {
-			Flash.create('danger', errRs.errMessage, 'custom-class');
-		})
+		});
 	}
 
 	function formControl() {

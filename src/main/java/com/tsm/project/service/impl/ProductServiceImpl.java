@@ -34,6 +34,7 @@ public class ProductServiceImpl  implements ProductService{
 	public Product create(Product product) {
 		product.setCreateBy(getUser());
 		product.setCreateDate(new Date());
+		product.setProdStatus(1);
 		return prodRepo.save(product);
 	}
 

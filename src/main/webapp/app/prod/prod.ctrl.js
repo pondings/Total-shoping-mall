@@ -7,16 +7,16 @@ function ProdCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdService) {
 	var vm = this;
 
 	vm.stockhistorylog = {
-			amount :null,
-			logId : null,
-			detail : null,
-			lotNo : null,
-			logType : null,
-			productId : null,	
-			createdBy : null,
-			createdDate : null
+		amount : null,
+		logId : null,
+		detail : null,
+		lotNo : null,
+		logType : null,
+		productId : null,
+		createdBy : null,
+		createdDate : null
 	};
-	
+
 	/** tab * */
 	vm.tabs = [ {
 		title : 'ค้นหา ข้อมูลสินค้า',
@@ -93,17 +93,17 @@ function ProdCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdService) {
 		vm.stockhistorylog.productId = pick;
 		$ngBootbox.hideAll();
 	}
-	
+
 	$scope.setClickedRow = function(prodType) {
 		console.log(prodType);
 		vm.prod.productType = prodType;
 		$ngBootbox.hideAll();
 	}
 
-	function importProd(importProd){
-		
+	function importProd(importProd) {
+
 	}
-	
+
 	function getProdType() {
 		ProdService.prodType().then(
 				function(data) {
@@ -120,18 +120,43 @@ function ProdCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdService) {
 		vm.prod = angular.copy(vm.substitute);
 	}
 
-	function remove(id) {
-		ProdService.remove(id).then(function(data) {
-			Flash.create('success', 'Deleted', 'custom-class');
-			for (var i = 0; i < vm.prodList.length; i++) {
-				if (vm.prodList[i].id == id) {
-					vm.prodList.splice(i, 1);
-					break;
-				}
+	function remove(prod) {
+		SweetAlert.swal({
+			title : 'ยืนยันการลบ',
+			text : 'ต้องการลบข้อมูล  ' + '"' + prod.prodCode + ' '
+					+ prod.prodName + '"' + '?',
+			type : 'warning',
+			showCancelButton : true,
+			confirmButtonColor : '#DD6B55',
+			confirmButtonText : 'Continue',
+			closeOnConfirm : false,
+		}, function(isConfirm) {
+			if (isConfirm) {
+				ProdService.remove(prod.id).then(
+						function(data) {
+							Flash.create('success', 'Deleted', 'custom-class');
+							for (var i = 0; i < vm.prodList.length; i++) {
+								if (vm.prodList[i].id == prod.id) {
+									vm.prodList.splice(i, 1);
+									break;
+								}
+							}
+							SweetAlert.swal({
+								title : 'ลบเรียบร้อย',
+								text : 'ทำการลบ  ' + '"' + prod.prodCode + ' '
+										+ prod.prodName + ' ' + ' เรียบร้อย',
+								timer : 1500,
+								showConfirmButton : false,
+								type : 'success'
+							});
+						},
+						function(errRs) {
+							Flash.create('danger', errRs.errMessage,
+									'custom-class');
+						})
+			} else {
 			}
-		}, function(errRs) {
-			Flash.create('danger', errRs.errMessage, 'custom-class');
-		})
+		});
 	}
 
 	function formControl() {
@@ -188,14 +213,13 @@ function ProdCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdService) {
 		ProdService.searchProductModal().then(
 				function(data) {
 					$scope.prodList = data;
-					Flash
-							.create('success', "Import " + data.length
-									+ " reccord", 'custom-class');
+					Flash.create('success', "Import " + data.length
+							+ " reccord", 'custom-class');
 				}, function(errRs) {
 					Flash.create('danger', errRs.errMessage, 'custom-class');
 				})
 	}
-	
+
 	function resetPage() {
 		vm.prodList = [];
 		vm.prod = {
@@ -228,7 +252,8 @@ function ProdCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdService) {
 			prodPrice : null,
 			productType : {
 				typeName : null
-			}
+			},
+			prodStatus : true
 		};
 		vm.StockHistoryLog = null;
 		vm.prodForm.$setPristine();
@@ -244,20 +269,20 @@ function ProdCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdService) {
 			}
 		}
 	};
-	
+
 	vm.viewProductViewOptions = {
-			scope: $scope,
-			title: 'Product-Import',
-			onEscape: function(){
-			},
-			show: true,
-			backdrop: true,
-			size: 'large' ,
-			closeButton: true,
-			animate: true,
-			className: 'info-class',
-			buttons:vm.ViewDialogButton,
-			message:'info'
+		scope : $scope,
+		title : 'Product-Import',
+		onEscape : function() {
+		},
+		show : true,
+		backdrop : true,
+		size : 'large',
+		closeButton : true,
+		animate : true,
+		className : 'info-class',
+		buttons : vm.ViewDialogButton,
+		message : 'info'
 	};
 
 	vm.viewProdTypeModal = {

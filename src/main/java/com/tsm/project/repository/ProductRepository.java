@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tsm.project.dto.SeDate;
 import com.tsm.project.model.Product;
 
 @Transactional(readOnly = true)
@@ -23,7 +24,7 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
 
 	@Query("SELECT prod FROM Product prod WHERE prod.prodCode = :#{#param.prodCode}")
 	Product searchCode(@Param("param") Product product);
-	
+
 	@Query("SELECT prod FROM Product prod WHERE 1=1 AND (prod.prodCode like %:#{#param.prodCode != null ? #param.prodCode : ''}%)")
-List<Product> searchmodal(@Param("param") Product product);
+	List<Product> searchmodal(@Param("param") Product product);
 }
