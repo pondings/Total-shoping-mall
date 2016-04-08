@@ -67,6 +67,17 @@ function ProdTypeCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdTypeService) {
 	}
 
 	function remove(id) {
+		SweetAlert.swal({
+			title : 'ยืนยันการลบ',
+			text : 'ต้องการลบข้อมูล  ' + '"' + prodType.typeCode + ' '
+					+ prodType.type.Name + '"' + '?',
+			type : 'warning',
+			showCancelButton : true,
+			confirmButtonColor : '#DD6B55',
+			confirmButtonText : 'Continue',
+			closeOnConfirm : false,
+		}, function(isConfirm) {
+			if (isConfirm) {
 		ProdTypeService.remove(id).then(function(data) {
 			Flash.create('success', 'Deleted', 'custom-class');
 			for (var i = 0; i < vm.prodTypeList.length; i++) {
@@ -75,9 +86,20 @@ function ProdTypeCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdTypeService) {
 					break;
 				}
 			}
+			SweetAlert.swal({
+				title : 'ลบเรียบร้อย',
+				text : 'ทำการลบ  ' + '"' + prodType.typeCode + ' '
+						+ prodType.type.Name + ' ' + ' เรียบร้อย',
+				timer : 1500,
+				showConfirmButton : false,
+				type : 'success'
+			});
 		}, function(errRs) {
 			Flash.create('danger', errRs.errMessage, 'custom-class');
 		})
+	}else {
+			}
+		});
 	}
 
 	function formControl() {
