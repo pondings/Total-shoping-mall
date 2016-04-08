@@ -80,7 +80,7 @@
 		<div ng-show="exprotToExcel">
 			<div id="exportable">
 				<table st-table="displayedSubOrderList" wt-responsive-table
-					st-safe-src="vm.subOrderList" width="100%"
+					st-safe-src="vm.subOrderList" width="100%" border="1"
 					class="table table-striped table-bordered">
 					<thead>
 						<tr>
@@ -127,7 +127,7 @@
 							<td class="text-center">{{vm.orderView.orderNet}} บาท</td>
 						</tr>
 						<tr>
-							<td colspan="11">ทำรายการเมื่อ :: {{vm.orderView.orderDate}}</td>
+							<td colspan="5">ทำรายการเมื่อ :: {{vm.orderView.orderDate}}</td>
 						</tr>
 					</tfoot>
 				</table>

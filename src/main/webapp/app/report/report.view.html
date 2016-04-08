@@ -170,8 +170,69 @@
 		<div ng-hide="chart"></div>
 		<div ng-show="chart">
 			<div>
-				<fusioncharts width="600" height="400" type="pie3d"
-					datasource="{{myDataSource}}"></fusioncharts>
+				<div class="text-center">
+					<form class="form-horizontal form-margin" novalidate="novalidate"
+						ng-submit="vm.orderSearch()">
+						<div class="col-md-12">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="control-label col-md-4">วันที่เริ่ม</label>
+									<div class="col-md-8">
+										<div class="input-group">
+											<input type="text" class="form-control" placeholder="Start"
+												readonly uib-datepicker-popup="dd-MM-yyyy"
+												is-open="vm.startDate.opened" ng-model="vm.order.startDate"><span
+												class="input-group-btn">
+												<button type="button" class="btn btn-default"
+													ng-click="vm.start($event)">
+													<i class="glyphicon glyphicon-calendar"></i>
+												</button>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-md-4 control-label">วันที่สิ้นสุด</label>
+									<div class="col-md-8">
+										<p class="input-group">
+											<input type="text" class="form-control"
+												uib-datepicker-popup="dd-MM-yyyy" placeholder="End" readonly
+												ng-model="vm.order.endDate" is-open="vm.endDate.opened"
+												min-date="vm.order.startDate" close-text="Close" /> <span
+												class="input-group-btn">
+												<button type="button" class="btn btn-default"
+													ng-click="vm.end($event)">
+													<i class="glyphicon glyphicon-calendar"></i>
+												</button>
+											</span>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12 col-sm-12">
+							<div class="form-group">
+								<div class="col-md-1 col-md-offset-5 text-center">
+									<button class="btn btn-default" type="submit">
+										<fa name="search" size="1" title="search"></fa>
+										ค้นหา
+									</button>
+								</div>
+								<div class="col-md-1 text-center">
+									<button class="btn btn-default" type="reset"
+										ng-click="vm.resetPage()">
+										<fa name="remove" size="1" title="Reset"></fa>
+										ยกเลิก
+									</button>
+								</div>
+							</div>
+						</div>
+					</form>
+					<fusioncharts width="600" height="400" type="pie3d"
+						datasource="{{myDataSource}}"></fusioncharts>
+				</div>
 			</div>
 		</div>
 
@@ -274,5 +335,9 @@
 	<script src="./assets/js/angular-responsive-tables.min.js"></script>
 	<!-- ANGULAR SMART TABLE -->
 	<script src="./assets/js/smart-table.min.js"></script>
+
+	<script
+		src="http://www.fusioncharts.com/lib/fcassets/3.10.1/fusioncharts.js"></script>
+	<script src="./assets/js/angular-fusioncharts.min.js"></script>
 </body>
 </html>

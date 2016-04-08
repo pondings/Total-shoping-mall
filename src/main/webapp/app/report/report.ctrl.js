@@ -1,9 +1,10 @@
 'use strict';
 angular.module('app.report').controller('ReportCtrl', ReportCtrl);
 ReportCtrl.$inject = [ '$scope', 'SweetAlert', 'Flash', '$ngBootbox',
-		'ReportService' ];
+		'ReportService', '$location' ];
 
-function ReportCtrl($scope, SweetAlert, Flash, $ngBootbox, ReportService) {
+function ReportCtrl($scope, SweetAlert, Flash, $ngBootbox, ReportService,
+		$location) {
 	var vm = this;
 
 	$scope.myDataSource = {
@@ -43,7 +44,7 @@ function ReportCtrl($scope, SweetAlert, Flash, $ngBootbox, ReportService) {
 		title : 'รายการขาย',
 		method : 1
 	}, {
-		title : 'แสดงกราฟ',
+		title : 'แสดงกราฟ ประเภทที่ขายดีที่สุด ตามช่วงเวลา',
 		method : 2
 	} ];
 
@@ -144,6 +145,7 @@ function ReportCtrl($scope, SweetAlert, Flash, $ngBootbox, ReportService) {
 					vm.orderList = data;
 					for (var i = 0; i < vm.orderList.length; i++) {
 						vm.net = vm.net + vm.orderList[i].orderNet;
+//						vm.chartInput.label = data.
 					}
 					Flash
 							.create('success', "Found " + data.length
@@ -158,14 +160,17 @@ function ReportCtrl($scope, SweetAlert, Flash, $ngBootbox, ReportService) {
 			$scope.unSelect = true;
 			$scope.byDate = false;
 			$scope.chart = false;
+			vm.resetPage() ;
 		} else if (vm.selectedMethod.method == 1) {
 			$scope.unSelect = false;
 			$scope.byDate = true;
 			$scope.chart = false;
+			vm.resetPage() ;
 		} else if (vm.selectedMethod.method == 2) {
 			$scope.unSelect = false;
 			$scope.byDate = false;
 			$scope.chart = true;
+			vm.resetPage() ;
 		}
 	}
 
