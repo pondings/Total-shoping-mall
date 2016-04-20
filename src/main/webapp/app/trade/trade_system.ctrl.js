@@ -150,7 +150,7 @@ function TradeSystemCtrl($scope, SweetAlert, Flash, $ngBootbox,
 		vm.order.listOfSubOrder = vm.subOrder;
 		console.log(vm.order, vm.product);
 		TradeSystemService.create(vm.order).then(function(data) {
-			Flash.create('success', 'Created', 'custom-class');
+			Flash.create('success', 'ทำรายการสำเร็จ Order id ='+data.orderCode, 'custom-class');
 			vm.resetPage();
 		}, function(errRs) {
 			Flash.create('danger', errRs.errMessage, 'custom-class');

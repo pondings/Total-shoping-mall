@@ -10,16 +10,37 @@ function ReportService($http, $q) {
 		orderSearch : orderSearch,
 		getEmp : getEmp,
 		getCust : getCust,
-		getSubOrder : getSubOrder
+		getSubOrder : getSubOrder,
+		report : report
 	};
 
 	return service;
 
+	function report(startDate, endDate) {
+		var deferred = $q.defer();
+		var dateInput = {
+			startDate : startDate,
+			endDate : endDate
+		};
+		$http.post(urlBase + '/subOrder/report', dateInput).success(
+				function(dataArr) {
+					deferred.resolve(dataArr);
+				}).error(function(errMs, errCode) {
+			var err = {
+				errMessage : errMs,
+				errCode : errCode
+			}
+			deferred.reject(err);
+		});
+		return deferred.promise;
+	}
+
 	function getSubOrder(order) {
 		var deferred = $q.defer();
-		$http.post(urlBase + '/subOrder/searchSubOrderByOrder', order).success(function(dataArr) {
-			deferred.resolve(dataArr);
-		}).error(function(errMs, errCode) {
+		$http.post(urlBase + '/subOrder/searchSubOrderByOrder', order).success(
+				function(dataArr) {
+					deferred.resolve(dataArr);
+				}).error(function(errMs, errCode) {
 			var err = {
 				errMessage : errMs,
 				errCode : errCode

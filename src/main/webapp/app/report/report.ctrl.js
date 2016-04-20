@@ -9,8 +9,8 @@ function ReportCtrl($scope, SweetAlert, Flash, $ngBootbox, ReportService,
 
 	$scope.myDataSource = {
 		chart : {
-			caption : "Age profile of website visitors",
-			subcaption : "Last Year",
+			caption : "กราฟแสดงยอดขายตามประเภท",
+			subcaption : "ในช่วงเวลาทั้งหมด",
 			startingangle : "120",
 			showlabels : "0",
 			showlegend : "1",
@@ -18,21 +18,15 @@ function ReportCtrl($scope, SweetAlert, Flash, $ngBootbox, ReportService,
 			slicingdistance : "15",
 			showpercentvalues : "1",
 			showpercentintooltip : "0",
-			plottooltext : "Age group : $label Total visit : $datavalue",
+			plottooltext : "ประเภท : $label ราคาทั้งหมด : $datavalue",
 			theme : "fint"
 		},
 		data : [ {
-			label : "Teenage",
-			value : "1250400"
+			label : "Car",
+			value : "3000"
 		}, {
-			label : "Adult",
-			value : "1463300"
-		}, {
-			label : "Mid-age",
-			value : "1050700"
-		}, {
-			label : "Senior",
-			value : "491000"
+			label : "Pen",
+			value : "125000"
 		} ]
 	}
 
@@ -103,8 +97,17 @@ function ReportCtrl($scope, SweetAlert, Flash, $ngBootbox, ReportService,
 	vm.getEmp = getEmp;
 	vm.orderViewInfo = orderViewInfo;
 	vm.exportExel = exportExel;
+	vm.getReport = getReport;
 
 	/** Function * */
+
+	function getReport() {
+		ReportService.report(vm.order.startDate, vm.order.endDate).then(
+				function(data) {
+				}, function(errRs) {
+					Flash.create('danger', errRs.errMessage, 'custom-class');
+				})
+	}
 
 	function orderViewInfo(order) {
 		vm.orderView = angular.copy(order);
@@ -145,7 +148,6 @@ function ReportCtrl($scope, SweetAlert, Flash, $ngBootbox, ReportService,
 					vm.orderList = data;
 					for (var i = 0; i < vm.orderList.length; i++) {
 						vm.net = vm.net + vm.orderList[i].orderNet;
-//						vm.chartInput.label = data.
 					}
 					Flash
 							.create('success', "Found " + data.length
@@ -160,17 +162,17 @@ function ReportCtrl($scope, SweetAlert, Flash, $ngBootbox, ReportService,
 			$scope.unSelect = true;
 			$scope.byDate = false;
 			$scope.chart = false;
-			vm.resetPage() ;
+			vm.resetPage();
 		} else if (vm.selectedMethod.method == 1) {
 			$scope.unSelect = false;
 			$scope.byDate = true;
 			$scope.chart = false;
-			vm.resetPage() ;
+			vm.resetPage();
 		} else if (vm.selectedMethod.method == 2) {
 			$scope.unSelect = false;
 			$scope.byDate = false;
 			$scope.chart = true;
-			vm.resetPage() ;
+			vm.resetPage();
 		}
 	}
 

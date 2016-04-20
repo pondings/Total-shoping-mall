@@ -66,11 +66,11 @@ function ProdTypeCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdTypeService) {
 		vm.prodType = angular.copy(vm.substitute);
 	}
 
-	function remove(id) {
+	function remove(prodType) {
 		SweetAlert.swal({
 			title : 'ยืนยันการลบ',
 			text : 'ต้องการลบข้อมูล  ' + '"' + prodType.typeCode + ' '
-					+ prodType.type.Name + '"' + '?',
+					+ prodType.typeName + '"' + '?',
 			type : 'warning',
 			showCancelButton : true,
 			confirmButtonColor : '#DD6B55',
@@ -78,10 +78,10 @@ function ProdTypeCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdTypeService) {
 			closeOnConfirm : false,
 		}, function(isConfirm) {
 			if (isConfirm) {
-		ProdTypeService.remove(id).then(function(data) {
+		ProdTypeService.remove(prodType.id).then(function(data) {
 			Flash.create('success', 'Deleted', 'custom-class');
 			for (var i = 0; i < vm.prodTypeList.length; i++) {
-				if (vm.prodTypeList[i].id == id) {
+				if (vm.prodTypeList[i].id == prodType.id) {
 					vm.prodTypeList.splice(i, 1);
 					break;
 				}
@@ -89,7 +89,7 @@ function ProdTypeCtrl($scope, SweetAlert, Flash, $ngBootbox, ProdTypeService) {
 			SweetAlert.swal({
 				title : 'ลบเรียบร้อย',
 				text : 'ทำการลบ  ' + '"' + prodType.typeCode + ' '
-						+ prodType.type.Name + ' ' + ' เรียบร้อย',
+						+ prodType.typeName + ' ' + ' เรียบร้อย',
 				timer : 1500,
 				showConfirmButton : false,
 				type : 'success'

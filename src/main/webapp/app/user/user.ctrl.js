@@ -88,17 +88,46 @@ function UserCtrl($scope, SweetAlert, Flash, $ngBootbox, UserService) {
 	}
 
 	function setStatus(userRole) {
-		UserService.setStatus(userRole.user).then(function(data) {
-			Flash.create('success','ทำการเปลี่ยนแปลงเรียบร้อย','custom-class') ;
-			for(var i = 0 ; i < vm.userList.length ; i++){
-				if (vm.userList[i].user.id = data.id) {
-					vm.userList.splice(i, 1) ;				
-					break ;
-				}
+		SweetAlert.swal({
+			title : 'ยืนยันการ ปิดใช้งาน',
+			text : 'ยืนยันการ ปิดใช้งาน  ' + userRole.user.username + '?',
+			type : 'warning',
+			showCancelButton : true,
+			confirmButtonColor : '#DD6B55',
+			confirmButtonText : 'Continue',
+			closeOnConfirm : false,
+		}, function(isConfirm) {
+			if (isConfirm) {
+				UserService.setStatus(userRole.user).then(
+						function(data) {
+							Flash
+									.create('success',
+											'ทำการเปลี่ยนแปลงเรียบร้อย',
+											'custom-class');
+							for (var i = 0; i < vm.userList.length; i++) {
+								if (vm.userList[i].user.id = data.id) {
+									vm.userList.splice(i, 1);
+									break;
+								}
+							}
+							SweetAlert
+									.swal({
+										title : 'เรียบร้อย',
+										text : 'ทำการเปลี่ยนแปลง  ' + '"'
+												+ userRole.user.username
+												+ ' เรียบร้อย',
+										timer : 1500,
+										showConfirmButton : false,
+										type : 'success'
+									});
+						},
+						function(errRs) {
+							Flash.create('danger', errRs.errMessage,
+									'custom-class');
+						})
+			} else {
 			}
-		}, function(errRs) {
-			Flash.create('danger', errRs.errMessage, 'custom-class');
-		})
+		});
 	}
 
 	$scope.setClickedEmpRow = function(emp) {
@@ -196,6 +225,7 @@ function UserCtrl($scope, SweetAlert, Flash, $ngBootbox, UserService) {
 		$scope.emp = true;
 		vm.updateValid = false;
 		vm.userForm.$setPristine();
+		vm.confirmPassword = null;
 	}
 
 	function resetForm() {

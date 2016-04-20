@@ -8,8 +8,10 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tsm.project.dto.SeDate;
 import com.tsm.project.dto.orderDto;
 import com.tsm.project.model.Order;
+import com.tsm.project.model.SubOrder;
 
 @Repository
 @Transactional(readOnly = true)
@@ -24,5 +26,6 @@ public interface OrderRepository extends CrudRepository<Order, Integer> {
 			+ "AND (ord.empInfo.empCode like %:#{#param.empCode != null ? #param.empCode:''}%) "
 			+ "AND ord.orderDate >= :#{#param.startDate} AND ord.orderDate <= :#{#param.endDate}")
 	List<Order> searchOrder(@Param("param") orderDto order);
-
+	
 }
+
