@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tsm.project.config.PersistenceConfig;
 import com.tsm.project.model.Order;
-import com.tsm.project.model.SubOrder;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class, classes = { PersistenceConfig.class })

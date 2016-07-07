@@ -129,6 +129,12 @@ function TradeSystemCtrl($scope, SweetAlert, Flash, $ngBootbox,
 	function getCust() {
 		TradeSystemService.getCust().then(function(data) {
 			$scope.custList = data;
+			for(var i = 0 ; i < $scope.custList.length ; i++){
+				if($scope.custList[i].id == 1){
+					$scope.custList.splice(i,1);
+					break;
+				}
+			}
 		}, function(errRs) {
 			Flash.create('danger', errRs.errMessage, 'custom-class');
 		})
@@ -143,18 +149,20 @@ function TradeSystemCtrl($scope, SweetAlert, Flash, $ngBootbox,
 			vm.resetSubProduct();
 		}
 		if (vm.order.customer.custName == null) {
-			vm.order.customer = ' ';
+			vm.order.customer.id = 1;
 		}
 		vm.order.orderNet = vm.calculate.net;
 		vm.order.status = true;
 		vm.order.listOfSubOrder = vm.subOrder;
 		console.log(vm.order, vm.product);
-		TradeSystemService.create(vm.order).then(function(data) {
-			Flash.create('success', 'ทำรายการสำเร็จ Order id ='+data.orderCode, 'custom-class');
-			vm.resetPage();
-		}, function(errRs) {
-			Flash.create('danger', errRs.errMessage, 'custom-class');
-		})
+		TradeSystemService.create(vm.order).then(
+				function(data) {
+					Flash.create('success', 'ทำรายการสำเร็จ Order id ='
+							+ data.orderCode, 'custom-class');
+					vm.resetPage();
+				}, function(errRs) {
+					Flash.create('danger', errRs.errMessage, 'custom-class');
+				})
 	}
 
 	function resetSubProduct() {

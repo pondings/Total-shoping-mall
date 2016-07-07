@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tsm.project.model.Customer;
-import com.tsm.project.model.EmpInfo;
 import com.tsm.project.service.CustomerService;
 
 @RestController

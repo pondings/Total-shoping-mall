@@ -275,7 +275,7 @@
 						<td class="text-center">{{prod.prodPrice}}</td>
 						<td class="text-right">{{prod.prodQuantity}}</td>
 						<td class="text-right">{{prod.productType.typeName}}</td>
-						<td class="text-right">{{prod.prodStatus}}</td>
+						<td class="text-right">{{prod.prodStatus == 1 ? "Enable" : "Disable"}}</td>
 						<td class="text-center"><button class="btn btn-info"
 								ng-click="vm.update(prod)">
 								<fa name="edit"></fa>

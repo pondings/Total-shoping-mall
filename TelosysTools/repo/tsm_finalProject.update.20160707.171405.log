@@ -1,0 +1,232 @@
+Update date : Thu Jul 07 17:14:07 ICT 2016
+ 
+ Table 'customer' found in repository
+ . Column 'id' : Comment changed to null
+ . Column 'id' updated
+ . Column 'cust_title' : Comment changed to null
+ . Column 'cust_title' updated
+ . Column 'cust_code' : Comment changed to null
+ . Column 'cust_code' updated
+ . Column 'cust_name' : Comment changed to null
+ . Column 'cust_name' updated
+ . Column 'cust_phone' : Comment changed to null
+ . Column 'cust_phone' updated
+ . Column 'cust_fax' : Comment changed to null
+ . Column 'cust_fax' updated
+ . Column 'cust_desc' : Comment changed to null
+ . Column 'cust_desc' updated
+ . Column 'created_by' : Comment changed to null
+ . Column 'created_by' updated
+ . Column 'created_date' : Comment changed to null
+ . Column 'created_date' updated
+ . Column 'updated_by' : Comment changed to null
+ . Column 'updated_by' updated
+ . Column 'updated_date' : Comment changed to null
+ . Column 'updated_date' updated
+ . Column 'cust_address' : Comment changed to null
+ . Column 'cust_address' updated
+ (*) table 'customer' updated : 12 change(s)
+ 
+ Table 'emp_info' found in repository
+ . Column 'id' : Comment changed to null
+ . Column 'id' updated
+ . Column 'emp_code' : Comment changed to null
+ . Column 'emp_code' updated
+ . Column 'emp_title' : Comment changed to null
+ . Column 'emp_title' updated
+ . Column 'emp_name' : Comment changed to null
+ . Column 'emp_name' updated
+ . Column 'emp_address' : Comment changed to null
+ . Column 'emp_address' updated
+ . Column 'emp_email' : Comment changed to null
+ . Column 'emp_email' updated
+ . Column 'emp_phone' : Comment changed to null
+ . Column 'emp_phone' updated
+ . Column 'emp_fax' : Comment changed to null
+ . Column 'emp_fax' updated
+ . Column 'emp_desc' : Comment changed to null
+ . Column 'emp_desc' updated
+ . Column 'create_by' : Comment changed to null
+ . Column 'create_by' updated
+ . Column 'create_date' : Comment changed to null
+ . Column 'create_date' updated
+ . Column 'update_by' : Comment changed to null
+ . Column 'update_by' updated
+ . Column 'update_date' : Comment changed to null
+ . Column 'update_date' updated
+ . Column 'emp_date_attended' : Comment changed to null
+ . Column 'emp_date_attended' updated
+ . Column 'emp_position' : Comment changed to null
+ . Column 'emp_position' updated
+ (*) table 'emp_info' updated : 15 change(s)
+ 
+ Table 'order' found in repository
+ . Column 'cust_id' : Comment changed to null
+ . Column 'cust_id' updated
+ . Column 'emp_id' : Comment changed to null
+ . Column 'emp_id' updated
+ . Column 'order_net' : Comment changed to null
+ . Column 'order_net' updated
+ . Column 'order_remark' : Comment changed to null
+ . Column 'order_remark' updated
+ . Column 'status' : Comment changed to null
+ . Column 'status' updated
+ . Column 'order_code' : Comment changed to null
+ . Column 'order_code' updated
+ . Column 'id' : Comment changed to null
+ . Column 'id' updated
+ . Column 'order_date' : Comment changed to null
+ . Column 'order_date' updated
+ (*) table 'order' updated : 8 change(s)
+ 
+ Table 'product' found in repository
+ . Column 'create_by' : Comment changed to null
+ . Column 'create_by' updated
+ . Column 'create_date' : Comment changed to null
+ . Column 'create_date' updated
+ . Column 'prod_brand' : Comment changed to null
+ . Column 'prod_brand' updated
+ . Column 'prod_code' : Comment changed to null
+ . Column 'prod_code' updated
+ . Column 'prod_color' : Comment changed to null
+ . Column 'prod_color' updated
+ . Column 'prod_desc' : Comment changed to null
+ . Column 'prod_desc' updated
+ . Column 'prod_img' : Comment changed to null
+ . Column 'prod_img' updated
+ . Column 'prod_model' : Comment changed to null
+ . Column 'prod_model' updated
+ . Column 'prod_name' : Comment changed to null
+ . Column 'prod_name' updated
+ . Column 'prod_price' : Comment changed to null
+ . Column 'prod_price' updated
+ . Column 'prod_quantity' : Comment changed to null
+ . Column 'prod_quantity' updated
+ . Column 'prod_status' : Comment changed to null
+ . Column 'prod_status' updated
+ . Column 'update_by' : Comment changed to null
+ . Column 'update_by' updated
+ . Column 'update_date' : Comment changed to null
+ . Column 'update_date' updated
+ . Column 'type_id' : Comment changed to null
+ . Column 'type_id' updated
+ . Column 'id' : Comment changed to null
+ . Column 'id' updated
+ (*) table 'product' updated : 16 change(s)
+ 
+ Table 'product_type' found in repository
+ . Column 'create_by' : Comment changed to null
+ . Column 'create_by' updated
+ . Column 'create_date' : Comment changed to null
+ . Column 'create_date' updated
+ . Column 'type_code' : Comment changed to null
+ . Column 'type_code' updated
+ . Column 'type_desc' : Comment changed to null
+ . Column 'type_desc' updated
+ . Column 'type_name' : Comment changed to null
+ . Column 'type_name' updated
+ . Column 'update_by' : Comment changed to null
+ . Column 'update_by' updated
+ . Column 'update_date' : Comment changed to null
+ . Column 'update_date' updated
+ . Column 'id' : Comment changed to null
+ . Column 'id' updated
+ . Column 'prod_code' : Comment changed to null
+ . Column 'prod_code' updated
+ . Column 'prod_desc' : Comment changed to null
+ . Column 'prod_desc' updated
+ . Column 'prod_name' : Comment changed to null
+ . Column 'prod_name' updated
+ (*) table 'product_type' updated : 11 change(s)
+ 
+ Table 'stockcheck' found in repository
+ . Column 'checkId' : Comment changed to null
+ . Column 'checkId' updated
+ . Column 'prodAmount' : Comment changed to null
+ . Column 'prodAmount' updated
+ . Column 'count' : Comment changed to null
+ . Column 'count' updated
+ . Column 'checkCode' : Comment changed to null
+ . Column 'checkCode' updated
+ . Column 'detail' : Comment changed to null
+ . Column 'detail' updated
+ . Column 'logStatus' : Comment changed to null
+ . Column 'logStatus' updated
+ . Column 'createDate' : Comment changed to null
+ . Column 'createDate' updated
+ . Column 'createBy' : Comment changed to null
+ . Column 'createBy' updated
+ . Column 'productId' : Comment changed to null
+ . Column 'productId' updated
+ . Column 'check_id' added
+ . Column 'check_code' added
+ . Column 'create_by' added
+ . Column 'create_date' added
+ . Column 'log_status' added
+ . Column 'prod_amount' added
+ . Column 'product_id' added
+ . Foreign key 'fk_oatc9gwtlbb2lq61n0nfg4yj' added
+ (*) table 'stockcheck' updated : 17 change(s)
+ 
+ Table 'stockhistorylog' found in repository
+ . Column 'logId' : Comment changed to null
+ . Column 'logId' updated
+ . Column 'amount' : Comment changed to null
+ . Column 'amount' updated
+ . Column 'detail' : Comment changed to null
+ . Column 'detail' updated
+ . Column 'lotNo' : Comment changed to null
+ . Column 'lotNo' updated
+ . Column 'operationdate' : Comment changed to null
+ . Column 'operationdate' updated
+ . Column 'logType' : Comment changed to null
+ . Column 'logType' updated
+ . Column 'createBy' : Comment changed to null
+ . Column 'createBy' updated
+ . Column 'createDate' : Comment changed to null
+ . Column 'createDate' updated
+ . Column 'productId' : Comment changed to null
+ . Column 'productId' updated
+ . Column 'log_id' added
+ . Column 'create_by' added
+ . Column 'create_date' added
+ . Column 'log_type' added
+ . Column 'lot_no' added
+ . Column 'product_id' added
+ . Foreign key 'fk_pyrbm5o5xlt1wukjh3aqhsvpg' added
+ (*) table 'stockhistorylog' updated : 16 change(s)
+ 
+ Table 'sub_order' found in repository
+ . Column 'id' : Comment changed to null
+ . Column 'id' updated
+ . Column 'prod_id' : Comment changed to null
+ . Column 'prod_id' updated
+ . Column 'sub_total' : Comment changed to null
+ . Column 'sub_total' updated
+ . Column 'order_id' : Comment changed to null
+ . Column 'order_id' updated
+ . Column 'sub_quantity' : Comment changed to null
+ . Column 'sub_quantity' updated
+ (*) table 'sub_order' updated : 5 change(s)
+ 
+ Table 'user' found in repository
+ . Column 'username' : Comment changed to null
+ . Column 'username' updated
+ . Column 'enabled' : Comment changed to null
+ . Column 'enabled' updated
+ . Column 'password' : Comment changed to null
+ . Column 'password' updated
+ . Column 'emp' : Comment changed to null
+ . Column 'emp' updated
+ . Column 'id' : Comment changed to null
+ . Column 'id' updated
+ (*) table 'user' updated : 5 change(s)
+ 
+ Table 'user_role' found in repository
+ . Column 'id' : Comment changed to null
+ . Column 'id' updated
+ . Column 'role' : Comment changed to null
+ . Column 'role' updated
+ . Column 'user_id' : Comment changed to null
+ . Column 'user_id' updated
+ (*) table 'user_role' updated : 3 change(s)

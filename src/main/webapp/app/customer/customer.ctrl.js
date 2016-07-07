@@ -103,6 +103,7 @@ function CustomerCtrl($scope, SweetAlert, Flash, $ngBootbox, CustomerService) {
 		CustomerService.search(vm.cus).then(
 				function(data) {
 					vm.cusList = data;
+		
 					Flash
 							.create('success', "Found " + data.length
 									+ " reccord", 'custom-class');
@@ -123,25 +124,28 @@ function CustomerCtrl($scope, SweetAlert, Flash, $ngBootbox, CustomerService) {
 			closeOnConfirm : false,
 		}, function(isConfirm) {
 			if (isConfirm) {
-				CustomerService.remove(cus.id).then(function(data) {
-					Flash.create('success', 'Deleted', 'custom-class');
-					for (var i = 0; i < vm.cusList.length; i++) {
-						if (vm.cusList[i].id == cus.id) {
-							vm.cusList.splice(i, 1);
-							break;
-						}
-					}
-					SweetAlert.swal({
-						title : 'ลบเรียบร้อย',
-						text : 'ทำการลบ  ' + '"' + cus.custCode + ' '
-								+ cus.custName + ' ' + ' เรียบร้อย',
-						timer : 1500,
-						showConfirmButton : false,
-						type : 'success'
-					});
-				}, function(errRs) {
-					Flash.create('danger', errRs.errMessage, 'custom-class');
-				})
+				CustomerService.remove(cus.id).then(
+						function(data) {
+							Flash.create('success', 'Deleted', 'custom-class');
+							for (var i = 0; i < vm.cusList.length; i++) {
+								if (vm.cusList[i].id == cus.id) {
+									vm.cusList.splice(i, 1);
+									break;
+								}
+							}
+							SweetAlert.swal({
+								title : 'ลบเรียบร้อย',
+								text : 'ทำการลบ  ' + '"' + cus.custCode + ' '
+										+ cus.custName + ' ' + ' เรียบร้อย',
+								timer : 1500,
+								showConfirmButton : false,
+								type : 'success'
+							});
+						},
+						function(errRs) {
+							Flash.create('danger', errRs.errMessage,
+									'custom-class');
+						})
 			} else {
 			}
 		});

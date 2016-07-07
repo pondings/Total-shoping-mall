@@ -202,12 +202,11 @@
 								class="form-control">{{emp.empDesc}}</textarea></td>
 						<td class="text-center">{{emp.empDateAttended |
 							date:'dd/MM/yyyy'}}</td>
-						<td class="text-right">{{emp.empStatus}}</td>
+						<td class="text-right">{{emp.empStatus == 1 ? "Enable" : "Disable"}}</td>
 						<td class="text-center"><button class="btn btn-info"
 								ng-click="vm.update(emp)">
 								<fa name="edit"></fa>
 							</button>
-
 							<button class="btn btn-danger" ng-click="vm.remove(emp)">
 								<fa name="trash-o"></fa>
 							</button></td>

@@ -83,14 +83,16 @@
 <fk name="prod-&gt;type">
 <fkcol colname="type_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="product" tableref="product_type" updaterule="3"/>
 </fk>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_pyrbm5o5xlt1wukjh3aqhsvpg" id="LINK_FK_fk_pyrbm5o5xlt1wukjh3aqhsvpg_I" inverseSideOf="LINK_FK_fk_pyrbm5o5xlt1wukjh3aqhsvpg_O" javaName="listOfStockhistorylog2" javaType="java.util.List" joinTableName="" mappedBy="product2" optional="UNDEFINED" owningSide="false" sourceTableName="product" targetEntity="Stockhistorylog" targetTableName="stockhistorylog" used="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="fk_oatc9gwtlbb2lq61n0nfg4yj" id="LINK_FK_fk_oatc9gwtlbb2lq61n0nfg4yj_I" inverseSideOf="LINK_FK_fk_oatc9gwtlbb2lq61n0nfg4yj_O" javaName="listOfStockcheck2" javaType="java.util.List" joinTableName="" mappedBy="product2" optional="UNDEFINED" owningSide="false" sourceTableName="product" targetEntity="Stockcheck" targetTableName="stockcheck" used="true"/>
 <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="historyFK" id="LINK_FK_historyFK_I" inverseSideOf="LINK_FK_historyFK_O" javaName="listOfStockhistorylog" javaType="java.util.List" joinTableName="" mappedBy="product" optional="UNDEFINED" owningSide="false" sourceTableName="product" targetEntity="Stockhistorylog" targetTableName="stockhistorylog" used="true"/>
 <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="prod-&gt;type" id="LINK_FK_prod-&gt;type_O" inverseSideOf="" javaName="productType" javaType="ProductType" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="product" targetEntity="ProductType" targetTableName="product_type" used="true">
 <joinColumns>
 <joinColumn insertable="false" name="type_id" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
 </joinColumns>
 </link>
-<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="sub-&gt;prod" id="LINK_FK_sub-&gt;prod_I" inverseSideOf="LINK_FK_sub-&gt;prod_O" javaName="listOfSubOrder" javaType="java.util.List" joinTableName="" mappedBy="product" optional="UNDEFINED" owningSide="false" sourceTableName="product" targetEntity="SubOrder" targetTableName="sub_order" used="true"/>
 <link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="checkFK" id="LINK_FK_checkFK_I" inverseSideOf="LINK_FK_checkFK_O" javaName="listOfStockcheck" javaType="java.util.List" joinTableName="" mappedBy="product" optional="UNDEFINED" owningSide="false" sourceTableName="product" targetEntity="Stockcheck" targetTableName="stockcheck" used="true"/>
+<link cardinality="OneToMany" cascade="" fetch="DEFAULT" foreignKeyName="sub-&gt;prod" id="LINK_FK_sub-&gt;prod_I" inverseSideOf="LINK_FK_sub-&gt;prod_O" javaName="listOfSubOrder" javaType="java.util.List" joinTableName="" mappedBy="product" optional="UNDEFINED" owningSide="false" sourceTableName="product" targetEntity="SubOrder" targetTableName="sub_order" used="true"/>
 </table>
 <table catalog="" databaseType="TABLE" javaBean="ProductType" name="product_type" schema="main">
 <column dbComment="" dbDefaultValue="" dbName="create_by" dbNotNull="false" dbPosition="1" dbSize="45" dbTypeName="varchar" inputType="text" javaName="createBy" javaType="java.lang.String" jdbcTypeCode="12" label="Create by" maxLength="45" notNull="false" selected="true"/>
@@ -116,9 +118,24 @@
 <column dateType="D" dbComment="" dbDefaultValue="" dbName="createDate" dbNotNull="false" dbPosition="7" dbSize="13" dbTypeName="date" inputType="date" javaName="createdate" javaType="java.util.Date" jdbcTypeCode="91" label="Createdate" notNull="false" selected="true"/>
 <column dbComment="" dbDefaultValue="" dbName="createBy" dbNotNull="false" dbPosition="8" dbSize="100" dbTypeName="bpchar" inputType="text" javaName="createby" javaType="java.lang.String" jdbcTypeCode="1" label="Createby" maxLength="100" notNull="false" selected="true"/>
 <column dbComment="" dbDefaultValue="" dbForeignKey="true" dbName="productId" dbNotNull="false" dbPosition="9" dbSize="10" dbTypeName="int4" inputType="number" javaName="productid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Productid" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="check_id" dbNotNull="true" dbPosition="10" dbSize="10" dbTypeName="int4" inputType="number" javaName="checkId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Check id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="check_code" dbNotNull="false" dbPosition="11" dbSize="100" dbTypeName="varchar" inputType="text" javaName="checkCode" javaType="java.lang.String" jdbcTypeCode="12" label="Check code" maxLength="100" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="create_by" dbNotNull="false" dbPosition="12" dbSize="100" dbTypeName="varchar" inputType="text" javaName="createBy" javaType="java.lang.String" jdbcTypeCode="12" label="Create by" maxLength="100" notNull="false" selected="true"/>
+<column dateType="D" dbComment="" dbDefaultValue="" dbName="create_date" dbNotNull="false" dbPosition="13" dbSize="13" dbTypeName="date" inputType="date" javaName="createDate" javaType="java.util.Date" jdbcTypeCode="91" label="Create date" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="log_status" dbNotNull="false" dbPosition="14" dbSize="10" dbTypeName="int4" inputType="number" javaName="logStatus" javaType="java.lang.Integer" jdbcTypeCode="4" label="Log status" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="prod_amount" dbNotNull="false" dbPosition="15" dbSize="10" dbTypeName="int4" inputType="number" javaName="prodAmount" javaType="java.lang.Integer" jdbcTypeCode="4" label="Prod amount" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbForeignKey="true" dbName="product_id" dbNotNull="false" dbPosition="16" dbSize="10" dbTypeName="int4" inputType="number" javaName="productId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Product id" notNull="false" selected="true"/>
 <fk name="checkFK">
 <fkcol colname="productId" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="stockcheck" tableref="product" updaterule="3"/>
 </fk>
+<fk name="fk_oatc9gwtlbb2lq61n0nfg4yj">
+<fkcol colname="product_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="stockcheck" tableref="product" updaterule="3"/>
+</fk>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_oatc9gwtlbb2lq61n0nfg4yj" id="LINK_FK_fk_oatc9gwtlbb2lq61n0nfg4yj_O" inverseSideOf="" javaName="product2" javaType="Product" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="stockcheck" targetEntity="Product" targetTableName="product" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="product_id" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
 <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="checkFK" id="LINK_FK_checkFK_O" inverseSideOf="" javaName="product" javaType="Product" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="stockcheck" targetEntity="Product" targetTableName="product" used="true">
 <joinColumns>
 <joinColumn insertable="false" name="productId" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
@@ -135,9 +152,23 @@
 <column dbComment="" dbDefaultValue="" dbName="createBy" dbNotNull="false" dbPosition="7" dbSize="100" dbTypeName="bpchar" inputType="text" javaName="createby" javaType="java.lang.String" jdbcTypeCode="1" label="Createby" maxLength="100" notNull="false" selected="true"/>
 <column dateType="D" dbComment="" dbDefaultValue="" dbName="createDate" dbNotNull="false" dbPosition="8" dbSize="13" dbTypeName="date" inputType="date" javaName="createdate" javaType="java.util.Date" jdbcTypeCode="91" label="Createdate" notNull="false" selected="true"/>
 <column dbComment="" dbDefaultValue="" dbForeignKey="true" dbName="productId" dbNotNull="false" dbPosition="9" dbSize="10" dbTypeName="int4" inputType="number" javaName="productid" javaType="java.lang.Integer" jdbcTypeCode="4" label="Productid" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="log_id" dbNotNull="true" dbPosition="10" dbSize="10" dbTypeName="int4" inputType="number" javaName="logId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Log id" notNull="true" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="create_by" dbNotNull="false" dbPosition="11" dbSize="100" dbTypeName="varchar" inputType="text" javaName="createBy" javaType="java.lang.String" jdbcTypeCode="12" label="Create by" maxLength="100" notNull="false" selected="true"/>
+<column dateType="D" dbComment="" dbDefaultValue="" dbName="create_date" dbNotNull="false" dbPosition="12" dbSize="13" dbTypeName="date" inputType="date" javaName="createDate" javaType="java.util.Date" jdbcTypeCode="91" label="Create date" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="log_type" dbNotNull="false" dbPosition="13" dbSize="10" dbTypeName="int4" inputType="number" javaName="logType" javaType="java.lang.Integer" jdbcTypeCode="4" label="Log type" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbName="lot_no" dbNotNull="false" dbPosition="14" dbSize="100" dbTypeName="varchar" inputType="text" javaName="lotNo" javaType="java.lang.String" jdbcTypeCode="12" label="Lot no" maxLength="100" notNull="false" selected="true"/>
+<column dbComment="" dbDefaultValue="" dbForeignKey="true" dbName="product_id" dbNotNull="false" dbPosition="15" dbSize="10" dbTypeName="int4" inputType="number" javaName="productId" javaType="java.lang.Integer" jdbcTypeCode="4" label="Product id" notNull="false" selected="true"/>
+<fk name="fk_pyrbm5o5xlt1wukjh3aqhsvpg">
+<fkcol colname="product_id" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="stockhistorylog" tableref="product" updaterule="3"/>
+</fk>
 <fk name="historyFK">
 <fkcol colname="productId" colref="id" deferrable="7" deleterule="3" sequence="1" tablename="stockhistorylog" tableref="product" updaterule="3"/>
 </fk>
+<link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="fk_pyrbm5o5xlt1wukjh3aqhsvpg" id="LINK_FK_fk_pyrbm5o5xlt1wukjh3aqhsvpg_O" inverseSideOf="" javaName="product2" javaType="Product" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="stockhistorylog" targetEntity="Product" targetTableName="product" used="true">
+<joinColumns>
+<joinColumn insertable="false" name="product_id" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
+</joinColumns>
+</link>
 <link cardinality="ManyToOne" cascade="" fetch="DEFAULT" foreignKeyName="historyFK" id="LINK_FK_historyFK_O" inverseSideOf="" javaName="product" javaType="Product" joinTableName="" mappedBy="" optional="UNDEFINED" owningSide="true" sourceTableName="stockhistorylog" targetEntity="Product" targetTableName="product" used="true">
 <joinColumns>
 <joinColumn insertable="false" name="productId" nullable="true" referencedColumnName="id" unique="false" updatable="false"/>
