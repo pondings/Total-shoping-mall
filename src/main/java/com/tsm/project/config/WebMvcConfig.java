@@ -42,6 +42,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		registry.addViewController("/report").setViewName("app/report/report.view");
 		registry.addViewController("/import").setViewName("app/stock-import/stockImport.view");
 		registry.addViewController("/export").setViewName("app/stock-export/stockExport.view");
+		registry.addViewController("/api-service").setViewName("app/api/api-service.view");
 	}
 
 	@Bean
