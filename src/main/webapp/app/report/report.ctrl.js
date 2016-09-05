@@ -37,10 +37,10 @@ function ReportCtrl($scope, SweetAlert, Flash, $ngBootbox, ReportService,
 	}, {
 		title : 'รายการขาย',
 		method : 1
-	}, {
+	}/*, {
 		title : 'แสดงกราฟ ประเภทที่ขายดีที่สุด ตามช่วงเวลา',
 		method : 2
-	} ];
+	}*/ ];
 
 	/* calendar */
 	vm.startDate = {
